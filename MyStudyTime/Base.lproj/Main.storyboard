@@ -15,27 +15,112 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IGV-i1-nSN">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IGV-i1-nSN">
                                 <rect key="frame" x="0.0" y="56" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="My Study Schedule" id="s8r-J3-qqq">
                                         <barButtonItem key="rightBarButtonItem" title="Item" id="W4y-tK-nNh"/>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DFE-Lf-We4">
+                                <rect key="frame" x="0.0" y="207" width="111" height="515"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MENU" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hd1-px-7h0">
+                                        <rect key="frame" x="35" y="17" width="42" height="13.333333333333336"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Study Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Joz-nD-bTn">
+                                        <rect key="frame" x="27" y="144.33333333333331" width="60" height="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amend Study" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h6z-Eb-zxN">
+                                        <rect key="frame" x="20.666666666666671" y="293" width="71" height="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yUV-a9-mtr">
+                                        <rect key="frame" x="16" y="54" width="80" height="82"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="82" id="2fM-5I-sYs"/>
+                                            <constraint firstAttribute="width" constant="80" id="ZIJ-Jx-vxk"/>
+                                        </constraints>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="quV-xq-yDK">
+                                        <rect key="frame" x="17" y="348" width="79.666666666666671" height="85"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="85" id="ivB-8B-HkT"/>
+                                        </constraints>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Study Reports" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xqh-8v-lM8">
+                                        <rect key="frame" x="17.666666666666671" y="441" width="75" height="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eMv-hI-Xbi">
+                                        <rect key="frame" x="16" y="203" width="79.666666666666671" height="82"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="82" id="Rz3-RP-A4O"/>
+                                        </constraints>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="hd1-px-7h0" secondAttribute="trailing" constant="34" id="4tz-Oj-rV5"/>
+                                    <constraint firstItem="eMv-hI-Xbi" firstAttribute="centerX" secondItem="Joz-nD-bTn" secondAttribute="centerX" constant="-2" id="5GB-Qa-NwM"/>
+                                    <constraint firstItem="eMv-hI-Xbi" firstAttribute="trailing" secondItem="quV-xq-yDK" secondAttribute="trailing" constant="-1" id="Ddm-vp-Jch"/>
+                                    <constraint firstItem="Joz-nD-bTn" firstAttribute="top" secondItem="yUV-a9-mtr" secondAttribute="bottom" constant="8" id="GIN-MY-kXP"/>
+                                    <constraint firstItem="hd1-px-7h0" firstAttribute="leading" secondItem="DFE-Lf-We4" secondAttribute="leading" constant="35" id="HjQ-F3-2jA"/>
+                                    <constraint firstItem="yUV-a9-mtr" firstAttribute="centerX" secondItem="h6z-Eb-zxN" secondAttribute="centerX" id="JRo-Rg-zRQ"/>
+                                    <constraint firstItem="h6z-Eb-zxN" firstAttribute="top" secondItem="eMv-hI-Xbi" secondAttribute="bottom" constant="8" id="RBz-a9-9Ux"/>
+                                    <constraint firstItem="Xqh-8v-lM8" firstAttribute="top" secondItem="quV-xq-yDK" secondAttribute="bottom" constant="8" id="Rap-64-xjC"/>
+                                    <constraint firstItem="eMv-hI-Xbi" firstAttribute="leading" secondItem="quV-xq-yDK" secondAttribute="leading" constant="-1" id="SCs-01-Nkm"/>
+                                    <constraint firstItem="yUV-a9-mtr" firstAttribute="centerX" secondItem="hd1-px-7h0" secondAttribute="centerX" id="YFv-CT-0mK"/>
+                                    <constraint firstItem="quV-xq-yDK" firstAttribute="top" secondItem="h6z-Eb-zxN" secondAttribute="bottom" constant="41" id="cjk-m1-vRd"/>
+                                    <constraint firstItem="yUV-a9-mtr" firstAttribute="top" secondItem="hd1-px-7h0" secondAttribute="bottom" constant="24" id="hfX-pG-P1s"/>
+                                    <constraint firstItem="hd1-px-7h0" firstAttribute="top" secondItem="DFE-Lf-We4" secondAttribute="top" constant="17" id="jMQ-t8-Wv5"/>
+                                    <constraint firstItem="eMv-hI-Xbi" firstAttribute="leading" secondItem="DFE-Lf-We4" secondAttribute="leading" constant="16" id="kh7-4u-2jH"/>
+                                    <constraint firstItem="yUV-a9-mtr" firstAttribute="leading" secondItem="DFE-Lf-We4" secondAttribute="leading" constant="16" id="op4-bo-HTi"/>
+                                    <constraint firstItem="eMv-hI-Xbi" firstAttribute="centerX" secondItem="h6z-Eb-zxN" secondAttribute="centerX" constant="-1.1666666666666714" id="uD3-FD-aKL"/>
+                                    <constraint firstItem="yUV-a9-mtr" firstAttribute="centerX" secondItem="Xqh-8v-lM8" secondAttribute="centerX" constant="1" id="z0L-HJ-YX4"/>
+                                    <constraint firstItem="eMv-hI-Xbi" firstAttribute="top" secondItem="Joz-nD-bTn" secondAttribute="bottom" constant="44.666666666666686" id="zdG-8J-kgs"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="IGV-i1-nSN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2o4-me-Nos"/>
+                            <constraint firstItem="IGV-i1-nSN" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="12" id="4GZ-uU-osE"/>
+                            <constraint firstItem="DFE-Lf-We4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="6mH-J3-LYe"/>
+                            <constraint firstItem="IGV-i1-nSN" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="ILc-kO-vgi"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="DFE-Lf-We4" secondAttribute="bottom" constant="140" id="Rm7-uY-pqW"/>
+                            <constraint firstItem="DFE-Lf-We4" firstAttribute="top" secondItem="IGV-i1-nSN" secondAttribute="bottom" constant="107" id="coC-Ag-WZe"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="amendStudyOutletButton" destination="eMv-hI-Xbi" id="SYV-va-7hV"/>
+                        <outlet property="amendStudyOutletLabel" destination="h6z-Eb-zxN" id="bzX-zu-CUt"/>
                         <outlet property="menuOutletItem" destination="W4y-tK-nNh" id="0Hv-Oj-TQY"/>
+                        <outlet property="menuTitleOutletLabel" destination="hd1-px-7h0" id="ARJ-rM-a6o"/>
+                        <outlet property="menubarLeadingConstraint" destination="6mH-J3-LYe" id="KMc-LM-IHg"/>
+                        <outlet property="menubarOutletView" destination="DFE-Lf-We4" id="6Ab-d1-E7c"/>
                         <outlet property="navigationbarOutletNavbar" destination="IGV-i1-nSN" id="M5N-FQ-wiF"/>
+                        <outlet property="studyReportOutletLabel" destination="Xqh-8v-lM8" id="UQx-q9-0kI"/>
+                        <outlet property="studyReportsOutletButton" destination="quV-xq-yDK" id="aG0-ju-1aC"/>
+                        <outlet property="studyTimeOutletButton" destination="yUV-a9-mtr" id="bVa-lp-0XW"/>
+                        <outlet property="studyTimeOutletLabel" destination="Joz-nD-bTn" id="ZE6-cO-Pke"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-614" y="139"/>
+            <point key="canvasLocation" x="-614.49275362318849" y="138.61607142857142"/>
         </scene>
     </scenes>
 </document>

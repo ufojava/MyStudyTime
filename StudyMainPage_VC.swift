@@ -15,6 +15,22 @@ class StudyMainPage_VC: UIViewController {
     @IBOutlet weak var navigationbarOutletNavbar: UINavigationBar!
     @IBOutlet weak var menuOutletItem: UIBarButtonItem!
     
+    //Set Outlet for constraints
+    @IBOutlet weak var menubarLeadingConstraint: NSLayoutConstraint!
+    
+    //Set Outlet for MenuBar
+    @IBOutlet weak var menubarOutletView: UIView!
+    @IBOutlet weak var menuTitleOutletLabel: UILabel!
+    @IBOutlet weak var studyTimeOutletButton: UIButton!
+    @IBOutlet weak var studyTimeOutletLabel: UILabel!
+    @IBOutlet weak var amendStudyOutletButton: UIButton!
+    @IBOutlet weak var amendStudyOutletLabel: UILabel!
+    @IBOutlet weak var studyReportsOutletButton: UIButton!
+    @IBOutlet weak var studyReportOutletLabel: UILabel!
+    
+    
+    
+    
     
     
     
@@ -41,8 +57,39 @@ class StudyMainPage_VC: UIViewController {
         navigationbarOutletNavbar.layer.shadowRadius = 5
         navigationbarOutletNavbar.layer.shadowOffset = CGSize(width: 3, height: 3)
         
+        //Format Menubar Color and Opacity
+        menubarOutletView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        menubarOutletView.layer.cornerRadius = 10
+        
+        
+        
+        
         //Set image for Navigation Item
         menuOutletItem.image = UIImage(named: "Menu.png")
+        
+        //Format the constraints for Menubar
+        //menubarLeadingConstraint.constant = -117
+        
+        //Format Menu Labels and Buttons
+        menuTitleOutletLabel.textColor = UIColor.white
+        studyTimeOutletLabel.textColor = UIColor.white
+        amendStudyOutletLabel.textColor = UIColor.white
+        studyReportOutletLabel.textColor = UIColor.white
+        
+        //Set images for Main Page Buttons
+        let studyTimeImage = UIImage(named: "StudentIcon.png")
+        studyTimeOutletButton.setBackgroundImage(studyTimeImage, for: .normal)
+        
+        let amendStudyImage = UIImage(named: "AmendStudy.png")
+        amendStudyOutletButton.setBackgroundImage(amendStudyImage, for: .normal)
+        
+        let studyReportImage = UIImage(named: "StudentRpt.png")
+        studyReportsOutletButton.setBackgroundImage(studyReportImage, for: .normal)
+        
+        
+        
+        
+        
         
         
         
