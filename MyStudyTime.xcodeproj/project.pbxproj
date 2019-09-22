@@ -9,23 +9,23 @@
 /* Begin PBXBuildFile section */
 		0378063F2337C43400B18953 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0378063E2337C43400B18953 /* AppDelegate.swift */; };
 		037806412337C43400B18953 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037806402337C43400B18953 /* SceneDelegate.swift */; };
-		037806432337C43400B18953 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037806422337C43400B18953 /* ViewController.swift */; };
 		037806462337C43400B18953 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 037806442337C43400B18953 /* Main.storyboard */; };
 		037806492337C43400B18953 /* MyStudyTime.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 037806472337C43400B18953 /* MyStudyTime.xcdatamodeld */; };
 		0378064B2337C43500B18953 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0378064A2337C43500B18953 /* Assets.xcassets */; };
 		0378064E2337C43500B18953 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0378064C2337C43500B18953 /* LaunchScreen.storyboard */; };
+		037806562337C4D900B18953 /* StudyMainPage_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037806552337C4D900B18953 /* StudyMainPage_VC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0378063B2337C43400B18953 /* MyStudyTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyStudyTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0378063E2337C43400B18953 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		037806402337C43400B18953 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		037806422337C43400B18953 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		037806452337C43400B18953 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		037806482337C43400B18953 /* MyStudyTime.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyStudyTime.xcdatamodel; sourceTree = "<group>"; };
 		0378064A2337C43500B18953 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0378064D2337C43500B18953 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0378064F2337C43500B18953 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		037806552337C4D900B18953 /* StudyMainPage_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMainPage_VC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +42,7 @@
 		037806322337C43400B18953 = {
 			isa = PBXGroup;
 			children = (
+				037806552337C4D900B18953 /* StudyMainPage_VC.swift */,
 				0378063D2337C43400B18953 /* MyStudyTime */,
 				0378063C2337C43400B18953 /* Products */,
 			);
@@ -60,7 +61,6 @@
 			children = (
 				0378063E2337C43400B18953 /* AppDelegate.swift */,
 				037806402337C43400B18953 /* SceneDelegate.swift */,
-				037806422337C43400B18953 /* ViewController.swift */,
 				037806442337C43400B18953 /* Main.storyboard */,
 				0378064A2337C43500B18953 /* Assets.xcassets */,
 				0378064C2337C43500B18953 /* LaunchScreen.storyboard */,
@@ -141,7 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				037806432337C43400B18953 /* ViewController.swift in Sources */,
+				037806562337C4D900B18953 /* StudyMainPage_VC.swift in Sources */,
 				0378063F2337C43400B18953 /* AppDelegate.swift in Sources */,
 				037806492337C43400B18953 /* MyStudyTime.xcdatamodeld in Sources */,
 				037806412337C43400B18953 /* SceneDelegate.swift in Sources */,
