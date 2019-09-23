@@ -18,8 +18,12 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IGV-i1-nSN">
                                 <rect key="frame" x="0.0" y="56" width="414" height="44"/>
                                 <items>
-                                    <navigationItem title="My Study Schedule" id="s8r-J3-qqq">
-                                        <barButtonItem key="rightBarButtonItem" title="Item" id="W4y-tK-nNh"/>
+                                    <navigationItem id="s8r-J3-qqq">
+                                        <barButtonItem key="rightBarButtonItem" title="Item" id="W4y-tK-nNh">
+                                            <connections>
+                                                <action selector="callMenuActionItem:" destination="BYZ-38-t0r" id="kAu-Qe-6Ge"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -45,11 +49,14 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yUV-a9-mtr">
-                                        <rect key="frame" x="16" y="54" width="80" height="82"/>
+                                        <rect key="frame" x="16" y="54.333333333333314" width="80" height="82"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="82" id="2fM-5I-sYs"/>
                                             <constraint firstAttribute="width" constant="80" id="ZIJ-Jx-vxk"/>
                                         </constraints>
+                                        <connections>
+                                            <action selector="studyActionButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3LT-bn-dAG"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="quV-xq-yDK">
                                         <rect key="frame" x="17" y="348" width="79.666666666666671" height="85"/>
@@ -121,6 +128,44 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-614.49275362318849" y="138.61607142857142"/>
+        </scene>
+        <!--Study EntryVC-->
+        <scene sceneID="3t0-B2-Nk8">
+            <objects>
+                <viewController storyboardIdentifier="studyEntry_VC" id="hgX-DX-CAW" customClass="StudyEntry_VC" customModule="MyStudyTime" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="i4u-4I-8Vk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6bF-GM-a9a">
+                                <rect key="frame" x="0.0" y="52" width="414" height="44"/>
+                                <items>
+                                    <navigationItem title="Title" id="svq-le-6FT">
+                                        <barButtonItem key="leftBarButtonItem" title="Item" id="CY5-D5-X39">
+                                            <connections>
+                                                <action selector="callMainMenu:" destination="hgX-DX-CAW" id="Yfp-96-ncA"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="6bF-GM-a9a" firstAttribute="leading" secondItem="n3K-t6-tZd" secondAttribute="leading" id="hUs-0c-2LC"/>
+                            <constraint firstItem="6bF-GM-a9a" firstAttribute="centerX" secondItem="i4u-4I-8Vk" secondAttribute="centerX" id="haL-rv-e81"/>
+                            <constraint firstItem="6bF-GM-a9a" firstAttribute="top" secondItem="n3K-t6-tZd" secondAttribute="top" constant="8" id="wAH-L3-h93"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="n3K-t6-tZd"/>
+                    </view>
+                    <connections>
+                        <outlet property="backToMainMenuItem" destination="CY5-D5-X39" id="Cji-k1-4gw"/>
+                        <outlet property="navigationbarOutletNavbar" destination="6bF-GM-a9a" id="7UG-na-p0o"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YNE-wm-McN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="90" y="139"/>
         </scene>
     </scenes>
 </document>

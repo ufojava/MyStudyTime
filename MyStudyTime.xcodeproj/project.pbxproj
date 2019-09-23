@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		034138AA233968F9002D1B8F /* StudyEntry_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034138A9233968F9002D1B8F /* StudyEntry_VC.swift */; };
 		0378063F2337C43400B18953 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0378063E2337C43400B18953 /* AppDelegate.swift */; };
 		037806412337C43400B18953 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037806402337C43400B18953 /* SceneDelegate.swift */; };
 		037806462337C43400B18953 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 037806442337C43400B18953 /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		034138A9233968F9002D1B8F /* StudyEntry_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyEntry_VC.swift; sourceTree = "<group>"; };
 		0378063B2337C43400B18953 /* MyStudyTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyStudyTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0378063E2337C43400B18953 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		037806402337C43400B18953 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 				0378063E2337C43400B18953 /* AppDelegate.swift */,
 				037806402337C43400B18953 /* SceneDelegate.swift */,
 				037806442337C43400B18953 /* Main.storyboard */,
+				034138A9233968F9002D1B8F /* StudyEntry_VC.swift */,
 				0378064A2337C43500B18953 /* Assets.xcassets */,
 				0378064C2337C43500B18953 /* LaunchScreen.storyboard */,
 				0378064F2337C43500B18953 /* Info.plist */,
@@ -144,6 +147,7 @@
 				037806562337C4D900B18953 /* StudyMainPage_VC.swift in Sources */,
 				0378063F2337C43400B18953 /* AppDelegate.swift in Sources */,
 				037806492337C43400B18953 /* MyStudyTime.xcdatamodeld in Sources */,
+				034138AA233968F9002D1B8F /* StudyEntry_VC.swift in Sources */,
 				037806412337C43400B18953 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

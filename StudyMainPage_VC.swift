@@ -28,6 +28,9 @@ class StudyMainPage_VC: UIViewController {
     @IBOutlet weak var studyReportsOutletButton: UIButton!
     @IBOutlet weak var studyReportOutletLabel: UILabel!
     
+    //Initialize Menu SlideBar
+    var menuSlidebarShowing = false
+    
     
     
     
@@ -41,6 +44,35 @@ class StudyMainPage_VC: UIViewController {
         //Custom Functions
         formatVC() //Set Background
     }
+    
+    
+    //Buttons Action
+    
+    @IBAction func callMenuActionItem(_ sender: UIBarButtonItem) { //Call Menu
+        
+        if(menuSlidebarShowing) {
+            menubarLeadingConstraint.constant = -117
+            
+        } else {
+            menubarLeadingConstraint.constant = 0
+            UIAnimate() //Animate Menu Slidebar
+            
+        }
+        
+            menuSlidebarShowing = !menuSlidebarShowing
+            UIAnimate()
+        
+        
+    }
+    
+    //Funcition to animate slidebar
+    func UIAnimate() {
+        UIView.animate(withDuration: 0.3, animations: self.view.layoutIfNeeded)
+    }
+    
+    
+    
+    
     
     //Format Main page
     func formatVC() {
@@ -56,6 +88,7 @@ class StudyMainPage_VC: UIViewController {
         navigationbarOutletNavbar.layer.shadowOpacity = 1
         navigationbarOutletNavbar.layer.shadowRadius = 5
         navigationbarOutletNavbar.layer.shadowOffset = CGSize(width: 3, height: 3)
+        navigationbarOutletNavbar.topItem?.title = "My Study Schedule"
         
         //Format Menubar Color and Opacity
         menubarOutletView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
@@ -64,11 +97,12 @@ class StudyMainPage_VC: UIViewController {
         
         
         
+        
         //Set image for Navigation Item
         menuOutletItem.image = UIImage(named: "Menu.png")
         
         //Format the constraints for Menubar
-        //menubarLeadingConstraint.constant = -117
+        menubarLeadingConstraint.constant = -117
         
         //Format Menu Labels and Buttons
         menuTitleOutletLabel.textColor = UIColor.white
@@ -85,18 +119,23 @@ class StudyMainPage_VC: UIViewController {
         
         let studyReportImage = UIImage(named: "StudentRpt.png")
         studyReportsOutletButton.setBackgroundImage(studyReportImage, for: .normal)
+       
         
-        
-        
-        
-        
-        
-        
-        
+           }
     
+    //Call Subject Entry
+    @IBAction func studyActionButton(_ sender: UIButton) {
         
+        //Set Main Storyboard
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         
+        //Call Study Time
+        let studyTimeEntry = mainStoryboard.instantiateViewController(withIdentifier: "studyEntry_VC") as! StudyEntry_VC
+        
+        //Call Study Entry
+        self.present(studyTimeEntry,animated: true,completion: nil)
     }
+    
     
 
 
