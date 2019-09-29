@@ -88,7 +88,7 @@ class StudyMainPage_VC: UIViewController {
         navigationbarOutletNavbar.layer.shadowOpacity = 1
         navigationbarOutletNavbar.layer.shadowRadius = 5
         navigationbarOutletNavbar.layer.shadowOffset = CGSize(width: 3, height: 3)
-        navigationbarOutletNavbar.topItem?.title = "My Study Schedule"
+        navigationbarOutletNavbar.topItem?.title = "MY STUDY SCHEDULE"
         
         //Format Menubar Color and Opacity
         menubarOutletView.backgroundColor = UIColor.black.withAlphaComponent(0.5)

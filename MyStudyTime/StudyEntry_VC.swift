@@ -15,17 +15,21 @@ class StudyEntry_VC: UIViewController {
     //Outlet for Text field and buttons
     @IBOutlet weak var navigationbarOutletNavbar: UINavigationBar!
     @IBOutlet weak var backToMainMenuItem: UIBarButtonItem!
+    @IBOutlet weak var studyDateOutletText: UITextField!
     @IBOutlet weak var startTimeOutletText: UITextField!
     @IBOutlet weak var pickerviewOutletLabel: UILabel!
     @IBOutlet weak var subjectPickerviewOutletPickerview: UIPickerView!
     @IBOutlet weak var endTimeOutletText: UITextField!
     @IBOutlet weak var totalTimeOutletLabel: UILabel!
+    @IBOutlet weak var calcStudyTimeOutletButton: UIButton!
     @IBOutlet weak var saveOutletButton: UIButton!
     @IBOutlet weak var infoSaveOutletLabel: UILabel!
     
     //Subject Array
     var subjectArray = ["English", "Literature","History","Biology","Chemistry","Maths","Physics","Geography"]
     
+
+
     
     
     
@@ -60,7 +64,7 @@ class StudyEntry_VC: UIViewController {
         self.view.insertSubview(backgroundImage, at: 0)
         
         //Set Navagation Title
-        navigationbarOutletNavbar.topItem?.title = "Subject Study Time"
+        navigationbarOutletNavbar.topItem?.title = "MY STUDY TIME"
         
         //Set Item Title
         backToMainMenuItem.title = "Back"
@@ -72,11 +76,19 @@ class StudyEntry_VC: UIViewController {
         navigationbarOutletNavbar.layer.shadowOffset = CGSize(width: 3, height: 3)
         
         //Format Text fields, lables and button
+        studyDateOutletText.layer.shadowOpacity = 1
+        studyDateOutletText.layer.shadowRadius = 5
+        studyDateOutletText.layer.shadowOffset = CGSize(width: 3, height: 3)
+        studyDateOutletText.font = studyDateOutletText.font?.withSize(17)
+        studyDateOutletText.clearButtonMode = .always
+        
+        
         startTimeOutletText.layer.shadowOpacity = 1
         startTimeOutletText.layer.shadowRadius = 5
         startTimeOutletText.layer.shadowOffset = CGSize(width: 3, height: 3)
         startTimeOutletText.clearButtonMode = .always
         startTimeOutletText.font = startTimeOutletText.font?.withSize(17)
+        startTimeOutletText.textColor = UIColor.red
         
         endTimeOutletText.layer.shadowOpacity = 1
         endTimeOutletText.layer.shadowRadius = 5
@@ -84,17 +96,22 @@ class StudyEntry_VC: UIViewController {
         endTimeOutletText.clearButtonMode = .always
         endTimeOutletText.font =
             endTimeOutletText.font?.withSize(17)
+        endTimeOutletText.textColor = UIColor.red
         
         
         totalTimeOutletLabel.textColor = UIColor.blue
         totalTimeOutletLabel.font = totalTimeOutletLabel.font.withSize(17)
         
         saveOutletButton.setTitleColor(.white, for: .normal)
-        saveOutletButton.backgroundColor = UIColor.black
+        saveOutletButton.backgroundColor = UIColor.blue
         saveOutletButton.layer.shadowOpacity = 1
-        saveOutletButton.layer.shadowRadius = 5
-        saveOutletButton.layer.cornerRadius = 10
-        saveOutletButton.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        saveOutletButton.layer.cornerRadius = 8
+    
+        
+        calcStudyTimeOutletButton.setTitleColor(.white, for: .normal)
+        calcStudyTimeOutletButton.backgroundColor = UIColor.blue
+        calcStudyTimeOutletButton.layer.shadowOpacity = 1
+        calcStudyTimeOutletButton.layer.cornerRadius = 8
         
         totalTimeOutletLabel.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         totalTimeOutletLabel.layer.shadowOpacity = 1
@@ -108,6 +125,178 @@ class StudyEntry_VC: UIViewController {
                 
                 
     }
+    
+
+    //Text Field Action
+    
+    //Enter Study Date
+    @IBAction func StudyAction(_ sender: UITextField) {
+        showDatePickerStudyD()
+    }
+    
+    //Enter Study Start Time
+    @IBAction func startTimeAction(_ sender: UITextField) {
+        
+        showDatePickerStartT()
+    }
+    
+    //Enter Study End Time
+    @IBAction func entTimeAction(_ sender: UITextField) {
+        showDatePickerEndT()
+    }
+    
+    
+    
+    //Date Picker for Start Times
+    let datePicker = UIDatePicker()
+    
+    
+    
+     //Study Date Function
+    func showDatePickerStudyD() {
+        
+        //define the datepicker
+        datePicker.datePickerMode = .date
+        
+        //Define the toolbar
+        let toolBar = UIToolbar()
+            toolBar.sizeToFit()
+        
+        //Configure Toolbar
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(studyDoneDPicker))
+        let createSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDTPicker))
+        
+        //Set Toolbar
+        toolBar.setItems([doneButton,createSpace,cancelButton], animated: false)
+        
+        //Assign Text field
+        studyDateOutletText.inputAccessoryView = toolBar
+        studyDateOutletText.inputView = datePicker
+        
+        
+    }
+    
+    
+    //DatePicker for Start Date and Time
+    func showDatePickerStartT() {
+        
+        //Get Date and Time
+        datePicker.datePickerMode = .time
+        
+        //Set Toolbar to action date Time selection
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        
+        //Configure Done and Cancel buttons in toolbar
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(startDoneTPicker))
+        
+        
+        //Configure space
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        
+        //Configure Cancel button
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDTPicker))
+        
+        //Set Toolbar
+        toolBar.setItems([doneButton,spaceButton,cancelButton], animated: false)
+        
+        //Assign the
+        startTimeOutletText.inputAccessoryView = toolBar
+        startTimeOutletText.inputView = datePicker
+       
+        
+               
+    }
+    
+    //Function for End Time toolbat
+    func showDatePickerEndT() {
+        
+        //Get Date and Time
+        datePicker.datePickerMode = .time
+        
+        //Set toolbar
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        //Configure Done toolbar
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(endDoneTPicker))
+        
+        //Configure Space between buttons
+        let createSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        
+        //Configre Cancel button
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDTPicker))
+        
+        //Set Toolbar
+        toolbar.setItems([doneButton,createSpace,cancelButton], animated: false)
+        
+        //Assign value to End Time
+        endTimeOutletText.inputAccessoryView = toolbar
+        endTimeOutletText.inputView = datePicker
+        
+        
+    }
+    
+    //Function for Done buton Study Date
+    @objc func studyDoneDPicker(){
+        
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        
+        //Assign forma to text field
+        studyDateOutletText.text = formatter.string(from: datePicker.date)
+        self.view.endEditing(true)
+    }
+    
+    
+    //Function for Done Button for Start time
+    @objc func startDoneTPicker() {
+        
+        let formatter = DateFormatter()
+            formatter.timeStyle = .medium
+        
+        //Assign value to Start Time text field
+        startTimeOutletText.text = formatter.string(from: datePicker.date)
+            self.view.endEditing(true)
+     
+        
+    }
+    
+    //Function for Done button for End Study Time
+    @objc func endDoneTPicker() {
+        
+        let formatter = DateFormatter()
+        formatter.timeStyle = .medium
+        
+        //Assign the calue to Ent Time text field
+        endTimeOutletText.text = formatter.string(from: datePicker.date)
+        self.view.endEditing(true)
+        
+    }
+    
+    
+    //Function for Cancel Button - Used by all Functions
+    @objc func cancelDTPicker() {
+        self.view.endEditing(true)
+    }
+    
+    
+    
+    //Function to calculate total study time
+    func calcStudyTime() {
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HHMM"
+        
+      
+        
+        
+    
+        
+    }
+    
     
     //Function to Connect delegate & Datasource
     func conDelData() {
