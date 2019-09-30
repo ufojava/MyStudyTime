@@ -28,7 +28,9 @@ class StudyEntry_VC: UIViewController {
     //Subject Array
     var subjectArray = ["English", "Literature","History","Biology","Chemistry","Maths","Physics","Geography"]
     
-
+    var studyEndTime = Date()
+    var studyStartTime = Date()
+    var timeIntVal = Date()
 
     
     
@@ -81,6 +83,7 @@ class StudyEntry_VC: UIViewController {
         studyDateOutletText.layer.shadowOffset = CGSize(width: 3, height: 3)
         studyDateOutletText.font = studyDateOutletText.font?.withSize(17)
         studyDateOutletText.clearButtonMode = .always
+        studyDateOutletText.textAlignment = .center
         
         
         startTimeOutletText.layer.shadowOpacity = 1
@@ -144,6 +147,12 @@ class StudyEntry_VC: UIViewController {
     @IBAction func entTimeAction(_ sender: UITextField) {
         showDatePickerEndT()
     }
+    
+    //Button Function Section
+    @IBAction func calcStudyTimeButton(_ sender: UIButton) {
+        calcStudyTime()
+    }
+    
     
     
     
@@ -236,6 +245,7 @@ class StudyEntry_VC: UIViewController {
         endTimeOutletText.inputAccessoryView = toolbar
         endTimeOutletText.inputView = datePicker
         
+
         
     }
     
@@ -259,7 +269,10 @@ class StudyEntry_VC: UIViewController {
         
         //Assign value to Start Time text field
         startTimeOutletText.text = formatter.string(from: datePicker.date)
-            self.view.endEditing(true)
+        studyStartTime = datePicker.date
+        print("Start Time: \(studyStartTime)")
+        
+         self.view.endEditing(true)
      
         
     }
@@ -267,11 +280,15 @@ class StudyEntry_VC: UIViewController {
     //Function for Done button for End Study Time
     @objc func endDoneTPicker() {
         
+        
         let formatter = DateFormatter()
         formatter.timeStyle = .medium
         
         //Assign the calue to Ent Time text field
         endTimeOutletText.text = formatter.string(from: datePicker.date)
+        
+        studyEndTime = datePicker.date
+        print("Study Time: \(studyEndTime)")
         self.view.endEditing(true)
         
     }
@@ -287,11 +304,14 @@ class StudyEntry_VC: UIViewController {
     //Function to calculate total study time
     func calcStudyTime() {
         
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HHMM"
+        //var dateComponets = DateComponents()
+        let cal = Calendar.current
         
-      
-        
+        let calComp = cal.dateComponents([.hour], from: studyStartTime, to: studyEndTime)
+        let diff = calComp.hour!
+        totalTimeOutletLabel.textColor = UIColor.red
+        print(diff)
+        totalTimeOutletLabel.text = " \(diff)"
         
     
         
