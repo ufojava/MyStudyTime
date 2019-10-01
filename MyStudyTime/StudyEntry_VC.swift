@@ -28,9 +28,10 @@ class StudyEntry_VC: UIViewController {
     //Subject Array
     var subjectArray = ["English", "Literature","History","Biology","Chemistry","Maths","Physics","Geography"]
     
+    var studyDate = Date()
     var studyEndTime = Date()
     var studyStartTime = Date()
-    var timeIntVal = Date()
+    var timeIntVal = 0
 
     
     
@@ -153,11 +154,38 @@ class StudyEntry_VC: UIViewController {
         calcStudyTime()
     }
     
+    //Save New  Study Record
+    @IBAction func saveNewStudyButton(_ sender: UIButton) {
+        
+        if studyDateOutletText.text != "" && startTimeOutletText.text != "" && endTimeOutletText.text != "" && pickerviewOutletLabel.text != "" && totalTimeOutletLabel.text != ""{
+            
+            newStudy() //New Study
+            infoSaveOutletLabel.textColor = UIColor.green
+            infoSaveOutletLabel.text = "New Study Saved"
+            
+            //Set Message Delay
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                self.infoSaveOutletLabel.text = ""
+            }
+        } else {
+            infoSaveOutletLabel.textColor = UIColor.red
+            infoSaveOutletLabel.text = "All fields must be filled!!"
+            
+            //Set Message Delay
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                self.infoSaveOutletLabel.text = ""
+            }
+        }
+    }
+    
+    
+    
     
     
     
     //Date Picker for Start Times
     let datePicker = UIDatePicker()
+    
     
     
     
@@ -257,6 +285,7 @@ class StudyEntry_VC: UIViewController {
         
         //Assign forma to text field
         studyDateOutletText.text = formatter.string(from: datePicker.date)
+        studyDate = datePicker.date
         self.view.endEditing(true)
     }
     
@@ -266,6 +295,8 @@ class StudyEntry_VC: UIViewController {
         
         let formatter = DateFormatter()
             formatter.timeStyle = .medium
+        
+    
         
         //Assign value to Start Time text field
         startTimeOutletText.text = formatter.string(from: datePicker.date)
@@ -308,12 +339,12 @@ class StudyEntry_VC: UIViewController {
         let cal = Calendar.current
         
         let calComp = cal.dateComponents([.hour], from: studyStartTime, to: studyEndTime)
-        let diff = calComp.hour!
-        totalTimeOutletLabel.textColor = UIColor.red
-        print(diff)
-        totalTimeOutletLabel.text = " \(diff)"
-        
+        timeIntVal = calComp.hour!
+        totalTimeOutletLabel.textColor = UIColor.yellow
+        print(Int32(timeIntVal))
     
+        totalTimeOutletLabel.text = "Study Duration: \(timeIntVal) Hour(s)"
+  
         
     }
     
@@ -337,8 +368,36 @@ class StudyEntry_VC: UIViewController {
         self.present(mainMenu,animated: true,completion: nil)
     }
     
-
-
+    //Insert study entry into CoreData
+        func newStudy() {
+        
+            //Set Context
+            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            
+            //Declare Entity with NSEntityDescription
+            let studyEntity = NSEntityDescription.entity(forEntityName: "Study", in: context)
+            
+            let newStudy = NSManagedObject(entity: studyEntity!, insertInto: context)
+            
+            //Inset new record
+            
+            newStudy.setValue(studyDate, forKey: "studyDate")
+            newStudy.setValue(studyStartTime, forKey: "startTime")
+            newStudy.setValue(studyEndTime, forKey: "endTime")
+            newStudy.setValue(pickerviewOutletLabel.text, forKey: "subjectSelection")
+            newStudy.setValue(Int32(timeIntVal), forKey: "studyTimeTotal")
+            
+            //Save new record
+            do {
+                
+                try context.save()
+                
+            } catch {
+                print("Unable to save record")
+            }
+            
+                
+    }
 
 }
 
