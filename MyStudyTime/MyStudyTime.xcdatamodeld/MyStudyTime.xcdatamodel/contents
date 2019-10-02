@@ -7,7 +7,18 @@
         <attribute name="studyTimeTotal" optional="YES" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="subjectSelection" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="Targets" representedClassName="Targets" syncable="YES" codeGenerationType="class">
+        <attribute name="subBiology" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="subChemistry" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="subEnglish" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="subGeography" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="subHistory" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="subLiterature" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="subMaths" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="subPhysics" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
     <elements>
         <element name="Study" positionX="-63" positionY="-18" width="128" height="118"/>
+        <element name="Targets" positionX="-54" positionY="27" width="128" height="163"/>
     </elements>
 </model>

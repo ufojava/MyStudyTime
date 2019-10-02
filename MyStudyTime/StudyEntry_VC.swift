@@ -363,6 +363,7 @@ class StudyEntry_VC: UIViewController {
         
         //Set Main Menu
         let mainMenu = mainStoryBoard.instantiateViewController(identifier: "studyMainPahe_VC") as! StudyMainPage_VC
+            mainMenu.modalPresentationStyle = .fullScreen
         
         //Call Main menu
         self.present(mainMenu,animated: true,completion: nil)

@@ -27,6 +27,9 @@ class StudyMainPage_VC: UIViewController {
     @IBOutlet weak var amendStudyOutletLabel: UILabel!
     @IBOutlet weak var studyReportsOutletButton: UIButton!
     @IBOutlet weak var studyReportOutletLabel: UILabel!
+    @IBOutlet weak var studyTargetsOutletButton: UIButton!
+    @IBOutlet weak var studyTargetOutletLabel: UILabel!
+    
     
     //Initialize Menu SlideBar
     var menuSlidebarShowing = false
@@ -109,6 +112,8 @@ class StudyMainPage_VC: UIViewController {
         studyTimeOutletLabel.textColor = UIColor.white
         amendStudyOutletLabel.textColor = UIColor.white
         studyReportOutletLabel.textColor = UIColor.white
+        studyTargetOutletLabel.textColor = UIColor.white
+        
         
         //Set images for Main Page Buttons
         let studyTimeImage = UIImage(named: "StudentIcon.png")
@@ -119,6 +124,9 @@ class StudyMainPage_VC: UIViewController {
         
         let studyReportImage = UIImage(named: "StudentRpt.png")
         studyReportsOutletButton.setBackgroundImage(studyReportImage, for: .normal)
+        
+        let studyTargetsImage = UIImage(named: "subjectTargets.png")
+        studyTargetsOutletButton.setBackgroundImage(studyTargetsImage, for: .normal)
        
         
            }
@@ -131,11 +139,23 @@ class StudyMainPage_VC: UIViewController {
         
         //Call Study Time
         let studyTimeEntry = mainStoryboard.instantiateViewController(withIdentifier: "studyEntry_VC") as! StudyEntry_VC
+        studyTimeEntry.modalPresentationStyle = .fullScreen
         
         //Call Study Entry
         self.present(studyTimeEntry,animated: true,completion: nil)
     }
     
+    //Call the
+    
+    @IBAction func studyTargetButton(_ sender: UIButton) {
+        let mainStoryBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        let studyTarget = mainStoryBoard.instantiateViewController(identifier: "studyTime_VC") as! StudyTargets_VC
+        studyTarget.modalPresentationStyle = .fullScreen
+        
+        //Call the function
+        self.present(studyTarget,animated: true,completion: nil)
+    }
     
 
 
