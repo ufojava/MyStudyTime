@@ -145,7 +145,7 @@ class StudyMainPage_VC: UIViewController {
         self.present(studyTimeEntry,animated: true,completion: nil)
     }
     
-    //Call the
+    //Call the Target
     
     @IBAction func studyTargetButton(_ sender: UIButton) {
         let mainStoryBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -157,7 +157,21 @@ class StudyMainPage_VC: UIViewController {
         self.present(studyTarget,animated: true,completion: nil)
     }
     
-
+    //Call the Reports Menu
+    @IBAction func reportMenuButton(_ sender: UIButton) {
+        
+        //Main Storyboard
+        let mainStoryBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        //Reports Menu
+        let reportsMenu = mainStoryBoard.instantiateViewController(identifier: "reportMenu_VC") as! ReportnMenu_VC
+        reportsMenu.modalPresentationStyle = .fullScreen
+        
+        //Call Reports Menu
+        self.present(reportsMenu,animated: true,completion: nil)
+        
+    }
+    
 
 
 }
