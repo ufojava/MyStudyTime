@@ -20,6 +20,10 @@ class studyRptByDate_VC: UIViewController {
     @IBOutlet weak var todayStudyOutletButton: UIButton!
     @IBOutlet weak var currentWeekStudyOutletButton: UIButton!
     @IBOutlet weak var currentMonthStudyOutletButton: UIButton!
+    @IBOutlet weak var rptTotalTimeOutletLabel: UILabel!
+    @IBOutlet weak var preWeekOutletButton: UIButton!
+    @IBOutlet weak var prevMonthOutletButton: UIButton!
+    
     
     //Array to hold Data
     var studyDateArray: [String] = []
@@ -28,7 +32,8 @@ class studyRptByDate_VC: UIViewController {
     var subjectArray: [String] = []
     var timeTotalArray: [Int32] = []
     
-  
+  //Variable to hold Report Total Study Time
+    var reportTotalStudyTime = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,36 +66,58 @@ class studyRptByDate_VC: UIViewController {
         
         //Format Button All Records
         searchOutletButton.setTitleColor(.white, for: .normal)
-        searchOutletButton.backgroundColor = UIColor.blue
+        searchOutletButton!.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        searchOutletButton.backgroundColor = UIColor.black
         searchOutletButton.layer.shadowOpacity = 1
         searchOutletButton.layer.shadowRadius = 5
         searchOutletButton.layer.shadowOffset = CGSize(width: 3, height: 3)
-        searchOutletButton.layer.cornerRadius = 8
+    
         
         //Format Button Todays Records
         todayStudyOutletButton.setTitleColor(.white, for: .normal)
-        todayStudyOutletButton.backgroundColor = UIColor.blue
+        todayStudyOutletButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        todayStudyOutletButton.backgroundColor = UIColor.black
         todayStudyOutletButton.layer.shadowOpacity = 1
         todayStudyOutletButton.layer.shadowRadius = 5
         todayStudyOutletButton.layer.shadowOffset = CGSize(width: 3, height: 3)
-        todayStudyOutletButton.layer.cornerRadius = 8
+
         
         //Format Button Current Week
         currentWeekStudyOutletButton.setTitleColor(.white, for: .normal)
-        currentWeekStudyOutletButton.backgroundColor = UIColor.blue
+        currentWeekStudyOutletButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        currentWeekStudyOutletButton.backgroundColor = UIColor.purple
         currentWeekStudyOutletButton.layer.shadowOpacity = 1
         currentWeekStudyOutletButton.layer.shadowRadius = 5
         currentWeekStudyOutletButton.layer.shadowOffset = CGSize(width: 3, height: 3)
-        currentWeekStudyOutletButton.layer.cornerRadius = 8
+    
+        
+        //Format Button Previous Week
+        preWeekOutletButton.setTitleColor(.white, for: .normal)
+        preWeekOutletButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        preWeekOutletButton.backgroundColor = UIColor.purple
+        preWeekOutletButton.layer.shadowOpacity = 1
+        preWeekOutletButton.layer.shadowRadius = 5
+        preWeekOutletButton.layer.shadowOffset = CGSize(width: 3, height: 3)
+      
         
         
         //Format Button Current Month
         currentMonthStudyOutletButton.setTitleColor(.white, for: .normal)
-        currentMonthStudyOutletButton.backgroundColor = UIColor.blue
+        currentMonthStudyOutletButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        currentMonthStudyOutletButton.backgroundColor = UIColor.red
         currentMonthStudyOutletButton.layer.shadowOpacity = 1
         currentMonthStudyOutletButton.layer.shadowRadius = 5
         currentMonthStudyOutletButton.layer.shadowOffset = CGSize(width: 3, height: 3)
-        currentMonthStudyOutletButton.layer.cornerRadius = 8
+        
+        
+        //Format Button Previous Month
+        prevMonthOutletButton.setTitleColor(.white, for: .normal)
+        prevMonthOutletButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        prevMonthOutletButton.backgroundColor = UIColor.red
+        prevMonthOutletButton.layer.shadowOpacity = 1
+        prevMonthOutletButton.layer.shadowRadius = 5
+        prevMonthOutletButton.layer.shadowOffset = CGSize(width: 3, height: 3)
+    
         
         
     }
@@ -104,12 +131,20 @@ class studyRptByDate_VC: UIViewController {
     //Get Records of the Week
     @IBAction func weekOfTheYearButtonAction(_ sender: UIButton) {
         
-        getWeeklyRecords() //Function to get weekly records
+        getWeeklyRecords(inWeek: weekOfYear(inWeek: currentWeekOfYear))
         self.tableviewOutletView.reloadData()
+        print(weekOfYear(inWeek: currentWeekOfYear))
+    }
+    
+    @IBAction func prevWeekOfWeekYearButton(_ sender: UIButton) {
+        
+        getWeeklyRecords(inWeek: weekOfYear(inWeek: prevWeekOfYear))
+        self.tableviewOutletView.reloadData()
+        print(weekOfYear(inWeek: prevWeekOfYear))
     }
     
     
-    
+
     
     
     //Menu call
@@ -136,6 +171,9 @@ class studyRptByDate_VC: UIViewController {
            endTimeArray.removeAll()
            subjectArray.removeAll()
            timeTotalArray.removeAll()
+        
+        //Reset Report Study Total
+        reportTotalStudyTime = 0
         
         //Set Context
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -201,6 +239,7 @@ class studyRptByDate_VC: UIViewController {
                     }
                     //Assign result to Total Study Time
                     timeTotalArray.append(resTotalTime)
+                    reportTotalStudyTime += Int(resTotalTime)
                     
                 }
                 
@@ -208,6 +247,8 @@ class studyRptByDate_VC: UIViewController {
                 print(startTimeArray)
                 print(endTimeArray)
                 print(subjectArray)
+                rptTotalTimeOutletLabel.textColor = UIColor.yellow
+                rptTotalTimeOutletLabel.text = "Total Hours \(reportTotalStudyTime)"
         
             } else {
                 print("No Data found")
@@ -220,23 +261,21 @@ class studyRptByDate_VC: UIViewController {
         
     }
     
+    //Variable for Times of the year
+    var currentWeekOfYear = "Current Week"
+    var prevWeekOfYear = "Previous Week"
     
     
-    //Function to retreive periodic record request
-    func getWeeklyRecords() {
+    //Function to get Week of year
+    func weekOfYear(inWeek: String) -> Int {
         
-        //Reset Array
-        studyDateArray.removeAll()
-        startTimeArray.removeAll()
-        endTimeArray.removeAll()
-        subjectArray.removeAll()
-        timeTotalArray.removeAll()
+        let weekChoice = ["Current Week", "Previous Week"]
         
         //Format Date and Time
         let dateFomrmatter = DateFormatter()
             dateFomrmatter.timeStyle = .none
             dateFomrmatter.dateStyle = .medium
-            
+                
         let timeFormatter = DateFormatter()
             timeFormatter.dateStyle = .none
             timeFormatter.timeStyle = .short
@@ -247,9 +286,62 @@ class studyRptByDate_VC: UIViewController {
         let curWeekOfYear = dateFomrmatter.string(from: curWeek)
         let curWkOfYrToDate = dateFomrmatter.date(from: curWeekOfYear)
         let defaultWeekOfYear = weekOfYearCal.component(.weekOfYear, from: curWkOfYrToDate!)
+        var weekOfYear = 0
+        
+            //Condition to run week of year
             
+        if (weekChoice[0] == inWeek) {
+            
+            weekOfYear = defaultWeekOfYear
+            
+        } else if (weekChoice[1] == inWeek) {
+            
+            weekOfYear = defaultWeekOfYear - 1
+            
+        }
+        
+        return weekOfYear
+      
+    }
+    
+    
+    
+    
+    //Function to retreive periodic record request
+    func getWeeklyRecords(inWeek: Int) {
+        
+        //Reset Array
+        studyDateArray.removeAll()
+        startTimeArray.removeAll()
+        endTimeArray.removeAll()
+        subjectArray.removeAll()
+        timeTotalArray.removeAll()
+        
+        //Reset Report Study Total
+        reportTotalStudyTime = 0
+        
+        //Format Date and Time
+        let dateFomrmatter = DateFormatter()
+            dateFomrmatter.timeStyle = .none
+            dateFomrmatter.dateStyle = .medium
+            
+        let timeFormatter = DateFormatter()
+            timeFormatter.dateStyle = .none
+            timeFormatter.timeStyle = .short
         
         
+        //Set Current Week
+              let weekOfYearCal = Calendar.current
+              //let curWeek = Date()
+              //let curWeekOfYear = dateFomrmatter.string(from: curWeek)
+              //let curWkOfYrToDate = dateFomrmatter.date(from: curWeekOfYear)
+              
+              //To be used in Week Processing
+              //let defaultWeekOfYear = weekOfYearCal.component(.weekOfYear, from: curWkOfYrToDate!)
+              //let preDefaultWeekOfYear = defaultWeekOfYear  - 1
+        
+      
+            
         
         //Set Context
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -318,7 +410,7 @@ class studyRptByDate_VC: UIViewController {
                     let restudyWeekOfYear = weekOfYearCal.component(.weekOfYear, from: stdyDateFromStringToDate!)
                      
                     //Compare Week of year with Default Week of Year
-                    if restudyWeekOfYear == defaultWeekOfYear {
+                    if (restudyWeekOfYear == inWeek) {
                         
                         //Assign to Array
                         
@@ -328,14 +420,22 @@ class studyRptByDate_VC: UIViewController {
                             subjectArray.append(resSubject) //Subject Selection
                             timeTotalArray.append(resTimeTotal) //Total Study Time
                         
+                    //Total Study Time
+                    reportTotalStudyTime += Int(resTimeTotal)
                         
+                          
+                    } else if (restudyWeekOfYear == inWeek) {
+                        
+                        //Assign to Array
                             
-                
-                    
-                        
-                        
-                        
-                        
+                                studyDateArray.append(formatStdyDate) //Study Time Value
+                                startTimeArray.append(formatStartTime) //Start Time Value
+                                endTimeArray.append(formatEndTime) //End Time Value
+                                subjectArray.append(resSubject) //Subject Selection
+                                timeTotalArray.append(resTimeTotal) //Total Study Time
+                            
+                        //Total Study Time
+                        reportTotalStudyTime += Int(resTimeTotal)
                         
                     }
                     
@@ -348,6 +448,8 @@ class studyRptByDate_VC: UIViewController {
                 print(endTimeArray)
                 print(subjectArray)
                 print(timeTotalArray)
+                rptTotalTimeOutletLabel.textColor = UIColor.yellow
+                rptTotalTimeOutletLabel.text = "Total Hours \(reportTotalStudyTime)"
 
                 
                 
@@ -411,7 +513,7 @@ extension studyRptByDate_VC: UITableViewDataSource, UITableViewDelegate {
         cell.subjectOutletLabel.font = cell.subjectOutletLabel.font.withSize(14)
         
         //Total Time
-        cell.totalTimeOutletLabel.text = "Study Time \(timeTotalArray[indexPath.row])"
+        cell.totalTimeOutletLabel.text = "Study Time \(timeTotalArray[indexPath.row]) Hrs"
         cell.totalTimeOutletLabel.textAlignment = .left
         cell.totalTimeOutletLabel.font = cell.totalTimeOutletLabel.font.withSize(14)
         

@@ -163,6 +163,11 @@ class StudyEntry_VC: UIViewController {
             infoSaveOutletLabel.textColor = UIColor.green
             infoSaveOutletLabel.text = "New Study Saved"
             
+            //Reset form after delay
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                self.resetForm() //Reset form after 2 seconds
+            }
+            
             //Set Message Delay
             DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
                 self.infoSaveOutletLabel.text = ""
@@ -178,7 +183,14 @@ class StudyEntry_VC: UIViewController {
         }
     }
     
-    
+    //Reset Study Input form
+    func resetForm() {
+        studyDateOutletText.text = ""
+        startTimeOutletText.text = ""
+        endTimeOutletText.text = ""
+        pickerviewOutletLabel.text = ""
+        totalTimeOutletLabel.text = ""
+    }
     
     
     
