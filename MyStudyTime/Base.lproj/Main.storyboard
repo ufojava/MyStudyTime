@@ -807,6 +807,9 @@
                                     <constraint firstAttribute="width" constant="124" id="Yes-V9-bXT"/>
                                 </constraints>
                                 <state key="normal" title="Current Month"/>
+                                <connections>
+                                    <action selector="currentMonthOfYear:" destination="An8-1f-BDJ" eventType="touchUpInside" id="9Ls-kM-YKy"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yuj-r4-9mf">
                                 <rect key="frame" x="20" y="808" width="374" height="33"/>
@@ -830,6 +833,9 @@
                                     <constraint firstAttribute="width" constant="124" id="B4D-4G-sjC"/>
                                 </constraints>
                                 <state key="normal" title="Prev Month"/>
+                                <connections>
+                                    <action selector="prevMonthOfYearButton:" destination="An8-1f-BDJ" eventType="touchUpInside" id="mTk-2K-XaV"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

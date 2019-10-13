@@ -143,6 +143,18 @@ class studyRptByDate_VC: UIViewController {
         print(weekOfYear(inWeek: prevWeekOfYear))
     }
     
+    //Get Month of Year
+    @IBAction func currentMonthOfYear(_ sender: UIButton) {
+        print((monthOfYear(inMonth: currentMonthOfYear)))
+        
+    }
+    
+    //Get previous Month
+    @IBAction func prevMonthOfYearButton(_ sender: UIButton) {
+        
+        print((monthOfYear(inMonth: prevMonthOfYear)))
+    }
+    
     
 
     
@@ -188,12 +200,12 @@ class studyRptByDate_VC: UIViewController {
         
         //Format Date and Time
         let dateFomrmatter = DateFormatter()
-        dateFomrmatter.timeStyle = .short
-        dateFomrmatter.dateStyle = .medium
+            dateFomrmatter.timeStyle = .short
+            dateFomrmatter.dateStyle = .medium
         
         let timeFormatter = DateFormatter()
-        timeFormatter.dateStyle = .none
-        timeFormatter.timeStyle = .short
+            timeFormatter.dateStyle = .none
+            timeFormatter.timeStyle = .short
         
         
         do {
@@ -264,6 +276,8 @@ class studyRptByDate_VC: UIViewController {
     //Variable for Times of the year
     var currentWeekOfYear = "Current Week"
     var prevWeekOfYear = "Previous Week"
+    var currentMonthOfYear = "Current Month"
+    var prevMonthOfYear = "Previous Month"
     
     
     //Function to get Week of year
@@ -280,13 +294,11 @@ class studyRptByDate_VC: UIViewController {
             timeFormatter.dateStyle = .none
             timeFormatter.timeStyle = .short
         
-        //Set Current Week
-        let weekOfYearCal = Calendar.current
-        let curWeek = Date()
-        let curWeekOfYear = dateFomrmatter.string(from: curWeek)
-        let curWkOfYrToDate = dateFomrmatter.date(from: curWeekOfYear)
-        let defaultWeekOfYear = weekOfYearCal.component(.weekOfYear, from: curWkOfYrToDate!)
-        var weekOfYear = 0
+     //Set Current Week
+          let weekOfYearCal = Calendar.current
+          let curWeek = Date()
+          let defaultWeekOfYear = weekOfYearCal.component(.weekOfYear, from: curWeek)
+          var weekOfYear = 0
         
             //Condition to run week of year
             
@@ -304,6 +316,33 @@ class studyRptByDate_VC: UIViewController {
       
     }
     
+    
+    //Function to get Month of the Year
+    func monthOfYear(inMonth: String) -> Int {
+        
+        let monthChoice = ["Current Month", "Previous Month"]
+        
+        //Format Date and Time
+        let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .medium
+            
+        //Set Current Week
+        let calComponent = Calendar.current
+        let curMonth = Date()
+        let monthComponent = calComponent.component(.month, from: curMonth)
+        var monthOfYear = 0
+        
+        //Set condition for the month of the year
+        if monthChoice[0] == inMonth {
+            
+            monthOfYear = monthComponent
+        } else if monthChoice[1] == inMonth {
+            
+            monthOfYear = monthComponent - 1
+        }
+        
+        return monthOfYear
+    }
     
     
     
@@ -332,13 +371,7 @@ class studyRptByDate_VC: UIViewController {
         
         //Set Current Week
               let weekOfYearCal = Calendar.current
-              //let curWeek = Date()
-              //let curWeekOfYear = dateFomrmatter.string(from: curWeek)
-              //let curWkOfYrToDate = dateFomrmatter.date(from: curWeekOfYear)
-              
-              //To be used in Week Processing
-              //let defaultWeekOfYear = weekOfYearCal.component(.weekOfYear, from: curWkOfYrToDate!)
-              //let preDefaultWeekOfYear = defaultWeekOfYear  - 1
+            
         
       
             
