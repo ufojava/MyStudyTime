@@ -790,6 +790,9 @@
                                     <constraint firstAttribute="width" constant="124" id="CwW-di-v8i"/>
                                 </constraints>
                                 <state key="normal" title="Today"/>
+                                <connections>
+                                    <action selector="todayStudyRecordButton:" destination="An8-1f-BDJ" eventType="touchUpInside" id="bRO-68-6dG"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RsS-Sc-1hS">
                                 <rect key="frame" x="20" y="160" width="124" height="30"/>
