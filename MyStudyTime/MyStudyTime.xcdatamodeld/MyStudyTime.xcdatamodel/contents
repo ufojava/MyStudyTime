@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14903" systemVersion="18G103" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15400" systemVersion="19A583" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Study" representedClassName="Study" syncable="YES" codeGenerationType="class">
         <attribute name="endTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="startTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="studyDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="studyTimeTotal" optional="YES" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="subjectSelection" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Study_Targets" representedClassName="Study_Targets" syncable="YES" codeGenerationType="class">
+        <attribute name="subBiology" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="subChemistry" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="subEnglish" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="subGeography" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="subHistory" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="subLiterature" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="subMaths" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="subPhysics" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="subTargets" optional="YES" attributeType="String"/>
     </entity>
     <entity name="Targets" representedClassName="Targets" syncable="YES" codeGenerationType="class">
         <attribute name="subBiology" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
@@ -19,6 +30,7 @@
     </entity>
     <elements>
         <element name="Study" positionX="-63" positionY="-18" width="128" height="118"/>
+        <element name="Study_Targets" positionX="-54" positionY="63" width="128" height="28"/>
         <element name="Targets" positionX="-54" positionY="27" width="128" height="163"/>
     </elements>
 </model>

@@ -150,7 +150,7 @@ class StudyMainPage_VC: UIViewController {
     @IBAction func studyTargetButton(_ sender: UIButton) {
         let mainStoryBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         
-        let studyTarget = mainStoryBoard.instantiateViewController(identifier: "studyTime_VC") as! StudyTargets_VC
+        let studyTarget = mainStoryBoard.instantiateViewController(identifier: "studyTargets_V2_VC") as! StudyTargets_V2_VC
         studyTarget.modalPresentationStyle = .fullScreen
         
         //Call the function

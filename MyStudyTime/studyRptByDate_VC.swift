@@ -117,6 +117,9 @@ class studyRptByDate_VC: UIViewController {
         prevMonthOutletButton.layer.shadowOpacity = 1
         prevMonthOutletButton.layer.shadowRadius = 5
         prevMonthOutletButton.layer.shadowOffset = CGSize(width: 3, height: 3)
+        
+        //Hide Table footer
+        tableviewOutletView.tableFooterView = UIView()
     
         
         
