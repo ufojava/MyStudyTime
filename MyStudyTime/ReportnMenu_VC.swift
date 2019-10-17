@@ -151,6 +151,22 @@ class ReportnMenu_VC: UIViewController {
         
     }
     
+    //Call Subject Report
+    @IBAction func callSubjectReport(_ sender: UIButton) {
+        
+        //Main Storyboard
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        //Call Subject Report
+        let subjectReport = mainStoryboard.instantiateViewController(identifier: "subjectReport_VC") as! SubjectReport_VC
+            subjectReport.modalPresentationStyle = .fullScreen
+        
+        self.present(subjectReport,animated: true,completion: nil)
+        
+        
+    }
+    
+    
 
  
 
