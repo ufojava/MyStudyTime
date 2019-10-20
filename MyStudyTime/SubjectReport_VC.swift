@@ -18,33 +18,43 @@ class SubjectReport_VC: UIViewController {
     @IBOutlet weak var navbarOutletNavbar: UINavigationBar!
     @IBOutlet weak var navbarOutletItem: UIBarButtonItem!
     
-    //Label Fields
+    //Label and Text Fields
     @IBOutlet weak var pickerOutletLabel: UILabel!
     @IBOutlet weak var pickerviewOutletPickerview: UIPickerView!
     @IBOutlet weak var totalStudyOutletLabel: UILabel!
     @IBOutlet weak var infoOutletLabel: UILabel!
+    @IBOutlet weak var startDateOutletText: UITextField!
+    @IBOutlet weak var endDateOutletText: UITextField!
+    @IBOutlet weak var searchOutletButton: UIButton!
     
-    //Buttons
-    @IBOutlet weak var thisweekOutletButton: UIButton!
-    @IBOutlet weak var prevweekOutletButton: UIButton!
-    @IBOutlet weak var thismonthOutletButton: UIButton!
-    @IBOutlet weak var prevmonthOutletButton: UIButton!
+
     
     //TableView View
     @IBOutlet weak var tableviewOutletTableview: UITableView!
     
     
     //Variables for holding array values
-    var studyDateArray: [Date] = []
-    var startTimeArray: [Date] = []
-    var endTimeArray: [Date] = []
+    var studyDateArray: [String] = []
+    var startTimeArray: [String] = []
+    var endTimeArray: [String] = []
     var subjectArray: [String] = []
     var totalTimeArray: [Int32] = []
+    
+    
+    
+    //Variables for holding array values
+    var studyDate_V3Array: [Date] = []
+    var startTime_3Array: [Date] = []
+    var endTime_V3Array: [Date] = []
+    var subject_V3Array: [String] = []
+    var totalTime_V3Array: [Int32] = []
     
     //Variable to hold PickerView Array
     var pickerSubArray = ["English", "Literature","History","Biology","Chemistry","Maths","Physics","Geography"]
     
     
+    //Set Variable for DatePicker
+    let datePicker = UIDatePicker()
     
 
     override func viewDidLoad() {
@@ -53,6 +63,7 @@ class SubjectReport_VC: UIViewController {
         //Set Custom from here
         formatVC() //Format View Controller
         conDelegateDatasource() //Connect PickerView
+       
     }
     
     //Format ViewController
@@ -76,12 +87,35 @@ class SubjectReport_VC: UIViewController {
         navbarOutletNavbar.layer.shadowOffset = CGSize(width: 3, height: 3)
         navbarOutletItem.title = "Back"
         
-        //Format label field
+        //Format label and text field
         pickerOutletLabel.textColor = UIColor.purple
         pickerOutletLabel.textAlignment = .center
         pickerOutletLabel.font = pickerOutletLabel.font.withSize(14)
         pickerOutletLabel.layer.borderColor = UIColor.gray.cgColor
         pickerOutletLabel.layer.borderWidth = 1.0
+        
+        startDateOutletText.font = startDateOutletText.font?.withSize(14)
+        startDateOutletText.textAlignment = .left
+        startDateOutletText.clearButtonMode = .always
+        startDateOutletText.layer.borderColor = UIColor.gray.cgColor
+        startDateOutletText.layer.borderWidth = 1.0
+        
+        endDateOutletText.font = startDateOutletText.font?.withSize(14)
+        endDateOutletText.textAlignment = .left
+        endDateOutletText.clearButtonMode = .always
+        endDateOutletText.layer.borderColor = UIColor.gray.cgColor
+        endDateOutletText.layer.borderWidth = 1.0
+        
+        //Format Search Button
+        searchOutletButton.setTitleColor(.white, for: .normal)
+        searchOutletButton.backgroundColor = UIColor.brown
+        searchOutletButton.layer.shadowOpacity = 1
+        searchOutletButton.layer.shadowRadius = 5
+        searchOutletButton.layer.shadowColor = UIColor.black.cgColor
+        searchOutletButton.layer.shadowOffset = CGSize(width: 3, height: 3)
+        
+        
+        
         
         pickerviewOutletPickerview.layer.borderColor = UIColor.gray.cgColor
         pickerviewOutletPickerview.layer.borderWidth = 1.0
@@ -92,171 +126,202 @@ class SubjectReport_VC: UIViewController {
         totalStudyOutletLabel.layer.borderColor = UIColor.gray.cgColor
         totalStudyOutletLabel.layer.borderWidth = 1.0
         
-        //Format Buttons
-        thisweekOutletButton.setTitleColor(.white, for: .normal)
-        thisweekOutletButton.backgroundColor = UIColor.gray
-        thisweekOutletButton.layer.shadowOpacity = 1
-        thisweekOutletButton.layer.shadowRadius = 5
-        thisweekOutletButton.layer.shadowColor = UIColor.black.cgColor
-        thisweekOutletButton.layer.shadowOffset = CGSize(width: 3, height: 3)
-        
-        prevweekOutletButton.setTitleColor(.white, for: .normal)
-        prevweekOutletButton.backgroundColor = UIColor.gray
-        prevweekOutletButton.layer.shadowOpacity = 1
-        prevweekOutletButton.layer.shadowRadius = 5
-        prevweekOutletButton.layer.shadowColor = UIColor.black.cgColor
-        prevweekOutletButton.layer.shadowOffset = CGSize(width: 3, height: 3)
-        
-        thismonthOutletButton.setTitleColor(.white, for: .normal)
-        thismonthOutletButton.backgroundColor = UIColor.brown
-        thismonthOutletButton.layer.shadowOpacity = 1
-        thismonthOutletButton.layer.shadowRadius = 5
-        thismonthOutletButton.layer.shadowColor = UIColor.black.cgColor
-        thismonthOutletButton.layer.shadowOffset = CGSize(width: 3, height: 3)
-        
-        prevmonthOutletButton.setTitleColor(.white, for: .normal)
-        prevmonthOutletButton.backgroundColor = UIColor.brown
-        prevmonthOutletButton.layer.shadowOpacity = 1
-        prevmonthOutletButton.layer.shadowRadius = 5
-        prevmonthOutletButton.layer.shadowColor = UIColor.black.cgColor
-        prevmonthOutletButton.layer.shadowOffset = CGSize(width: 3, height: 3)
         
         
-        
+        //Hide Unused cells
+        tableviewOutletTableview.tableFooterView = UIView()
         
         
     }
     
-    //Button Action
-    @IBAction func thisWeekButton(_ sender: UIButton) {
-        resetArray() //Reset Array
-        getStudySubject(inSubject: pickerOutletLabel.text!)
+    
+    //Setup DatePicker Start
+    func startDatePicker() {
+        
+        //Format Date for DatePicker
+        datePicker.datePickerMode = .date
+        
+        //Set Toolbar
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        
+        //Done Button
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneStartDatePicker))
+        
+        //Sapce Creation
+        let spaceAdjust = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        
+        //Cancel Button
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker))
+        
+        //Set ToolBar
+        toolBar.setItems([doneButton,spaceAdjust,cancelButton], animated: false)
+        startDateOutletText.inputAccessoryView = toolBar
+        startDateOutletText.inputView = datePicker
+        
     }
     
     
-    //Function to set Date components
+    //Setup DatePicker End
+       func endDatePicker() {
+           
+           //Format Date for DatePicker
+           datePicker.datePickerMode = .date
+           
+           //Set Toolbar
+           let toolBar = UIToolbar()
+           toolBar.sizeToFit()
+           
+           //Done Button
+           let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneEndDatePicker))
+           
+           //Sapce Creation
+           let spaceAdjust = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+           
+           //Cancel Button
+           let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker))
+           
+           //Set ToolBar
+           toolBar.setItems([doneButton,spaceAdjust,cancelButton], animated: false)
+           endDateOutletText.inputAccessoryView = toolBar
+           endDateOutletText.inputView = datePicker
+           
+       }
     
-    //Week of year - Current and Previous
-    func weekOfYear(inPeriod: String) -> Int {
+    //Function for the Done Button
+    @objc func doneStartDatePicker() {
         
-        //Variable Week Choice
-        let periodChoice = ["Current Week", "Previous Week","Current Month","Previous Month"]
-    
-    
-        //Get the week of year
-        let cal = Calendar.current
-        let curWk = Date()
-        let curMth = Date()
+        let dFormatter = DateFormatter()
+        dFormatter.dateStyle = .medium
         
-        let getWkOfYear = cal.component(.weekOfYear, from: curWk)
-        let getMthOfYear = cal.component(.month, from: curMth)
+        //Set conditions for Start and End dates
+        startDateOutletText.text = dFormatter.string(from: datePicker.date)
+        self.view.endEditing(true)
         
-        //Set Week of Year
-        var periodOfYear = 0
-        
-        
-        //Condition for Week of year (Week Choice and inWeek)
-        if periodChoice[0] == inPeriod {
-            
-            periodOfYear = getWkOfYear
-            
-        } else if periodChoice[1] == inPeriod {
-            periodOfYear = getWkOfYear - 1
-            
-            //Get Month Dates
-        } else if periodChoice[2] == inPeriod {
-            periodOfYear = getMthOfYear
-            
-        } else if periodChoice[3] == inPeriod {
-            
-            periodOfYear = getMthOfYear - 1
-        }
-        
-        return periodOfYear
-        
+       
     }
     
-    //Function to retreive data from CoreData
+    
+    //Function for the Done Button
+    @objc func doneEndDatePicker() {
+        
+        let dFormatter = DateFormatter()
+        dFormatter.dateStyle = .medium
+        
+        //Set conditions for Start and End dates
+        endDateOutletText.text = dFormatter.string(from: datePicker.date)
+        self.view.endEditing(true)
+        
+       
+    }
+    
+    
+    
+    //Function for Cancel
+    @objc func cancelDatePicker() {
+        self.view.endEditing(true)
+    }
+    
+    //Enter Start Dates
+    @IBAction func startDateEditing(_ sender: UITextField) {
+        //Call Dated Picker
+        startDatePicker()
+    }
+    
+    //Enter End Date
+    @IBAction func endDateEditing(_ sender: UITextField) {
+        endDatePicker()
+    }
+ 
+ 
+    
+    @IBAction func searchButton(_ sender: UIButton) {
+        resetArray()
+             getStudySubject(inSubject: pickerOutletLabel.text!)
+             tableviewOutletTableview.reloadData()
+             
+             print(studyDate_V3Array)
+             print(startTime_3Array)
+             print(endTime_V3Array)
+             print(subject_V3Array)
+             print(totalTime_V3Array)
+    }
+    
+    
+
+   
+
+    
+    //Funciton to get CoreData Subjects
     func getStudySubject(inSubject: String) {
         
+        let dFormatter = DateFormatter()
+        dFormatter.dateStyle = .medium
         
+        var cal = Calendar.current
+        cal.timeZone = NSTimeZone.local
         
-        
-        
+
+ 
         
         //Set Context
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+               let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
-        //Set NSFetch
-        let studyEntity = NSFetchRequest<NSFetchRequestResult>(entityName: "Study")
+                let convStartDate = dFormatter.date(from: startDateOutletText.text!)
+                let convEndDate = dFormatter.date(from: endDateOutletText.text!)
+        
+        
+        
+                //Date Predicate
+           
+                let dateFromPredicate = NSPredicate(format: "studyDate >= %@", convStartDate! as NSDate)
+                let dateToPredicate = NSPredicate(format: "studyDate < %@", convEndDate! as NSDate)
+        
+        
+                let studyEntity = NSFetchRequest<NSFetchRequestResult>(entityName: "Study")
+        
+                let subJectPredicate = NSPredicate(format: "subjectSelection == %@", inSubject)
+        
+                let datePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [dateFromPredicate, dateToPredicate,subJectPredicate])
+        
+                    studyEntity.predicate = datePredicate
+               
+               //Set NSFetch
+               
+        
+                
 
-        studyEntity.predicate = NSPredicate(format: "subjectSelection == %@", inSubject)
-        
-        //Set fault result
-        studyEntity.returnsObjectsAsFaults = false
-        
-        //Retreive subject from CoreData
+               
+               
+               //Set fault result
+               studyEntity.returnsObjectsAsFaults = false
+               
+               //Retreive subject from CoreData
         
         do {
             
             let results = try context.fetch(studyEntity)
             if results.count > 0 {
-                for result in results as! [NSManagedObject] {
+                for result in results as!  [NSManagedObject] {
                     
-                    //Study Date
-                    guard let reStudyDate = (result.value(forKey: "studyDate") as? Date) else {
-                        print("Unable to retreive Study Date")
-                        return
-                    }
-                    //Assign value to array date
-                    studyDateArray.append(reStudyDate)
+                    studyDate_V3Array.append(result.value(forKey: "studyDate") as! Date)
+                    startTime_3Array.append(result.value(forKey: "startTime") as! Date)
+                    endTime_V3Array.append(result.value(forKey: "endTime") as! Date)
+                    subject_V3Array.append(result.value(forKey: "subjectSelection") as! String)
+                    totalTime_V3Array.append(result.value(forKey: "studyTimeTotal") as! Int32)
                     
-                    //Start Time
-                    guard let resStartTime = (result.value(forKey: "startTime") as? Date) else {
-                        print("Unable to retreive Start Time")
-                        return
-                    }
-                    //Assign value to start time array
-                    startTimeArray.append(resStartTime)
-                    
-                    //End Time
-                    guard let resEndTime = (result.value(forKey: "endTime") as? Date) else {
-                        print("Unable to retreive End Time")
-                        return
-                    }
-                    //Assign vale ti end time array
-                    endTimeArray.append(resEndTime)
-                    
-                    //Subject
-                    guard let resSubject = (result.value(forKey: "subjectSelection") as? String) else {
-                        print("Unable to retreive Subject")
-                        return
-                    }
-                    //Assign to Subject Array
-                    subjectArray.append(resSubject)
-                    
-                    guard let resTotalTime = (result.value(forKey: "studyTimeTotal") as? Int32) else {
-                        print("Unable to retrieve Study Time Total")
-                        return
-                    }
-                    //Assign to Time Total Array
-                    totalTimeArray.append(resTotalTime)
                     
                 }
-                
-                print(startTimeArray)
-                print(studyDateArray)
-                print(endTimeArray)
-                print(subjectArray)
+            } else {
+                print("No records found")
             }
         } catch {
-            print("Unable to retrive records")
+            print("Unable to retreive records")
         }
         
         
-        
-        
     }
+    
     
     
     //Function to reset Arrays
@@ -284,10 +349,16 @@ class SubjectReport_VC: UIViewController {
         self.present(reportMenu,animated: true,completion: nil)
     }
     
-    //Function to set Pickerview Delegta and Datasource
+    //Function to set Pickerview  & TableView Delegta and Datasource
     func conDelegateDatasource() {
+        //PickerView
         pickerviewOutletPickerview.delegate = self
         pickerviewOutletPickerview.dataSource = self
+        
+        //TableView
+        tableviewOutletTableview.delegate = self
+        tableviewOutletTableview.dataSource = self
+        
     }
     
     
@@ -322,4 +393,51 @@ extension SubjectReport_VC: UIPickerViewDataSource, UIPickerViewDelegate {
         pickerOutletLabel.font = pickerOutletLabel.font.withSize(22)
         pickerOutletLabel.text = pickerSubArray[row]
     }
+    
+}
+
+//Extension for TableView
+extension SubjectReport_VC: UITableViewDataSource, UITableViewDelegate {
+    
+    //Set number of sections
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    //Number of Row in Section
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return studyDateArray.count
+    }
+    
+    //Cell in Row
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableviewOutletTableview.dequeueReusableCell(withIdentifier: "subRptCell", for: indexPath) as! SubjectReportCell_VC
+        
+        //Study Date
+        cell.studyDateOutletCell.textColor = UIColor.blue
+        cell.studyDateOutletCell.font = cell.studyDateOutletCell.font.withSize(14)
+        cell.studyDateOutletCell.text = "Study Date: \(studyDateArray[indexPath.row])"
+        
+        //Start Time
+        cell.startOutletCell.font = cell.startOutletCell.font.withSize(14)
+        cell.startOutletCell.text = "Start Time: \(startTimeArray[indexPath.row])"
+        
+        //End Time
+        cell.endOutletCell.font = cell.endOutletCell.font.withSize(14)
+        cell.endOutletCell.text = "End Time: \(endTimeArray[indexPath.row])"
+        
+        //Subject
+        cell.subjectOutletCell.font = cell.subjectOutletCell.font.withSize(14)
+        cell.subjectOutletCell.text = subjectArray[indexPath.row]
+        
+        //Total Study Time
+        cell.totalTimeOutletCell.textColor = UIColor.green
+        cell.totalTimeOutletCell.font = cell.totalTimeOutletCell.font.withSize(14)
+        cell.totalTimeOutletCell.text = "Study Time: \(totalTimeArray[indexPath.row]) Hour(s)"
+        
+        
+        return cell
+    }
+    
 }
