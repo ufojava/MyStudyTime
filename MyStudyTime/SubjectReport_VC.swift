@@ -32,6 +32,7 @@ class SubjectReport_VC: UIViewController {
     //TableView View
     @IBOutlet weak var tableviewOutletTableview: UITableView!
     
+    /*
     
     //Variables for holding array values
     var studyDateArray: [String] = []
@@ -40,7 +41,7 @@ class SubjectReport_VC: UIViewController {
     var subjectArray: [String] = []
     var totalTimeArray: [Int32] = []
     
-    
+    */
     
     //Variables for holding array values
     var studyDate_V3Array: [Date] = []
@@ -136,7 +137,7 @@ class SubjectReport_VC: UIViewController {
     
     
     //Setup DatePicker Start
-    func startDatePicker() {
+    func startEndDatePicker() {
         
         //Format Date for DatePicker
         datePicker.datePickerMode = .date
@@ -146,7 +147,7 @@ class SubjectReport_VC: UIViewController {
         toolBar.sizeToFit()
         
         //Done Button
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneStartDatePicker))
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneDatePicker))
         
         //Sapce Creation
         let spaceAdjust = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -158,59 +159,34 @@ class SubjectReport_VC: UIViewController {
         toolBar.setItems([doneButton,spaceAdjust,cancelButton], animated: false)
         startDateOutletText.inputAccessoryView = toolBar
         startDateOutletText.inputView = datePicker
+        endDateOutletText.inputAccessoryView = toolBar
+        endDateOutletText.inputView = datePicker
+        
         
     }
     
+
     
-    //Setup DatePicker End
-       func endDatePicker() {
-           
-           //Format Date for DatePicker
-           datePicker.datePickerMode = .date
-           
-           //Set Toolbar
-           let toolBar = UIToolbar()
-           toolBar.sizeToFit()
-           
-           //Done Button
-           let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneEndDatePicker))
-           
-           //Sapce Creation
-           let spaceAdjust = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-           
-           //Cancel Button
-           let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker))
-           
-           //Set ToolBar
-           toolBar.setItems([doneButton,spaceAdjust,cancelButton], animated: false)
-           endDateOutletText.inputAccessoryView = toolBar
-           endDateOutletText.inputView = datePicker
-           
-       }
     
     //Function for the Done Button
-    @objc func doneStartDatePicker() {
+    @objc func doneDatePicker() {
         
         let dFormatter = DateFormatter()
         dFormatter.dateStyle = .medium
         
-        //Set conditions for Start and End dates
-        startDateOutletText.text = dFormatter.string(from: datePicker.date)
-        self.view.endEditing(true)
+        if (startDateOutletText.isEditing) {
+            //Set conditions for Start and End dates
+            startDateOutletText.text = dFormatter.string(from: datePicker.date)
+            self.view.endEditing(true)
+            
+        }
         
-       
-    }
-    
-    
-    //Function for the Done Button
-    @objc func doneEndDatePicker() {
-        
-        let dFormatter = DateFormatter()
-        dFormatter.dateStyle = .medium
-        
-        //Set conditions for Start and End dates
+        if (endDateOutletText.isEditing) {
+        //Set conditions for End dates
         endDateOutletText.text = dFormatter.string(from: datePicker.date)
         self.view.endEditing(true)
+            
+        }
         
        
     }
@@ -225,12 +201,12 @@ class SubjectReport_VC: UIViewController {
     //Enter Start Dates
     @IBAction func startDateEditing(_ sender: UITextField) {
         //Call Dated Picker
-        startDatePicker()
+        startEndDatePicker()
     }
     
     //Enter End Date
     @IBAction func endDateEditing(_ sender: UITextField) {
-        endDatePicker()
+        startEndDatePicker()
     }
  
  
@@ -256,10 +232,13 @@ class SubjectReport_VC: UIViewController {
     func getStudySubject(inSubject: String) {
         
         let dFormatter = DateFormatter()
-        dFormatter.dateStyle = .medium
+            dFormatter.dateStyle = .medium
+        
+        let tFormatter = DateFormatter()
+            tFormatter.timeStyle = .medium
         
         var cal = Calendar.current
-        cal.timeZone = NSTimeZone.local
+                cal.timeZone = NSTimeZone.local
         
 
  
@@ -267,6 +246,8 @@ class SubjectReport_VC: UIViewController {
         //Set Context
                let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
+        
+                //Convert String to Date format
                 let convStartDate = dFormatter.date(from: startDateOutletText.text!)
                 let convEndDate = dFormatter.date(from: endDateOutletText.text!)
         
@@ -285,8 +266,6 @@ class SubjectReport_VC: UIViewController {
                 let datePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [dateFromPredicate, dateToPredicate,subJectPredicate])
         
                     studyEntity.predicate = datePredicate
-               
-               //Set NSFetch
                
         
                 
@@ -327,11 +306,11 @@ class SubjectReport_VC: UIViewController {
     //Function to reset Arrays
     func resetArray() {
         //Reset Array
-        studyDateArray.removeAll()
-        startTimeArray.removeAll()
-        endTimeArray.removeAll()
-        subjectArray.removeAll()
-        totalTimeArray.removeAll()
+        studyDate_V3Array.removeAll()
+        startTime_3Array.removeAll()
+        endTime_V3Array.removeAll()
+        subject_V3Array.removeAll()
+        totalTime_V3Array.removeAll()
     }
     
     
@@ -406,7 +385,7 @@ extension SubjectReport_VC: UITableViewDataSource, UITableViewDelegate {
     
     //Number of Row in Section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return studyDateArray.count
+        return studyDate_V3Array.count
     }
     
     //Cell in Row
@@ -417,24 +396,24 @@ extension SubjectReport_VC: UITableViewDataSource, UITableViewDelegate {
         //Study Date
         cell.studyDateOutletCell.textColor = UIColor.blue
         cell.studyDateOutletCell.font = cell.studyDateOutletCell.font.withSize(14)
-        cell.studyDateOutletCell.text = "Study Date: \(studyDateArray[indexPath.row])"
+        cell.studyDateOutletCell.text = "Study Date: \(studyDate_V3Array[indexPath.row])"
         
         //Start Time
         cell.startOutletCell.font = cell.startOutletCell.font.withSize(14)
-        cell.startOutletCell.text = "Start Time: \(startTimeArray[indexPath.row])"
+        cell.startOutletCell.text = "Start Time: \(startTime_3Array[indexPath.row])"
         
         //End Time
         cell.endOutletCell.font = cell.endOutletCell.font.withSize(14)
-        cell.endOutletCell.text = "End Time: \(endTimeArray[indexPath.row])"
+        cell.endOutletCell.text = "End Time: \(endTime_V3Array[indexPath.row])"
         
         //Subject
         cell.subjectOutletCell.font = cell.subjectOutletCell.font.withSize(14)
-        cell.subjectOutletCell.text = subjectArray[indexPath.row]
+        cell.subjectOutletCell.text = subject_V3Array[indexPath.row]
         
         //Total Study Time
         cell.totalTimeOutletCell.textColor = UIColor.green
         cell.totalTimeOutletCell.font = cell.totalTimeOutletCell.font.withSize(14)
-        cell.totalTimeOutletCell.text = "Study Time: \(totalTimeArray[indexPath.row]) Hour(s)"
+        cell.totalTimeOutletCell.text = "Study Time: \(totalTime_V3Array[indexPath.row]) Hour(s)"
         
         
         return cell
