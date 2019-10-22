@@ -130,6 +130,21 @@ class Maintenance_VC: UIViewController {
         
     }
     
+    //Get Delete Record View Controller
+    @IBAction func delRecButton(_ sender: UIButton) {
+        
+        //Set Main Storyboard
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        //Set Delete Record VC
+        let delStdyRec = mainStoryboard.instantiateViewController(identifier: "DeleteRecord_VC") as! DeleteRecord_VC
+            delStdyRec.modalPresentationStyle = .fullScreen
+        
+        //Call Delete Record View Controller
+        self.present(delStdyRec,animated: true,completion: nil)
+    }
+    
+    
 
 
 }
