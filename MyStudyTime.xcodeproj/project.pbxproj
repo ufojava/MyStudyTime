@@ -23,6 +23,7 @@
 		037806562337C4D900B18953 /* StudyMainPage_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037806552337C4D900B18953 /* StudyMainPage_VC.swift */; };
 		039257CC2357AAF6009D51F5 /* SubjectReport_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039257CB2357AAF6009D51F5 /* SubjectReport_VC.swift */; };
 		039257CE2357B31B009D51F5 /* SubjectReportCell_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 039257CD2357B31B009D51F5 /* SubjectReportCell_VC.swift */; };
+		03ED96F4235F8AF5009C7273 /* Maintenance_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ED96F3235F8AF5009C7273 /* Maintenance_VC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		037806552337C4D900B18953 /* StudyMainPage_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMainPage_VC.swift; sourceTree = "<group>"; };
 		039257CB2357AAF6009D51F5 /* SubjectReport_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectReport_VC.swift; sourceTree = "<group>"; };
 		039257CD2357B31B009D51F5 /* SubjectReportCell_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectReportCell_VC.swift; sourceTree = "<group>"; };
+		03ED96F3235F8AF5009C7273 /* Maintenance_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Maintenance_VC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				0378063E2337C43400B18953 /* AppDelegate.swift */,
 				037806402337C43400B18953 /* SceneDelegate.swift */,
 				037806442337C43400B18953 /* Main.storyboard */,
+				03ED96F3235F8AF5009C7273 /* Maintenance_VC.swift */,
 				039257CD2357B31B009D51F5 /* SubjectReportCell_VC.swift */,
 				039257CB2357AAF6009D51F5 /* SubjectReport_VC.swift */,
 				0358B26A23551FEB00CE9AFD /* TargetsReport_VC.swift */,
@@ -174,6 +177,7 @@
 				03076EE8234A6E9E0059D1A1 /* studyRptByDate_VC.swift in Sources */,
 				0358B26B23551FEB00CE9AFD /* TargetsReport_VC.swift in Sources */,
 				03076EE6234926260059D1A1 /* ReportnMenu_VC.swift in Sources */,
+				03ED96F4235F8AF5009C7273 /* Maintenance_VC.swift in Sources */,
 				039257CC2357AAF6009D51F5 /* SubjectReport_VC.swift in Sources */,
 				037806492337C43400B18953 /* MyStudyTime.xcdatamodeld in Sources */,
 				034138AA233968F9002D1B8F /* StudyEntry_VC.swift in Sources */,

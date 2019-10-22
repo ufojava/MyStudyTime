@@ -119,7 +119,7 @@ class StudyMainPage_VC: UIViewController {
         let studyTimeImage = UIImage(named: "StudentIcon.png")
         studyTimeOutletButton.setBackgroundImage(studyTimeImage, for: .normal)
         
-        let amendStudyImage = UIImage(named: "AmendStudy.png")
+        let amendStudyImage = UIImage(named: "Maintenance.png")
         amendStudyOutletButton.setBackgroundImage(amendStudyImage, for: .normal)
         
         let studyReportImage = UIImage(named: "StudentRpt.png")
@@ -171,6 +171,22 @@ class StudyMainPage_VC: UIViewController {
         self.present(reportsMenu,animated: true,completion: nil)
         
     }
+    
+    //Call Maintenance Page
+    @IBAction func maintanceDatbaseButton(_ sender: UIButton) {
+        
+        //Main Storyboard
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        //Set Maintance
+        let maintRecord = mainStoryboard.instantiateViewController(identifier: "Maintenance_VC") as! Maintenance_VC
+        
+        //Call Menu
+        self.present(maintRecord,animated: true,completion: nil)
+        
+        
+    }
+    
     
 
 
