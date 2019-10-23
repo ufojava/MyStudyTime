@@ -32,7 +32,7 @@ class studyRptByDate_VC: UIViewController {
     var timeTotalArray: [Int32] = []
     
   //Variable to hold Report Total Study Time
-    var reportTotalStudyTime = 0
+    var reportTotalStudyTime = Int32(0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,60 +93,88 @@ class studyRptByDate_VC: UIViewController {
         
     }
     
-    //Get All or Todays Records
+    //Configure Date Picker
+    let datePicker = UIDatePicker()
     
     
-    
-    @IBAction func allStudyRecordsButton(_ sender: UIButton) {
+    //Function to show DatePicker
+    func showDatePicker() {
         
-        allStudyRecords()
-        self.tableviewOutletView.reloadData()
-    }
-    
-    //Todays study records
-    @IBAction func todayStudyRecordButton(_ sender: UIButton) {
+        //Format Date and Time
+        datePicker.datePickerMode = .date
         
-        all_Today_StudyRecords(inDay: dayOfYear(inDay: todayRecords))
-        print(dayOfYear(inDay: todayRecords))
-        self.tableviewOutletView.reloadData()
-    }
-    
-    
-    //Get Records of the Week
-    @IBAction func weekOfTheYearButtonAction(_ sender: UIButton) {
+        //Configure Toolbar
+        let toolbar = UIToolbar()
+            toolbar.sizeToFit()
         
-        getWeeklyRecords(inWeek: weekOfYear(inWeek: currentWeekOfYear))
-        self.tableviewOutletView.reloadData()
-        print(weekOfYear(inWeek: currentWeekOfYear))
-    }
-    
-    @IBAction func prevWeekOfWeekYearButton(_ sender: UIButton) {
+        //Configure Done and Cancel buttons
         
-        getWeeklyRecords(inWeek: weekOfYear(inWeek: prevWeekOfYear))
-        self.tableviewOutletView.reloadData()
-        print(weekOfYear(inWeek: prevWeekOfYear))
-    }
-    
-    //Get Month of Year
-    @IBAction func currentMonthOfYear(_ sender: UIButton) {
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneDatePicker))
         
+        //Create Space
+        let spaceAdjust = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         
-        getMonthlyRecords(inMonth: monthOfYear(inMonth: currentMonthOfYear))
-        self.tableviewOutletView.reloadData()
-        print((monthOfYear(inMonth: currentMonthOfYear)))
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker))
+        
+        //Call Toolbar
+        toolbar.setItems([doneButton,spaceAdjust,cancelButton], animated: false)
+        searchFromOutletText.inputAccessoryView = toolbar
+        searchFromOutletText.inputView = datePicker
+        
+        searchToOutletText.inputAccessoryView = toolbar
+        searchToOutletText.inputView = datePicker
         
     }
     
-    //Get previous Month
-    @IBAction func prevMonthOfYearButton(_ sender: UIButton) {
+    
+    
+    
+    //Function for Done for Date Picker
+    @objc func doneDatePicker() {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
         
-        getMonthlyRecords(inMonth: monthOfYear(inMonth: prevMonthOfYear))
-        self.tableviewOutletView.reloadData()
-        print((monthOfYear(inMonth: prevMonthOfYear)))
+        if (searchFromOutletText.isEditing) {
+            searchFromOutletText.text = formatter.string(from: datePicker.date)
+            self.view.endEditing(true)
+        }
+        
+        if (searchToOutletText.isEditing) {
+            searchToOutletText.text = formatter.string(from: datePicker.date)
+            self.view.endEditing(true)
+        }
+        
+    }
+    
+    //Function to cancel DatePicker
+    @objc func cancelDatePicker() {
+        self.view.endEditing(true)
     }
     
     
-
+    
+    //Enter date From
+    @IBAction func searchDateFromText(_ sender: UITextField) {
+        showDatePicker() //Start Search Date
+    }
+    
+    
+    //Enter Date To
+    @IBAction func searchDateToText(_ sender: UITextField) {
+        showDatePicker() //End Search Date
+    }
+    
+    //Search Button
+    @IBAction func searchButton(_ sender: UIButton) {
+        resetArray()
+        //allStudyRecords()
+        allStudyRecords(inDateFrom: searchFromOutletText.text!, inDateTo: searchToOutletText.text!)
+        tableviewOutletView.reloadData()
+       
+    
+    }
+    
+    
     
     
     //Menu call
@@ -158,44 +186,76 @@ class studyRptByDate_VC: UIViewController {
         let reportMenu = mainStoryBoard.instantiateViewController(identifier: "reportMenu_VC") as! ReportnMenu_VC
         reportMenu.modalPresentationStyle = .fullScreen
         
-        //Call M
+        //Call Menu
         self.present(reportMenu,animated: true,completion: nil)
     }
     
     
     //Import Study Entity from CoreData
-    func allStudyRecords() {
+    func allStudyRecords(inDateFrom: String, inDateTo: String) {
         
-        
-        //Reset Array
-           studyDateArray.removeAll()
-           startTimeArray.removeAll()
-           endTimeArray.removeAll()
-           subjectArray.removeAll()
-           timeTotalArray.removeAll()
-        
-        //Reset Report Study Total
-        reportTotalStudyTime = 0
+
         
         //Set Context
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
+        //Format Date and Time
+        let dateFomrmatter = DateFormatter()
+            dateFomrmatter.dateStyle = .medium
+    
+        
+        let timeFormatter = DateFormatter()
+            timeFormatter.dateStyle = .none
+            timeFormatter.timeStyle = .short
+        
+        guard searchFromOutletText.text != nil else {
+            print("search from has a nil value")
+            return
+        }
+        
+        let convDateFrom = dateFomrmatter.date(from: inDateFrom)
+        
+        guard convDateFrom != nil else {
+            print("ConvertFrom has nil value")
+            return
+            
+        }
+        
+        guard searchToOutletText.text != nil else {
+        print("search to has a nil value")
+        return
+        }
+        
+        let convDateTo = dateFomrmatter.date(from: inDateTo)
+        //Configure Data Picker String to Date
+        
+        guard convDateTo != nil else {
+            print("Convert To has nil")
+            return
+        }
+        
+        
+        
+        
+        //Set Search Predicate
+        let dateFromPredicate = NSPredicate(format: "studyDate >= %@", convDateFrom! as NSDate)
+        
+        let dateToPredicate = NSPredicate(format: "studyDate < %@", convDateTo! as NSDate)
+        
         //Study Entity
         let studyEntity = NSFetchRequest<NSFetchRequestResult>(entityName: "Study")
+        
+        //Set Compoubd Predicate
+        let dateRangePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [dateFromPredicate, dateToPredicate])
+        
+        studyEntity.predicate = dateRangePredicate
 
         //Chack fault reports
         studyEntity.returnsObjectsAsFaults = false
         
         //Serach Core Data database
         
-        //Format Date and Time
-        let dateFomrmatter = DateFormatter()
-            dateFomrmatter.timeStyle = .short
-            dateFomrmatter.dateStyle = .medium
         
-        let timeFormatter = DateFormatter()
-            timeFormatter.dateStyle = .none
-            timeFormatter.timeStyle = .short
         
         
         do {
@@ -203,52 +263,53 @@ class studyRptByDate_VC: UIViewController {
             if results.count > 0 {
                 for result in results as! [NSManagedObject] {
                     
-                    guard  let resStudyDate = result.value(forKey: "studyDate") as? Date else {
-                        print("unable to retreive study date")
+                   //Append search results into Arrays
+                    
+                    guard let resStdyDate = result.value(forKey: "studyDate") as? Date else {
+                        print("Unable to get Study Date")
                         return
                     }
                     
-                    //Assign to Array
-                    let mystdyDateFormat = dateFomrmatter.string(from: resStudyDate)
-                    studyDateArray.append(mystdyDateFormat)
+                    let convResStudyDate = dateFomrmatter.string(from: resStdyDate)
+                    //Assign Study Date Array
+                    studyDateArray.append(convResStudyDate)
                     
                     guard let resStartTime = result.value(forKey: "startTime") as? Date else {
-                        print("Unable to retreive start time")
+                        print("Unable to get Start Time")
                         return
                     }
-                    //Assign result to array
-                    let myStartTimeFormat = timeFormatter.string(from: resStartTime)
-                    startTimeArray.append(myStartTimeFormat)
+                    let convResStartTime = timeFormatter.string(from: resStartTime)
+                    //Assign Start Time Array
+                    startTimeArray.append(convResStartTime)
                     
-                    guard let resEndTime = result.value(forKey: "endTime") as? Date else {
-                        print("Unable to retreive end time")
+                    guard let resEndTime = result.value(forKey: "startTime") as? Date else {
+                        print("Unable to get End Time")
                         return
                     }
-                    //Assign result to array
-                    let myEndTimeFormat = timeFormatter.string(from: resEndTime)
-                    endTimeArray.append(myEndTimeFormat)
+                    let convResEndTime = timeFormatter.string(from: resEndTime)
+                    //Assign Start Time Array
+                    endTimeArray.append(convResEndTime)
                     
-                    guard let resSubject = result.value(forKey: "subjectSelection") as? String else {
-                        print("Unable to retreive subject")
-                        return
-                    }
-                    //Assign result to array
-                    subjectArray.append(resSubject)
+            
+                    subjectArray.append(result.value(forKey: "subjectSelection") as! String)
                     
-                    guard let resTotalTime = result.value(forKey: "studyTimeTotal") as? Int32 else {
-                        print("Unable to retrieve total study time")
+                    guard let resTimeTotal = result.value(forKey: "studyTimeTotal") as? Int32 else {
+                        print("Unable to to get Total Study Time")
                         return
                     }
-                    //Assign result to Total Study Time
-                    timeTotalArray.append(resTotalTime)
-                    reportTotalStudyTime += Int(resTotalTime)
+                    //Assign the total time to the Array
+                    timeTotalArray.append(resTimeTotal)
+                    
+                   
+                  
+                  
                     
                 }
-                
-                print(studyDateArray)
-                print(startTimeArray)
-                print(endTimeArray)
-                print(subjectArray)
+               
+                print(timeTotalArray)
+    
+                //Total number of hours
+                reportTotalStudyTime = timeTotalArray.reduce(0, +)
                 rptTotalTimeOutletLabel.textColor = UIColor.yellow
                 rptTotalTimeOutletLabel.text = "Total Hours \(reportTotalStudyTime)"
         
@@ -260,408 +321,16 @@ class studyRptByDate_VC: UIViewController {
         }
         
         
-        
     }
     
-    
-  
-    
-    //Function to get All or Todays records from Study
-    func all_Today_StudyRecords(inDay: Int) {
-        
-        //Reset Array
-               studyDateArray.removeAll()
-               startTimeArray.removeAll()
-               endTimeArray.removeAll()
-               subjectArray.removeAll()
-               timeTotalArray.removeAll()
-               
-               //Reset Report Study Total
-               reportTotalStudyTime = 0
-               
-               //Format Date and Time
-               let dateFomrmatter = DateFormatter()
-                   dateFomrmatter.timeStyle = .none
-                   dateFomrmatter.dateStyle = .medium
-                   
-               let timeFormatter = DateFormatter()
-                   timeFormatter.dateStyle = .none
-                   timeFormatter.timeStyle = .short
-               
-               
-               //Set Current Week
-                     let dayOfYearCal = Calendar.current
-                   
-               
-             
-                   
-               
-               //Set Context
-               let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-               
-               //Get Study Entity
-               let studyEntity = NSFetchRequest<NSFetchRequestResult>(entityName: "Study")
-               
-               //Set Fault result
-               studyEntity.returnsObjectsAsFaults = false
-               
-               //Get all records from Database
-               
-               do {
-                   
-                   let results = try context.fetch(studyEntity)
-                   if results.count > 0 {
-                       for result in results as! [NSManagedObject] {
-                           
-                           guard let resStudyDate = result.value(forKey: "studyDate")  as? Date else {
-                               print("Unable to retreive study Date")
-                               return
-                           }
-                           
-                           guard let resStartTime = result.value(forKey: "startTime") as? Date else {
-                               print("Unable to retrieve start time")
-                               return
-                           }
-                           
-                           guard let resEndTime = result.value(forKey: "endTime") as? Date else {
-                               print("Unable to retreive end time")
-                               return
-                           }
-                           
-                           guard let resSubject = result.value(forKey: "subjectSelection") as? String else {
-                               print("Unable to retreive subject selection")
-                               return
-                           }
-                           
-                           guard let resTimeTotal = result.value(forKey: "studyTimeTotal") as? Int32 else {
-                               print("Unable to retreive Total Study Time")
-                               return
-                           }
-                           
-                           //Convert Start Time from Date to String amd Medium format
-                           let formatStartTime = timeFormatter.string(from: resStartTime)
-                           
-                           //Convert End Time from Date to String amd Medium format
-                           let formatEndTime = timeFormatter.string(from: resEndTime)
-                           
-                           //Convert Subject from Date to String and Medium format
-                           
-                           
-                           //Shorten Date format to medium
-                           let resStudyDateConvert = dateFomrmatter.string(from: resStudyDate)
-                           
-                           //Convert date back to date to get Week Of Year
-                           let stdyDateFromStringToDate = dateFomrmatter.date(from: resStudyDateConvert)
-                           
-                           //Convert Study Date back to String
-                           let formatStdyDate = dateFomrmatter.string(from: resStudyDate)
-                           
-                           
-                           
-                           
-                           //Get Week Of Year
-                        let restudyDayOfYear = dayOfYearCal.component(.day, from: stdyDateFromStringToDate!)
-                            
-                           //Compare Week of year with Default Week of Year
-                           if (restudyDayOfYear == inDay) {
-                            
-                   
-                               //Assign to Array
-                               
-                                   studyDateArray.append(formatStdyDate) //Study Time Value
-                                   startTimeArray.append(formatStartTime) //Start Time Value
-                                   endTimeArray.append(formatEndTime) //End Time Value
-                                   subjectArray.append(resSubject) //Subject Selection
-                                   timeTotalArray.append(resTimeTotal) //Total Study Time
-                               
-                           //Total Study Time
-                           reportTotalStudyTime += Int(resTimeTotal)
-                               
-                                 
-                           }
-                           
-                           
-                       print(restudyDayOfYear)
-                           
-                       }
-                       print(studyDateArray)
-                       print(startTimeArray)
-                       print(endTimeArray)
-                       print(subjectArray)
-                       print(timeTotalArray)
-                    
-                       rptTotalTimeOutletLabel.textColor = UIColor.yellow
-                       rptTotalTimeOutletLabel.text = "Total Hours \(reportTotalStudyTime)"
-
-                       
-                       
-                   }
-               } catch {
-                   print("Unable to retreive record")
-               }
-        
-              
-              
-        
-        
-    }
-    
-    
-    
-    //Variable for Times of the year
-    var currentWeekOfYear = "Current Week"
-    var prevWeekOfYear = "Previous Week"
-    var currentMonthOfYear = "Current Month"
-    var prevMonthOfYear = "Previous Month"
-    
-    
-    //Function to get Week of year
-    func weekOfYear(inWeek: String) -> Int {
-        
-        let weekChoice = ["Current Week", "Previous Week"]
-        
-        //Format Date and Time
-        let dateFomrmatter = DateFormatter()
-            dateFomrmatter.timeStyle = .none
-            dateFomrmatter.dateStyle = .medium
-                
-        let timeFormatter = DateFormatter()
-            timeFormatter.dateStyle = .none
-            timeFormatter.timeStyle = .short
-        
-     //Set Current Week
-          let weekOfYearCal = Calendar.current
-          let curWeek = Date()
-          let defaultWeekOfYear = weekOfYearCal.component(.weekOfYear, from: curWeek)
-
-          var weekOfYear = 0
-        
-            //Condition to run week of year
-            
-        if (weekChoice[0] == inWeek) {
-            
-            weekOfYear = defaultWeekOfYear
-            
-        } else if (weekChoice[1] == inWeek) {
-            
-            weekOfYear = defaultWeekOfYear - 1
-            
-        }
-        
-        return weekOfYear
-      
-    }
-    
-    
-    var allRecords = "All Records"
-      var todayRecords = "Todays Records"
-      //Function to records for today
-      func dayOfYear(inDay: String) -> Int {
-          
-          let studyDay = "Todays Records"
-          
-          //Format Date and Time
-          let dateFomrmatter = DateFormatter()
-              dateFomrmatter.dateStyle = .medium
-                  
-          
-       //Set Current Week
-            let dayOfYearCal = Calendar.current
-            let curDay = Date()
-        let defaultDayOfYear = dayOfYearCal.component(.day, from: curDay)
-
-            var dayOfYear = 0
-          
-              //Condition to run week of year
-              
-          if (studyDay == inDay) {
-              
-              dayOfYear = defaultDayOfYear
-              
-          }
-          
-          return dayOfYear
-        
-      }
-
-    
-    
-    
-    //Function to get Month of the Year
-    func monthOfYear(inMonth: String) -> Int {
-        
-        let monthChoice = ["Current Month", "Previous Month"]
-        
-        //Format Date and Time
-        let dateFormatter = DateFormatter()
-            dateFormatter.dateStyle = .medium
-            
-        //Set Current Week
-        let calComponent = Calendar.current
-        let curMonth = Date()
-        let monthComponent = calComponent.component(.month, from: curMonth)
-        var monthOfYear = 0
-        
-        //Set condition for the month of the year
-        if monthChoice[0] == inMonth {
-            
-            monthOfYear = monthComponent
-        } else if monthChoice[1] == inMonth {
-            
-            monthOfYear = monthComponent - 1
-        }
-        
-        return monthOfYear
-    }
-    
-    
-    
-    //Function to retreive periodic record request
-    func getWeeklyRecords(inWeek: Int) {
-        
-        //Reset Array
+   
+    //Reset Array
+    func resetArray() {
         studyDateArray.removeAll()
         startTimeArray.removeAll()
         endTimeArray.removeAll()
         subjectArray.removeAll()
         timeTotalArray.removeAll()
-        
-        //Reset Report Study Total
-        reportTotalStudyTime = 0
-        
-        //Format Date and Time
-        let dateFomrmatter = DateFormatter()
-            dateFomrmatter.timeStyle = .none
-            dateFomrmatter.dateStyle = .medium
-            
-        let timeFormatter = DateFormatter()
-            timeFormatter.dateStyle = .none
-            timeFormatter.timeStyle = .short
-        
-        
-        //Set Current Week
-              let weekOfYearCal = Calendar.current
-            
-        
-      
-            
-        
-        //Set Context
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        
-        //Get Study Entity
-        let studyEntity = NSFetchRequest<NSFetchRequestResult>(entityName: "Study")
-        
-        //Set Fault result
-        studyEntity.returnsObjectsAsFaults = false
-        
-        //Get all records from Database
-        
-        do {
-            
-            let results = try context.fetch(studyEntity)
-            if results.count > 0 {
-                for result in results as! [NSManagedObject] {
-                    
-                    guard let resStudyDate = result.value(forKey: "studyDate")  as? Date else {
-                        print("Unable to retreive study Date")
-                        return
-                    }
-                    
-                    guard let resStartTime = result.value(forKey: "startTime") as? Date else {
-                        print("Unable to retrieve start time")
-                        return
-                    }
-                    
-                    guard let resEndTime = result.value(forKey: "endTime") as? Date else {
-                        print("Unable to retreive end time")
-                        return
-                    }
-                    
-                    guard let resSubject = result.value(forKey: "subjectSelection") as? String else {
-                        print("Unable to retreive subject selection")
-                        return
-                    }
-                    
-                    guard let resTimeTotal = result.value(forKey: "studyTimeTotal") as? Int32 else {
-                        print("Unable to retreive Total Study Time")
-                        return
-                    }
-                    
-                    //Convert Start Time from Date to String amd Medium format
-                    let formatStartTime = timeFormatter.string(from: resStartTime)
-                    
-                    //Convert End Time from Date to String amd Medium format
-                    let formatEndTime = timeFormatter.string(from: resEndTime)
-                    
-                    //Convert Subject from Date to String and Medium format
-                    
-                    
-                    //Shorten Date format to medium
-                    let resStudyDateConvert = dateFomrmatter.string(from: resStudyDate)
-                    
-                    //Convert date back to date to get Week Of Year
-                    let stdyDateFromStringToDate = dateFomrmatter.date(from: resStudyDateConvert)
-                    
-                    //Convert Study Date back to String
-                    let formatStdyDate = dateFomrmatter.string(from: resStudyDate)
-                    
-                    
-                    
-                    
-                    //Get Week Of Year
-                    let restudyWeekOfYear = weekOfYearCal.component(.weekOfYear, from: stdyDateFromStringToDate!)
-                     
-                    //Compare Week of year with Default Week of Year
-                    if (restudyWeekOfYear == inWeek) {
-                        
-                        //Assign to Array
-                        
-                            studyDateArray.append(formatStdyDate) //Study Time Value
-                            startTimeArray.append(formatStartTime) //Start Time Value
-                            endTimeArray.append(formatEndTime) //End Time Value
-                            subjectArray.append(resSubject) //Subject Selection
-                            timeTotalArray.append(resTimeTotal) //Total Study Time
-                        
-                    //Total Study Time
-                    reportTotalStudyTime += Int(resTimeTotal)
-                        
-                          
-                    } else if (restudyWeekOfYear == inWeek) {
-                        
-                        //Assign to Array
-                            
-                                studyDateArray.append(formatStdyDate) //Study Time Value
-                                startTimeArray.append(formatStartTime) //Start Time Value
-                                endTimeArray.append(formatEndTime) //End Time Value
-                                subjectArray.append(resSubject) //Subject Selection
-                                timeTotalArray.append(resTimeTotal) //Total Study Time
-                            
-                        //Total Study Time
-                        reportTotalStudyTime += Int(resTimeTotal)
-                        
-                    }
-                    
-                    
-                    
-                    
-                }
-                print(studyDateArray)
-                print(startTimeArray)
-                print(endTimeArray)
-                print(subjectArray)
-                print(timeTotalArray)
-                rptTotalTimeOutletLabel.textColor = UIColor.yellow
-                rptTotalTimeOutletLabel.text = "Total Hours \(reportTotalStudyTime)"
-
-                
-                
-            }
-        } catch {
-            print("Unable to retreive record")
-        }
-        
-        
     }
     
     //Connect Tableviw Delegate and Datasource
@@ -672,163 +341,8 @@ class studyRptByDate_VC: UIViewController {
     }
     
     
-    //Function to get Current Month and Previous Month Records
-    func getMonthlyRecords(inMonth: Int) {
-        
-        //Reset all arrays
-        studyDateArray.removeAll()
-        startTimeArray.removeAll()
-        endTimeArray.removeAll()
-        subjectArray.removeAll()
-        timeTotalArray.removeAll()
-        
-        //Reset Report Time Total
-        reportTotalStudyTime = 0
-        
-        //Format Date and Time
-        let dateFomrmatter = DateFormatter()
-            dateFomrmatter.timeStyle = .none
-            dateFomrmatter.dateStyle = .medium
-            
-        let timeFormatter = DateFormatter()
-            timeFormatter.dateStyle = .none
-            timeFormatter.timeStyle = .short
-        
-        
-        //Set Current Week
-              let MonthOfYearCal = Calendar.current
-        
-        
-        //Set Context
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        
-        //Get Study Entity
-        let studyEntity = NSFetchRequest<NSFetchRequestResult>(entityName: "Study")
-        
-        //Set Fault result
-        studyEntity.returnsObjectsAsFaults = false
-        
-        //Get all records from Database
-        
-        do {
-            
-            let results = try context.fetch(studyEntity)
-            if results.count > 0 {
-                for result in results as! [NSManagedObject] {
-                    
-                    guard let resStudyDate = result.value(forKey: "studyDate")  as? Date else {
-                        print("Unable to retreive study Date")
-                        return
-                    }
-                    
-                    guard let resStartTime = result.value(forKey: "startTime") as? Date else {
-                        print("Unable to retrieve start time")
-                        return
-                    }
-                    
-                    guard let resEndTime = result.value(forKey: "endTime") as? Date else {
-                        print("Unable to retreive end time")
-                        return
-                    }
-                    
-                    guard let resSubject = result.value(forKey: "subjectSelection") as? String else {
-                        print("Unable to retreive subject selection")
-                        return
-                    }
-                    
-                    guard let resTimeTotal = result.value(forKey: "studyTimeTotal") as? Int32 else {
-                        print("Unable to retreive Total Study Time")
-                        return
-                    }
-                    
-                    //Convert Start Time from Date to String amd Medium format
-                    let formatStartTime = timeFormatter.string(from: resStartTime)
-                    
-                    //Convert End Time from Date to String amd Medium format
-                    let formatEndTime = timeFormatter.string(from: resEndTime)
-                    
-                    //Convert Subject from Date to String and Medium format
                     
                     
-                    //Shorten Date format to medium
-                    let resStudyDateConvert = dateFomrmatter.string(from: resStudyDate)
-                    
-                    //Convert date back to date to get Week Of Year
-                    let stdyDateFromStringToDate = dateFomrmatter.date(from: resStudyDateConvert)
-                    
-                    //Convert Study Date back to String
-                    let formatStdyDate = dateFomrmatter.string(from: resStudyDate)
-                    
-                    
-                    
-                    
-                    //Get Week Of Year
-                    let restudyMonthOfYear = MonthOfYearCal.component(.month, from: stdyDateFromStringToDate!)
-                     
-                    //Compare Week of year with Default Week of Year
-                    if (restudyMonthOfYear == inMonth) {
-                        
-                        //Assign to Array
-                        
-                            studyDateArray.append(formatStdyDate) //Study Time Value
-                            startTimeArray.append(formatStartTime) //Start Time Value
-                            endTimeArray.append(formatEndTime) //End Time Value
-                            subjectArray.append(resSubject) //Subject Selection
-                            timeTotalArray.append(resTimeTotal) //Total Study Time
-                        
-                    //Total Study Time
-                    reportTotalStudyTime += Int(resTimeTotal)
-                        
-                          
-                    } else if (restudyMonthOfYear == inMonth) {
-                        
-                        //Assign to Array
-                            
-                                studyDateArray.append(formatStdyDate) //Study Time Value
-                                startTimeArray.append(formatStartTime) //Start Time Value
-                                endTimeArray.append(formatEndTime) //End Time Value
-                                subjectArray.append(resSubject) //Subject Selection
-                                timeTotalArray.append(resTimeTotal) //Total Study Time
-                            
-                        //Total Study Time
-                        reportTotalStudyTime += Int(resTimeTotal)
-                        
-                    }
-                    
-                    
-                    
-                    
-                }
-                print(studyDateArray)
-                print(startTimeArray)
-                print(endTimeArray)
-                print(subjectArray)
-                print(timeTotalArray)
-                rptTotalTimeOutletLabel.textColor = UIColor.yellow
-                rptTotalTimeOutletLabel.text = "Total Hours \(reportTotalStudyTime)"
-
-                
-                
-            }
-        } catch {
-            print("Unable to retreive record")
-        }
-        
-        
-        
-        
-        
-        
-    }
-    
-
-    
-    
-    
-    
-    
-    
-    
     
     
     

@@ -1111,10 +1111,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time Total" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qeZ-oO-qxF">
-                                                    <rect key="frame" x="16" y="124" width="80" height="21"/>
+                                                    <rect key="frame" x="16" y="124" width="338" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="Eux-mD-XcU"/>
-                                                        <constraint firstAttribute="width" constant="80" id="knx-FG-pgw"/>
+                                                        <constraint firstAttribute="width" constant="338" id="knx-FG-pgw"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -1143,7 +1143,7 @@
                                                 <constraint firstItem="Ltg-Mt-PkT" firstAttribute="leading" secondItem="SGN-ez-XNy" secondAttribute="leading" constant="16" id="LoY-oa-aNa"/>
                                                 <constraint firstItem="kBE-pL-BuJ" firstAttribute="top" secondItem="LkE-FV-CS7" secondAttribute="bottom" constant="13" id="OZ9-O6-CbS"/>
                                                 <constraint firstAttribute="trailing" secondItem="wyE-8I-gYk" secondAttribute="trailing" id="aYQ-6y-olm"/>
-                                                <constraint firstAttribute="trailing" secondItem="qeZ-oO-qxF" secondAttribute="trailing" constant="278" id="bPE-0K-8DZ"/>
+                                                <constraint firstAttribute="trailing" secondItem="qeZ-oO-qxF" secondAttribute="trailing" constant="20" id="bPE-0K-8DZ"/>
                                                 <constraint firstAttribute="trailing" secondItem="kBE-pL-BuJ" secondAttribute="trailing" id="bke-86-Qxh"/>
                                                 <constraint firstAttribute="bottom" secondItem="qeZ-oO-qxF" secondAttribute="bottom" constant="11" id="oQc-EI-ou0"/>
                                                 <constraint firstItem="wyE-8I-gYk" firstAttribute="leading" secondItem="LkE-FV-CS7" secondAttribute="trailing" constant="71" id="yRb-Dd-Tg3"/>
@@ -1172,11 +1172,17 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="searchDateFromText:" destination="An8-1f-BDJ" eventType="editingDidBegin" id="ydJ-1n-oMO"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search To" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YUN-8e-jr2">
                                 <rect key="frame" x="247" y="116" width="147" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="searchDateToText:" destination="An8-1f-BDJ" eventType="editingDidBegin" id="vpF-uy-S20"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OEa-v5-RVd">
                                 <rect key="frame" x="143" y="192" width="128" height="38"/>
@@ -1184,6 +1190,9 @@
                                     <constraint firstAttribute="height" constant="38" id="PaP-Ci-H9t"/>
                                 </constraints>
                                 <state key="normal" title="Search"/>
+                                <connections>
+                                    <action selector="searchButton:" destination="An8-1f-BDJ" eventType="touchUpInside" id="TVx-Qw-YAx"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

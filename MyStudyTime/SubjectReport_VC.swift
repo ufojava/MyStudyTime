@@ -32,16 +32,7 @@ class SubjectReport_VC: UIViewController {
     //TableView View
     @IBOutlet weak var tableviewOutletTableview: UITableView!
     
-    /*
-    
-    //Variables for holding array values
-    var studyDateArray: [String] = []
-    var startTimeArray: [String] = []
-    var endTimeArray: [String] = []
-    var subjectArray: [String] = []
-    var totalTimeArray: [Int32] = []
-    
-    */
+
     
     //Variables for holding array values
     var studyDate_V3Array: [Date] = []
