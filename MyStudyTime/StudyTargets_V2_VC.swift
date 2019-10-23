@@ -181,10 +181,10 @@ class StudyTargets_V2_VC: UIViewController {
         
         //Format Save Button
         SaveOutletButton.setTitleColor(.white, for: .normal)
-        SaveOutletButton.backgroundColor = #colorLiteral(red: 0.3098039329, green: 0.2039215714, blue: 0.03921568766, alpha: 0.7426155822)
-        SaveOutletButton.layer.shadowOpacity = 1
-        SaveOutletButton.layer.shadowRadius = 5
-        SaveOutletButton.layer.shadowOffset = CGSize(width: 3, height: 3)
+        SaveOutletButton.backgroundColor = UIColor.brown
+        SaveOutletButton.layer.borderColor = UIColor.gray.cgColor
+        SaveOutletButton.layer.borderWidth = 1
+        
         
         //Format the Info text
         infoFormOutletLabel.textAlignment = .center

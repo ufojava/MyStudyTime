@@ -79,52 +79,54 @@ class StudyEntry_VC: UIViewController {
         navigationbarOutletNavbar.layer.shadowOffset = CGSize(width: 3, height: 3)
         
         //Format Text fields, lables and button
-        studyDateOutletText.layer.shadowOpacity = 1
-        studyDateOutletText.layer.shadowRadius = 5
-        studyDateOutletText.layer.shadowOffset = CGSize(width: 3, height: 3)
-        studyDateOutletText.font = studyDateOutletText.font?.withSize(17)
+        studyDateOutletText.font = studyDateOutletText.font?.withSize(14)
+        studyDateOutletText.layer.borderColor = UIColor.gray.cgColor
+        studyDateOutletText.layer.borderWidth = 1.0
         studyDateOutletText.clearButtonMode = .always
-        studyDateOutletText.textAlignment = .center
+        studyDateOutletText.textAlignment = .left
         
         
-        startTimeOutletText.layer.shadowOpacity = 1
-        startTimeOutletText.layer.shadowRadius = 5
-        startTimeOutletText.layer.shadowOffset = CGSize(width: 3, height: 3)
+        
         startTimeOutletText.clearButtonMode = .always
-        startTimeOutletText.font = startTimeOutletText.font?.withSize(17)
+        startTimeOutletText.font = startTimeOutletText.font?.withSize(14)
+        startTimeOutletText.layer.borderColor = UIColor.gray.cgColor
+        startTimeOutletText.layer.borderWidth = 1.0
         startTimeOutletText.textColor = UIColor.red
         
-        endTimeOutletText.layer.shadowOpacity = 1
-        endTimeOutletText.layer.shadowRadius = 5
-        endTimeOutletText.layer.shadowOffset = CGSize(width: 3, height: 3)
+        
         endTimeOutletText.clearButtonMode = .always
-        endTimeOutletText.font =
-            endTimeOutletText.font?.withSize(17)
+        endTimeOutletText.layer.borderColor = UIColor.gray.cgColor
+        endTimeOutletText.layer.borderWidth = 1.0
+        endTimeOutletText.font = endTimeOutletText.font?.withSize(14)
         endTimeOutletText.textColor = UIColor.red
         
         
         totalTimeOutletLabel.textColor = UIColor.blue
-        totalTimeOutletLabel.font = totalTimeOutletLabel.font.withSize(17)
+        totalTimeOutletLabel.font = totalTimeOutletLabel.font.withSize(14)
+        
         
         saveOutletButton.setTitleColor(.white, for: .normal)
-        saveOutletButton.backgroundColor = UIColor.blue
-        saveOutletButton.layer.shadowOpacity = 1
-        saveOutletButton.layer.cornerRadius = 8
+        saveOutletButton.layer.borderColor = UIColor.gray.cgColor
+        saveOutletButton.layer.borderWidth = 1.0
+        saveOutletButton.backgroundColor = UIColor.brown
+        
     
         
         calcStudyTimeOutletButton.setTitleColor(.white, for: .normal)
-        calcStudyTimeOutletButton.backgroundColor = UIColor.blue
-        calcStudyTimeOutletButton.layer.shadowOpacity = 1
-        calcStudyTimeOutletButton.layer.cornerRadius = 8
+        calcStudyTimeOutletButton.backgroundColor = UIColor.brown
+        calcStudyTimeOutletButton.layer.borderColor = UIColor.gray.cgColor
+        calcStudyTimeOutletButton.layer.borderWidth = 1.0
         
-        totalTimeOutletLabel.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        totalTimeOutletLabel.layer.shadowOpacity = 1
-        totalTimeOutletLabel.layer.shadowRadius = 5
-        totalTimeOutletLabel.layer.shadowOffset = CGSize(width: 3, height: 3)
+        totalTimeOutletLabel.layer.borderColor = UIColor.gray.cgColor
+        totalTimeOutletLabel.layer.borderWidth = 1
+        
         
         //Format Boarder for Pickerview
-        subjectPickerviewOutletPickerview.layer.borderColor = UIColor.black.cgColor
+        subjectPickerviewOutletPickerview.layer.borderColor = UIColor.gray.cgColor
         subjectPickerviewOutletPickerview.layer.borderWidth = 1
+        
+        pickerviewOutletLabel.layer.borderColor = UIColor.gray.cgColor
+        pickerviewOutletLabel.layer.borderWidth = 1
         
                 
                 

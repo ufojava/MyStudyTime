@@ -107,10 +107,10 @@ class TargetsReport_VC: UIViewController {
         
         //Format Button
         targetsOutletsButton.setTitleColor(.white, for: .normal)
-        targetsOutletsButton.backgroundColor = #colorLiteral(red: 0.3098039329, green: 0.2039215714, blue: 0.03921568766, alpha: 0.7766748716)
-        targetsOutletsButton.layer.shadowOpacity = 1
-        targetsOutletsButton.layer.shadowRadius = 5
-        targetsOutletsButton.layer.shadowOffset = CGSize(width: 3, height: 3)
+        targetsOutletsButton.backgroundColor = UIColor.brown
+        targetsOutletsButton.layer.borderColor = UIColor.gray.cgColor
+        targetsOutletsButton.layer.borderWidth = 1
+        
         
         //Navigation Bar
         navigationOutletNavBar.layer.shadowColor = UIColor.black.cgColor

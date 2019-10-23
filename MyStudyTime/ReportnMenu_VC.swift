@@ -55,22 +55,25 @@ class ReportnMenu_VC: UIViewController {
         navbarOutletNavbar.layer.shadowRadius = 5
         navbarOutletNavbar.layer.shadowOffset = CGSize(width: 3, height: 3)
         
-        //Format buttons
-        allStudyReportOutletButton.layer.shadowOpacity = 1
-        allStudyReportOutletButton.layer.shadowRadius = 5
-        allStudyReportOutletButton.layer.shadowOffset = CGSize(width: 5, height: 5)
+        //Format the Button Descriptions
+        allStudyRptOutletLabel.font = allStudyRptOutletLabel.font.withSize(14)
+        allStudyRptOutletLabel.textAlignment = .center
+        allStudyRptOutletLabel.text = "Study Report"
         
-        subjectRptOutletButton.layer.shadowOpacity = 1
-        subjectRptOutletButton.layer.shadowRadius = 5
-        subjectRptOutletButton.layer.shadowOffset = CGSize(width: 5, height: 5)
+        subjectRptOutletLabel.font = subjectRptOutletLabel.font.withSize(14)
+        subjectRptOutletLabel.textAlignment = .center
+        subjectRptOutletLabel.text = "Subject Report"
         
-        targetRptOutletButton.layer.shadowOpacity = 1
-        targetRptOutletButton.layer.shadowRadius = 5
-        targetRptOutletButton.layer.shadowOffset = CGSize(width: 5, height: 5)
+        tartgetRptOutletLabel.font = tartgetRptOutletLabel.font.withSize(14)
+        tartgetRptOutletLabel.textAlignment = .center
+        tartgetRptOutletLabel.text = "Target Report"
         
-        graphicalRptOutletButton.layer.shadowOpacity = 1
-        graphicalRptOutletButton.layer.shadowRadius = 5
-        graphicalRptOutletButton.layer.shadowOffset = CGSize(width: 5, height: 5)
+        graphicalRptOutletLabel.font = graphicalRptOutletLabel.font.withSize(14)
+        graphicalRptOutletLabel.textAlignment = .center
+        graphicalRptOutletLabel.text = "Graph Reports"
+        
+        
+        
         
         
         

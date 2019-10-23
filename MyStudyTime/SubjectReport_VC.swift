@@ -110,10 +110,9 @@ class SubjectReport_VC: UIViewController {
         //Format Search Button
         searchOutletButton.setTitleColor(.white, for: .normal)
         searchOutletButton.backgroundColor = UIColor.brown
-        searchOutletButton.layer.shadowOpacity = 1
-        searchOutletButton.layer.shadowRadius = 5
-        searchOutletButton.layer.shadowColor = UIColor.black.cgColor
-        searchOutletButton.layer.shadowOffset = CGSize(width: 3, height: 3)
+        searchOutletButton.layer.borderColor = UIColor.gray.cgColor
+        searchOutletButton.layer.borderWidth = 1.0
+        
         
         
         

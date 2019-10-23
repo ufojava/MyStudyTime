@@ -10,19 +10,18 @@
 import UIKit
 import CoreData
 
+//Study Report by Date
 class studyRptByDate_VC: UIViewController {
     
     //Report Form Outlets
     @IBOutlet weak var navBarOutletNavbar: UINavigationBar!
     @IBOutlet weak var navBarOutletItem: UIBarButtonItem!
+    @IBOutlet weak var searchFromOutletText: UITextField!
+    @IBOutlet weak var searchToOutletText: UITextField!
     @IBOutlet weak var searchOutletButton: UIButton!
     @IBOutlet weak var tableviewOutletView: UITableView!
-    @IBOutlet weak var todayStudyOutletButton: UIButton!
-    @IBOutlet weak var currentWeekStudyOutletButton: UIButton!
-    @IBOutlet weak var currentMonthStudyOutletButton: UIButton!
     @IBOutlet weak var rptTotalTimeOutletLabel: UILabel!
-    @IBOutlet weak var preWeekOutletButton: UIButton!
-    @IBOutlet weak var prevMonthOutletButton: UIButton!
+ 
     
     
     //Array to hold Data
@@ -54,7 +53,7 @@ class studyRptByDate_VC: UIViewController {
         
         //Format navigation bar
         navBarOutletNavbar.topItem?.title = "STUDY REPORT BY DATE"
-        navBarOutletNavbar.layer.shadowColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        navBarOutletNavbar.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         navBarOutletNavbar.layer.shadowOpacity = 1
         navBarOutletNavbar.layer.shadowRadius = 5
         navBarOutletNavbar.layer.shadowOffset = CGSize(width: 3, height: 3)
@@ -64,61 +63,30 @@ class studyRptByDate_VC: UIViewController {
         
     
         
-        //Format Button All Records
+        //Format Text Field
+        searchFromOutletText.textColor = UIColor.red
+        searchFromOutletText.font = searchFromOutletText.font?.withSize(14)
+        searchFromOutletText.clearButtonMode = .always
+        searchFromOutletText.textAlignment = .left
+        searchFromOutletText.layer.borderColor = UIColor.gray.cgColor
+        searchFromOutletText.layer.borderWidth = 1
+        
+        searchToOutletText.textColor = UIColor.red
+        searchToOutletText.font = searchFromOutletText.font?.withSize(14)
+        searchToOutletText.clearButtonMode = .always
+        searchToOutletText.textAlignment = .left
+        searchToOutletText.layer.borderColor = UIColor.gray.cgColor
+        searchToOutletText.layer.borderWidth = 1
+        
         searchOutletButton.setTitleColor(.white, for: .normal)
-        searchOutletButton!.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        searchOutletButton.backgroundColor = UIColor.black
-        searchOutletButton.layer.shadowOpacity = 1
-        searchOutletButton.layer.shadowRadius = 5
-        searchOutletButton.layer.shadowOffset = CGSize(width: 3, height: 3)
-    
-        
-        //Format Button Todays Records
-        todayStudyOutletButton.setTitleColor(.white, for: .normal)
-        todayStudyOutletButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        todayStudyOutletButton.backgroundColor = UIColor.black
-        todayStudyOutletButton.layer.shadowOpacity = 1
-        todayStudyOutletButton.layer.shadowRadius = 5
-        todayStudyOutletButton.layer.shadowOffset = CGSize(width: 3, height: 3)
-
-        
-        //Format Button Current Week
-        currentWeekStudyOutletButton.setTitleColor(.white, for: .normal)
-        currentWeekStudyOutletButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        currentWeekStudyOutletButton.backgroundColor = UIColor.purple
-        currentWeekStudyOutletButton.layer.shadowOpacity = 1
-        currentWeekStudyOutletButton.layer.shadowRadius = 5
-        currentWeekStudyOutletButton.layer.shadowOffset = CGSize(width: 3, height: 3)
-    
-        
-        //Format Button Previous Week
-        preWeekOutletButton.setTitleColor(.white, for: .normal)
-        preWeekOutletButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        preWeekOutletButton.backgroundColor = UIColor.purple
-        preWeekOutletButton.layer.shadowOpacity = 1
-        preWeekOutletButton.layer.shadowRadius = 5
-        preWeekOutletButton.layer.shadowOffset = CGSize(width: 3, height: 3)
-      
-        
-        
-        //Format Button Current Month
-        currentMonthStudyOutletButton.setTitleColor(.white, for: .normal)
-        currentMonthStudyOutletButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        currentMonthStudyOutletButton.backgroundColor = UIColor.red
-        currentMonthStudyOutletButton.layer.shadowOpacity = 1
-        currentMonthStudyOutletButton.layer.shadowRadius = 5
-        currentMonthStudyOutletButton.layer.shadowOffset = CGSize(width: 3, height: 3)
-        
-        
-        //Format Button Previous Month
-        prevMonthOutletButton.setTitleColor(.white, for: .normal)
-        prevMonthOutletButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        prevMonthOutletButton.backgroundColor = UIColor.red
-        prevMonthOutletButton.layer.shadowOpacity = 1
-        prevMonthOutletButton.layer.shadowRadius = 5
-        prevMonthOutletButton.layer.shadowOffset = CGSize(width: 3, height: 3)
+        searchOutletButton.backgroundColor = UIColor.brown
+        searchOutletButton.layer.borderColor = UIColor.gray.cgColor
+        searchOutletButton.layer.borderWidth = 1
+       
         
         //Hide Table footer
+        tableviewOutletView.layer.borderColor = UIColor.gray.cgColor
+        tableviewOutletView.layer.borderWidth = 1
         tableviewOutletView.tableFooterView = UIView()
     
         
