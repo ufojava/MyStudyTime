@@ -35,11 +35,14 @@ class SubjectReport_VC: UIViewController {
 
     
     //Variables for holding array values
-    var studyDate_V3Array: [Date] = []
-    var startTime_3Array: [Date] = []
-    var endTime_V3Array: [Date] = []
+    var studyDate_V3Array: [String] = []
+    var startTime_V3Array: [String] = []
+    var endTime_V3Array: [String] = []
     var subject_V3Array: [String] = []
     var totalTime_V3Array: [Int32] = []
+    
+    //Variable to hold Report Total Study Time
+    var reportTotalStudyTime = Int32(0)
     
     //Variable to hold PickerView Array
     var pickerSubArray = ["English", "Literature","History","Biology","Chemistry","Maths","Physics","Geography"]
@@ -121,6 +124,8 @@ class SubjectReport_VC: UIViewController {
         
         //Hide Unused cells
         tableviewOutletTableview.tableFooterView = UIView()
+        tableviewOutletTableview.layer.borderColor = UIColor.gray.cgColor
+        tableviewOutletTableview.layer.borderWidth = 1
         
         
     }
@@ -207,7 +212,7 @@ class SubjectReport_VC: UIViewController {
              tableviewOutletTableview.reloadData()
              
              print(studyDate_V3Array)
-             print(startTime_3Array)
+             print(startTime_V3Array)
              print(endTime_V3Array)
              print(subject_V3Array)
              print(totalTime_V3Array)
@@ -226,6 +231,7 @@ class SubjectReport_VC: UIViewController {
         
         let tFormatter = DateFormatter()
             tFormatter.timeStyle = .medium
+            tFormatter.dateStyle = .none
         
         var cal = Calendar.current
                 cal.timeZone = NSTimeZone.local
@@ -273,11 +279,49 @@ class SubjectReport_VC: UIViewController {
             if results.count > 0 {
                 for result in results as!  [NSManagedObject] {
                     
-                    studyDate_V3Array.append(result.value(forKey: "studyDate") as! Date)
-                    startTime_3Array.append(result.value(forKey: "startTime") as! Date)
-                    endTime_V3Array.append(result.value(forKey: "endTime") as! Date)
+                    guard let resStdyDate = result.value(forKey: "studyDate") as? Date else {
+                        print("Unable to get Study Date")
+                        return
+                    }
+                    
+                    let convStudyDate = dFormatter.string(from: resStdyDate)
+                    //Assign result value to array
+                    studyDate_V3Array.append(convStudyDate)
+                    
+                    //Start Time
+                    
+                    guard let resStartTime = result.value(forKey: "startTime") as? Date else {
+                        print("Unable to get Start Time")
+                        return
+                    }
+                    
+                    let convStartTime = tFormatter.string(from: resStartTime)
+                    //Assign result value to array
+                    startTime_V3Array.append(convStartTime)
+                    
+                    
+                    guard let resEndTime = result.value(forKey: "endTime") as? Date else {
+                        print("Unable to get End Time")
+                        return
+                    }
+                    
+                    let convEndTime = tFormatter.string(from: resEndTime)
+                    //Assign result value to array
+                    endTime_V3Array.append(convEndTime)
+                    
+                    
                     subject_V3Array.append(result.value(forKey: "subjectSelection") as! String)
-                    totalTime_V3Array.append(result.value(forKey: "studyTimeTotal") as! Int32)
+                    
+                    guard let resTimeTotal = result.value(forKey: "studyTimeTotal") as? Int32 else {
+                        print("Unable to get Time Total")
+                        return
+                    }
+                    
+                    totalTime_V3Array.append(resTimeTotal)
+                    
+                    //Total number of hours
+                    reportTotalStudyTime = totalTime_V3Array.reduce(0, +)
+                    totalStudyOutletLabel.text = "Total Hours \(reportTotalStudyTime)"
                     
                     
                 }
@@ -297,7 +341,7 @@ class SubjectReport_VC: UIViewController {
     func resetArray() {
         //Reset Array
         studyDate_V3Array.removeAll()
-        startTime_3Array.removeAll()
+        startTime_V3Array.removeAll()
         endTime_V3Array.removeAll()
         subject_V3Array.removeAll()
         totalTime_V3Array.removeAll()
@@ -390,7 +434,7 @@ extension SubjectReport_VC: UITableViewDataSource, UITableViewDelegate {
         
         //Start Time
         cell.startOutletCell.font = cell.startOutletCell.font.withSize(14)
-        cell.startOutletCell.text = "Start Time: \(startTime_3Array[indexPath.row])"
+        cell.startOutletCell.text = "Start Time: \(startTime_V3Array[indexPath.row])"
         
         //End Time
         cell.endOutletCell.font = cell.endOutletCell.font.withSize(14)

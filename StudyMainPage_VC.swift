@@ -29,6 +29,7 @@ class StudyMainPage_VC: UIViewController {
     @IBOutlet weak var studyReportOutletLabel: UILabel!
     @IBOutlet weak var studyTargetsOutletButton: UIButton!
     @IBOutlet weak var studyTargetOutletLabel: UILabel!
+    @IBOutlet weak var clickHereOutletLabel: UILabel!
     
     
     //Initialize Menu SlideBar
@@ -46,12 +47,18 @@ class StudyMainPage_VC: UIViewController {
 
         //Custom Functions
         formatVC() //Set Background
+    
+    
+        
+        
     }
     
     
     //Buttons Action
     
     @IBAction func callMenuActionItem(_ sender: UIBarButtonItem) { //Call Menu
+        
+        
         
         if(menuSlidebarShowing) {
             menubarLeadingConstraint.constant = -117
@@ -77,6 +84,8 @@ class StudyMainPage_VC: UIViewController {
     
     
     
+    
+    
     //Format Main page
     func formatVC() {
     
@@ -92,6 +101,12 @@ class StudyMainPage_VC: UIViewController {
         navigationbarOutletNavbar.layer.shadowRadius = 5
         navigationbarOutletNavbar.layer.shadowOffset = CGSize(width: 3, height: 3)
         navigationbarOutletNavbar.topItem?.title = "MY STUDY SCHEDULE"
+        
+        
+        clickHereOutletLabel.textColor = UIColor.white
+        clickHereOutletLabel.textAlignment = .left
+        clickHereOutletLabel.font = clickHereOutletLabel.font.withSize(14)
+        clickHereOutletLabel.text = "CLICK"
         
         //Format Menubar Color and Opacity
         menubarOutletView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
@@ -127,9 +142,20 @@ class StudyMainPage_VC: UIViewController {
         
         let studyTargetsImage = UIImage(named: "subjectTargets.png")
         studyTargetsOutletButton.setBackgroundImage(studyTargetsImage, for: .normal)
-       
+        
+        
+      
         
            }
+    
+
+    
+    
+
+    
+    
+    
+    
     
     //Call Subject Entry
     @IBAction func studyActionButton(_ sender: UIButton) {
@@ -188,6 +214,12 @@ class StudyMainPage_VC: UIViewController {
     }
     
     
+    
+    
 
 
 }
+
+
+
+
