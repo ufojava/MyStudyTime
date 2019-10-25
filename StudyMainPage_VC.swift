@@ -104,7 +104,7 @@ class StudyMainPage_VC: UIViewController {
         
         
         clickHereOutletLabel.textColor = UIColor.white
-        clickHereOutletLabel.textAlignment = .left
+        clickHereOutletLabel.textAlignment = .center
         clickHereOutletLabel.font = clickHereOutletLabel.font.withSize(14)
         clickHereOutletLabel.text = "CLICK"
         
@@ -117,7 +117,8 @@ class StudyMainPage_VC: UIViewController {
         
         
         //Set image for Navigation Item
-        menuOutletItem.image = UIImage(named: "Menu.png")
+        menuOutletItem.image = UIImage(named: "MouseClick.png")
+    
         
         //Format the constraints for Menubar
         menubarLeadingConstraint.constant = -117
