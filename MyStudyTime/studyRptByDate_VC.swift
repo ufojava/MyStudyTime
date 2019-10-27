@@ -132,7 +132,7 @@ class studyRptByDate_VC: UIViewController {
     //Function for Done for Date Picker
     @objc func doneDatePicker() {
         let formatter = DateFormatter()
-        formatter.dateStyle = .medium
+            formatter.dateStyle = .medium
         
         if (searchFromOutletText.isEditing) {
             searchFromOutletText.text = formatter.string(from: datePicker.date)

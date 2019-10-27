@@ -1438,6 +1438,13 @@
                                                 <constraint firstItem="XnR-ks-XEr" firstAttribute="baseline" secondItem="bMi-R8-phh" secondAttribute="baseline" id="yRd-TJ-ZHm"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="stdyHoursOutletCell" destination="ZtH-Pp-1Jh" id="7Qa-gM-lcz"/>
+                                            <outlet property="stdySubjectOutletCell" destination="ev7-02-6Ko" id="bmh-4L-IrH"/>
+                                            <outlet property="stdyTimeFromOutletCell" destination="XnR-ks-XEr" id="oKa-rr-4DQ"/>
+                                            <outlet property="stdyTimeToOutletCell" destination="bMi-R8-phh" id="b1V-Lo-kPE"/>
+                                            <outlet property="studyDateOutletCell" destination="op0-h9-acI" id="FTq-74-yUn"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -1452,6 +1459,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="searchDateFrom:" destination="E8a-d6-1L3" eventType="editingDidBegin" id="uhu-9L-jKb"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search To" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BNv-8Y-wgF">
                                 <rect key="frame" x="187" y="154" width="207" height="34"/>
@@ -1461,6 +1471,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="searchDateTo:" destination="E8a-d6-1L3" eventType="editingDidBegin" id="DCL-PY-rIy"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i9V-9N-Ral">
                                 <rect key="frame" x="20" y="814" width="374" height="32"/>
@@ -1474,6 +1487,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o1h-9Y-gR0">
                                 <rect key="frame" x="187" y="208" width="207" height="30"/>
                                 <state key="normal" title="Search"/>
+                                <connections>
+                                    <action selector="searchButton:" destination="E8a-d6-1L3" eventType="touchUpInside" id="S0W-8n-Ykb"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wF7-N9-1Bn">
                                 <rect key="frame" x="20" y="104" width="149" height="32"/>
