@@ -201,13 +201,12 @@ class DeleteRecord_VC: UIViewController {
     //Search Button
     @IBAction func searchButton(_ sender: UIButton) {
         
+        resetArray() //Reset Array
         getStudyData(inSubject: pickerviewOutletLabel.text!, inStdyDateFrom: stdyOutletFromText.text!, inStudyDateTo: stdyOutletToText.text!)
+        tableviewOutletTableView.reloadData()
         
-        print(studyDateArray)
-        print(startTimeArray)
-        print(endTimeArray)
-        print(subjectTableViewArray)
-        print(totalTimeArray)
+    
+        
         
     }
     
@@ -262,6 +261,10 @@ class DeleteRecord_VC: UIViewController {
         let dateFormatter = DateFormatter()
             dateFormatter.dateStyle = .medium
             dateFormatter.timeStyle = .none
+        
+        let timeFormatter = DateFormatter()
+            timeFormatter.timeStyle = .medium
+            timeFormatter.dateStyle = .none
         
         
         //Check parameters for nil values
@@ -322,7 +325,7 @@ class DeleteRecord_VC: UIViewController {
                         }
                         
                         //Assign to Start Time Array
-                        let convStartTime = dateFormatter.string(from: resStartTime)
+                        let convStartTime = timeFormatter.string(from: resStartTime)
                         startTimeArray.append(convStartTime)
                         
                         guard let resEndTime = result.value(forKey: "endTime") as? Date else {
@@ -331,7 +334,7 @@ class DeleteRecord_VC: UIViewController {
                         }
                         
                         //Assign to End Time Array
-                        let convEndTime = dateFormatter.string(from: resEndTime)
+                        let convEndTime = timeFormatter.string(from: resEndTime)
                         endTimeArray.append(convEndTime)
                         
                         
@@ -354,9 +357,27 @@ class DeleteRecord_VC: UIViewController {
                         totalTimeArray.append(resTotalTime)
                     }
                     
+                    infoDelRecOutletLabel.textColor = UIColor.systemYellow
+                    infoDelRecOutletLabel.font = infoDelRecOutletLabel.font.withSize(17)
+                    infoDelRecOutletLabel.textAlignment = .center
+                    infoDelRecOutletLabel.text = "Search Results"
                     
+                    //Delay clear info
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                        self.infoDelRecOutletLabel.text = ""
+                    }
                     
                 } else {
+                    
+                    infoDelRecOutletLabel.textColor = UIColor.red
+                    infoDelRecOutletLabel.font = infoDelRecOutletLabel.font.withSize(17)
+                    infoDelRecOutletLabel.textAlignment = .center
+                    infoDelRecOutletLabel.text = "No Record(s) Found!!"
+                    
+                    //Delay clear info
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                        self.infoDelRecOutletLabel.text = ""
+                    }
                     print("no record Found!!")
             }
             
@@ -371,6 +392,15 @@ class DeleteRecord_VC: UIViewController {
         
         
         
+    }
+    
+    //Reset Array
+    func resetArray() {
+        studyDateArray.removeAll()
+        startTimeArray.removeAll()
+        endTimeArray.removeAll()
+        subjectTableViewArray.removeAll()
+        totalTimeArray.removeAll()
     }
     
 
@@ -436,7 +466,7 @@ extension DeleteRecord_VC: UITableViewDataSource, UITableViewDelegate {
         //Study Date
         cell.studyDateOutletCell.textColor = UIColor.blue
         cell.studyDateOutletCell.font = cell.studyDateOutletCell.font.withSize(14)
-        cell.stdyHoursOutletCell.text = "Study Date: \(studyDateArray[indexPath.row])"
+        cell.studyDateOutletCell.text = "Study Date: \(studyDateArray[indexPath.row])"
         
         //Study  From Time
         cell.stdyTimeFromOutletCell.font = cell.stdyTimeFromOutletCell.font.withSize(14)
