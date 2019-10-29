@@ -221,12 +221,17 @@ class DeleteRecord_VC: UIViewController {
         
         if selStudyDateCell != "" || selStudySubCell != "" {
         delStudyRecord(inStudySelectDate: selStudyDateCell, inStudySelectSub: selStudySubCell)
-        tableviewOutletTableView.reloadData()
+            
+            
+            resetArray() //Reset Array
+            getStudyData(inSubject: pickerviewOutletLabel.text!, inStdyDateFrom: stdyOutletFromText.text!, inStudyDateTo: stdyOutletToText.text!)
+            tableviewOutletTableView.reloadData()
+            
         
         } else {
             
             infoDelRecOutletLabel.textColor = UIColor.red
-            infoDelRecOutletLabel.text = "Click Search"
+            infoDelRecOutletLabel.text = "Search & Select"
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
                 self.infoDelRecOutletLabel.text = " "
@@ -577,18 +582,6 @@ extension DeleteRecord_VC: UITableViewDataSource, UITableViewDelegate {
     }
     
 
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
-        if editingStyle == .delete {
-            studyDateArray.remove(at: indexPath.row)
-            
-            tableviewOutletTableView.beginUpdates()
-            tableviewOutletTableView.deleteRows(at: [indexPath], with: .automatic)
-            tableviewOutletTableView.endUpdates()
-            
-        }
-    }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
