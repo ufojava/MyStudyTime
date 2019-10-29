@@ -1476,7 +1476,7 @@
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i9V-9N-Ral">
-                                <rect key="frame" x="20" y="814" width="374" height="32"/>
+                                <rect key="frame" x="20" y="814" width="188" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="4mL-Ku-ePx"/>
                                 </constraints>
@@ -1501,22 +1501,32 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RTq-OW-TRa">
+                                <rect key="frame" x="216" y="814" width="178" height="31"/>
+                                <state key="normal" title="Delete"/>
+                                <connections>
+                                    <action selector="deleteRecButton:" destination="E8a-d6-1L3" eventType="touchUpInside" id="fIw-Sv-0bc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="RTq-OW-TRa" firstAttribute="leading" secondItem="i9V-9N-Ral" secondAttribute="trailing" constant="8" id="3HY-GQ-7B7"/>
                             <constraint firstItem="i9V-9N-Ral" firstAttribute="leading" secondItem="ogD-po-XfY" secondAttribute="leading" constant="20" id="3y1-My-0bu"/>
                             <constraint firstItem="Bud-Sm-30y" firstAttribute="bottom" secondItem="o1h-9Y-gR0" secondAttribute="bottom" constant="7" id="4n8-Wa-mR2"/>
                             <constraint firstItem="wF7-N9-1Bn" firstAttribute="top" secondItem="2Gs-Qv-Lu2" secondAttribute="top" id="8Hk-p3-8hP"/>
                             <constraint firstItem="mQq-KL-RUe" firstAttribute="top" secondItem="Bud-Sm-30y" secondAttribute="bottom" constant="28" id="BUz-Gb-Jff"/>
+                            <constraint firstItem="i9V-9N-Ral" firstAttribute="centerY" secondItem="RTq-OW-TRa" secondAttribute="centerY" id="CYc-ql-O1r"/>
                             <constraint firstItem="Bud-Sm-30y" firstAttribute="top" secondItem="2Sq-0D-4lv" secondAttribute="bottom" constant="66" id="Cky-fi-d3a"/>
                             <constraint firstItem="Bud-Sm-30y" firstAttribute="top" secondItem="2Gs-Qv-Lu2" secondAttribute="top" constant="50" id="Dck-IS-BIe"/>
                             <constraint firstItem="2Sq-0D-4lv" firstAttribute="centerX" secondItem="mQq-KL-RUe" secondAttribute="centerX" id="EBg-g4-vYN"/>
                             <constraint firstItem="BNv-8Y-wgF" firstAttribute="top" secondItem="2Gs-Qv-Lu2" secondAttribute="bottom" constant="16" id="Eq5-06-lVu"/>
                             <constraint firstItem="o1h-9Y-gR0" firstAttribute="leading" secondItem="Bud-Sm-30y" secondAttribute="trailing" constant="18" id="Kum-WQ-Dq9"/>
+                            <constraint firstItem="i9V-9N-Ral" firstAttribute="top" secondItem="RTq-OW-TRa" secondAttribute="top" id="NnM-ML-Af0"/>
                             <constraint firstItem="ogD-po-XfY" firstAttribute="trailing" secondItem="o1h-9Y-gR0" secondAttribute="trailing" constant="20" id="OaD-Ss-hjt"/>
                             <constraint firstItem="ogD-po-XfY" firstAttribute="bottom" secondItem="i9V-9N-Ral" secondAttribute="bottom" constant="16" id="PfI-YQ-MfF"/>
                             <constraint firstItem="wF7-N9-1Bn" firstAttribute="leading" secondItem="Bud-Sm-30y" secondAttribute="leading" id="VyX-fp-iRb"/>
-                            <constraint firstItem="ogD-po-XfY" firstAttribute="trailing" secondItem="i9V-9N-Ral" secondAttribute="trailing" constant="20" id="X0k-gj-5Dq"/>
+                            <constraint firstItem="ogD-po-XfY" firstAttribute="trailing" secondItem="i9V-9N-Ral" secondAttribute="trailing" constant="206" id="X0k-gj-5Dq"/>
                             <constraint firstItem="2Sq-0D-4lv" firstAttribute="leading" secondItem="ogD-po-XfY" secondAttribute="leading" id="Y67-DU-Zei"/>
                             <constraint firstItem="mQq-KL-RUe" firstAttribute="top" secondItem="BNv-8Y-wgF" secondAttribute="bottom" constant="85" id="abk-Ve-bfj"/>
                             <constraint firstItem="ogD-po-XfY" firstAttribute="trailing" secondItem="BNv-8Y-wgF" secondAttribute="trailing" constant="20" id="dwd-aV-I9o"/>
@@ -1526,6 +1536,7 @@
                             <constraint firstItem="wF7-N9-1Bn" firstAttribute="trailing" secondItem="Bud-Sm-30y" secondAttribute="trailing" id="lvG-WI-A1p"/>
                             <constraint firstItem="mQq-KL-RUe" firstAttribute="leading" secondItem="ogD-po-XfY" secondAttribute="leading" constant="20" id="mAm-Ta-T5I"/>
                             <constraint firstItem="2Gs-Qv-Lu2" firstAttribute="leading" secondItem="Bud-Sm-30y" secondAttribute="trailing" constant="18" id="ni5-XT-Gz3"/>
+                            <constraint firstItem="mQq-KL-RUe" firstAttribute="trailing" secondItem="RTq-OW-TRa" secondAttribute="trailing" id="qmA-YX-ONz"/>
                             <constraint firstItem="2Sq-0D-4lv" firstAttribute="top" secondItem="ogD-po-XfY" secondAttribute="top" id="tTE-nV-zrH"/>
                             <constraint firstItem="2Gs-Qv-Lu2" firstAttribute="leading" secondItem="BNv-8Y-wgF" secondAttribute="leading" id="uPq-Wq-wjU"/>
                             <constraint firstItem="Bud-Sm-30y" firstAttribute="leading" secondItem="ogD-po-XfY" secondAttribute="leading" constant="20" id="wH6-OE-Ewa"/>
@@ -1533,6 +1544,7 @@
                         <viewLayoutGuide key="safeArea" id="ogD-po-XfY"/>
                     </view>
                     <connections>
+                        <outlet property="deleteRecOutletButton" destination="RTq-OW-TRa" id="yGI-ZY-br0"/>
                         <outlet property="infoDelRecOutletLabel" destination="i9V-9N-Ral" id="faQ-i1-dK8"/>
                         <outlet property="navbarItemOutletItem" destination="3pF-oz-Xsm" id="fgW-6R-lOB"/>
                         <outlet property="navbarOutletNavbar" destination="2Sq-0D-4lv" id="Uk2-yy-RhJ"/>

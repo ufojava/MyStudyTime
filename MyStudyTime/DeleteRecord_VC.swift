@@ -22,6 +22,8 @@ class DeleteRecord_VC: UIViewController {
     @IBOutlet weak var infoDelRecOutletLabel: UILabel!
     @IBOutlet weak var pickerviewOutletLabel: UILabel!
     @IBOutlet weak var searchOutletButton: UIButton!
+    @IBOutlet weak var deleteRecOutletButton: UIButton!
+    
     
     
     var subjectArray = ["English", "Literature","History","Biology","Chemistry","Maths","Physics","Geography"]
@@ -94,6 +96,11 @@ class DeleteRecord_VC: UIViewController {
         searchOutletButton.backgroundColor = UIColor.brown
         searchOutletButton.layer.borderColor = UIColor.gray.cgColor
         searchOutletButton.layer.borderWidth = 1.0
+        
+        deleteRecOutletButton.setTitleColor(.white, for: .normal)
+        deleteRecOutletButton.backgroundColor = UIColor.brown
+        deleteRecOutletButton.layer.borderColor = UIColor.gray.cgColor
+        deleteRecOutletButton.layer.borderWidth = 1.0
         
         pickerviewOutletLabel.textColor = UIColor.purple
         pickerviewOutletLabel.font = pickerviewOutletLabel.font?.withSize(17)
@@ -204,12 +211,29 @@ class DeleteRecord_VC: UIViewController {
         resetArray() //Reset Array
         getStudyData(inSubject: pickerviewOutletLabel.text!, inStdyDateFrom: stdyOutletFromText.text!, inStudyDateTo: stdyOutletToText.text!)
         tableviewOutletTableView.reloadData()
-        
-    
-        
+
         
     }
     
+    //Delete Buttom
+    @IBAction func deleteRecButton(_ sender: UIButton) {
+        
+        
+        if selStudyDateCell != "" || selStudySubCell != "" {
+        delStudyRecord(inStudySelectDate: selStudyDateCell, inStudySelectSub: selStudySubCell)
+        tableviewOutletTableView.reloadData()
+        
+        } else {
+            
+            infoDelRecOutletLabel.textColor = UIColor.red
+            infoDelRecOutletLabel.text = "Click Search"
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                self.infoDelRecOutletLabel.text = " "
+            }
+        }
+        
+    }
     
     
     
@@ -298,6 +322,10 @@ class DeleteRecord_VC: UIViewController {
         
         //Set compound predicate
         let studyCompundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [studySubjectPredicate,studyDateFromPredicate,studyDateToPredicate])
+        
+        let sortData = NSSortDescriptor(key: "studyDate", ascending: true)
+            
+        studyEntity.sortDescriptors = [sortData]
         
         //Set fault results
         studyEntity.returnsObjectsAsFaults = false
@@ -403,6 +431,64 @@ class DeleteRecord_VC: UIViewController {
         totalTimeArray.removeAll()
     }
     
+    
+    //Function to delete Study Record
+    func delStudyRecord(inStudySelectDate: String, inStudySelectSub: String) {
+        
+      
+        //Format Date
+        let cal = Calendar.current
+        let dFormatter = DateFormatter()
+            dFormatter.dateStyle = .medium
+            dFormatter.timeStyle = .none
+
+        
+        //CoreData Context
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        let convSelStudyDate = dFormatter.date(from: inStudySelectDate)
+        let dateTo = cal.date(byAdding: .day, value: 1, to: convSelStudyDate!)
+        
+        //Set predictates
+        let srchDateFromPredicate = NSCompoundPredicate(format: "studyDate => %@", convSelStudyDate! as NSDate)
+        let srchDateToPredicate = NSCompoundPredicate(format: "studyDate < %@", dateTo! as NSDate)
+        let srchSubjectPredicate = NSCompoundPredicate(format: "subjectSelection == %@", inStudySelectSub)
+        
+        //Search Predicate
+        let searchCompoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [srchDateFromPredicate, srchDateToPredicate,srchSubjectPredicate])
+        
+        //Study Entity
+        let studyEntity = NSFetchRequest<NSFetchRequestResult>(entityName: "Study")
+        
+        //Set Predictae
+        studyEntity.predicate = searchCompoundPredicate
+        
+        //Set fault reports
+        studyEntity.returnsObjectsAsFaults = false
+        
+        do {
+            let results = try context.fetch(studyEntity)
+            if results.count > 0 {
+                for result in results as! [NSManagedObject] {
+                    context.delete(result)
+                }
+                print(inStudySelectDate)
+                print(inStudySelectSub)
+            }
+        } catch {
+            print("Unable to get records")
+        }
+        
+        do {
+            try context.save()
+        } catch {
+            print("Unable to delete record")
+        }
+        
+        
+    }
+    
+    
 
     
 
@@ -490,44 +576,31 @@ extension DeleteRecord_VC: UITableViewDataSource, UITableViewDelegate {
         
     }
     
-    //Can edit set to True
+
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            studyDateArray.remove(at: indexPath.row)
+            
+            tableviewOutletTableView.beginUpdates()
+            tableviewOutletTableView.deleteRows(at: [indexPath], with: .automatic)
+            tableviewOutletTableView.endUpdates()
+            
+        }
+    }
+    
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selCell = tableviewOutletTableView.dequeueReusableCell(withIdentifier: "deleteRecCell", for: indexPath) as! delStudyRecCell_VC
+            
+        selStudyDateCell = studyDateArray[indexPath.row]
+        selStudySubCell = subjectTableViewArray[indexPath.row]
         
-        //Capture Cell values
         
-        //Get Study Date
-        guard selCell.studyDateOutletCell.text != nil else {
-            print("Nil value found in cell Study Date")
-            return
-        }
-        selStudyDateCell = selCell.studyDateOutletCell.text!
-        
-        //Get Study Time From
-        guard selCell.stdyTimeFromOutletCell.text != nil else {
-            print("Nil Value found on cell Study Time From")
-            return
-        }
-        selStudyTimeCell = selCell.stdyTimeFromOutletCell.text!
-        
-        //Get Study Subject
-        guard selCell.stdySubjectOutletCell != nil else {
-            print("Nil value found in Subject field")
-            return
-        }
-        selStudySubCell = selCell.stdySubjectOutletCell.text!
     }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        tableviewOutletTableView.beginUpdates()
-        tableviewOutletTableView.deleteRows(at: [indexPath], with: .automatic)
-        tableviewOutletTableView.endUpdates()
-    }
-    
         
         
     
