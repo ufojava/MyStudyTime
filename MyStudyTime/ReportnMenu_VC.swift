@@ -21,6 +21,8 @@ class ReportnMenu_VC: UIViewController {
     @IBOutlet weak var subjectRptOutletLabel: UILabel!
     @IBOutlet weak var targetRptOutletButton: UIButton!
     @IBOutlet weak var tartgetRptOutletLabel: UILabel!
+    @IBOutlet weak var targetDetailOutletButton: UIButton!
+    @IBOutlet weak var targetsDetailsOutletLabel: UILabel!
     @IBOutlet weak var graphicalRptOutletButton: UIButton!
     @IBOutlet weak var graphicalRptOutletLabel: UILabel!
     
@@ -73,6 +75,12 @@ class ReportnMenu_VC: UIViewController {
         graphicalRptOutletLabel.text = "Graph Reports"
         
         
+        //Physics.png
+        targetsDetailsOutletLabel.font = targetsDetailsOutletLabel.font.withSize(14)
+        targetsDetailsOutletLabel.textAlignment = .center
+        targetsDetailsOutletLabel.text = "Target Details"
+        
+        
         
         
         
@@ -101,9 +109,11 @@ class ReportnMenu_VC: UIViewController {
         let targetImage = UIImage(named: "StudentIcon")
         targetRptOutletButton.setBackgroundImage(targetImage, for: .normal)
         
+        let targetDetailsImage = UIImage(named: "Physics.png")
+        targetDetailOutletButton.setBackgroundImage(targetDetailsImage, for: .normal)
+        
         let graphImage = UIImage(named: "graphRpt")
         graphicalRptOutletButton.setBackgroundImage(graphImage, for: .normal)
-        
         
                 
         
@@ -168,6 +178,21 @@ class ReportnMenu_VC: UIViewController {
         
         
     }
+    
+    //Call Targets Details Menu
+    @IBAction func targetsDetailReport(_ sender: UIButton) {
+        
+        //Set Main Storyboard
+        let mainStoryBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        //Set Targets Details Report
+        let targetsDetailRpt = mainStoryBoard.instantiateViewController(identifier: "TargetDetailsRpt_VC") as! TargetDetailsRpt_VC
+            targetsDetailRpt.modalPresentationStyle = .fullScreen
+        
+        //Call Target Details Report
+        self.present(targetsDetailRpt,animated: true,completion: nil)
+    }
+    
     
     
 

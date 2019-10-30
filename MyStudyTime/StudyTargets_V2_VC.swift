@@ -194,6 +194,7 @@ class StudyTargets_V2_VC: UIViewController {
     
     //Save Targets
     @IBAction func saveTargetsButton(_ sender: UIButton) {
+        flushTargets() //Delete old records
         new_UpdateTargets() //Function to save record
         
 
@@ -349,6 +350,28 @@ class StudyTargets_V2_VC: UIViewController {
         
     }
     
+    //Fucntion to flush CoreData
+    func flushTargets() {
+        
+        //Set Context
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        //Set Entity
+        let studyTargets = NSFetchRequest<NSFetchRequestResult>(entityName: "Study_Targets")
+        
+        //Delete batch
+        let delFetchedRecords = NSBatchDeleteRequest(fetchRequest: studyTargets)
+        
+        //Execute delete action
+        do {
+            
+            try context.execute(delFetchedRecords)
+            try context.save()
+        } catch {
+            print("Unable to delete records")
+        }
+    }
+    
     
     //Function to save and update study daily targets
     func new_UpdateTargets() {
@@ -483,7 +506,7 @@ class StudyTargets_V2_VC: UIViewController {
             } else {
                 
                 //Create new record
-                print("Unable to get result, Creating new record")
+                //print("Unable to get result, Creating new record")
                 
                 //Enter new Record Entry
                 
