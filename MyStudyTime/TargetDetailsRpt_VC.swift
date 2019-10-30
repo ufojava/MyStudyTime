@@ -34,6 +34,8 @@ class TargetDetailsRpt_VC: UIViewController {
 
         // Custom Functions from here
         formatVC() //Format View Controller
+        conDelegateDatasource() //Connect TableView
+        
         
     }
     
@@ -68,6 +70,8 @@ class TargetDetailsRpt_VC: UIViewController {
         monthlyTargetsOutletButton.backgroundColor = UIColor.brown
         
         //Format Info label
+        infoOutletLabel.layer.borderColor = UIColor.gray.cgColor
+        infoOutletLabel.layer.borderWidth = 1
         infoOutletLabel.textAlignment = .center
         
         //Hide unused cells
@@ -82,6 +86,9 @@ class TargetDetailsRpt_VC: UIViewController {
         
        
         getTargets(inPeriod: 7) //Weekly
+        tableviewOutletTableview.reloadData()
+        infoOutletLabel.textColor = UIColor.purple
+        infoOutletLabel.text = "Total Weekly Targets"
         
     }
     
@@ -89,6 +96,9 @@ class TargetDetailsRpt_VC: UIViewController {
         
        
         getTargets(inPeriod: 28) //Monthly
+        tableviewOutletTableview.reloadData()
+        infoOutletLabel.textColor = UIColor.blue
+        infoOutletLabel.text = "Total Monthly Targets"
         
     }
     
@@ -242,7 +252,42 @@ class TargetDetailsRpt_VC: UIViewController {
             print("Unable to get records")
         }
     }
+    //Connect Delegate and Datasource
+    func conDelegateDatasource() {
+        
+        tableviewOutletTableview.delegate = self
+        tableviewOutletTableview.dataSource = self
+        
+    }
     
 
 
+}
+
+//Set environment for tableview
+extension TargetDetailsRpt_VC: UITableViewDelegate, UITableViewDataSource {
+    
+    //Number of components
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        subTargetArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableviewOutletTableview.dequeueReusableCell(withIdentifier: "targetDetailCell") as! TargetsDetailsRptCell_TVC
+        
+        cell.subTargetsOutletCell.textColor = UIColor.brown
+        cell.subTargetsOutletCell.font = cell.subTargetsOutletCell.font.withSize(14)
+        cell.subTargetsOutletCell.text = subTargetArray[indexPath.row]
+        
+        return cell
+        
+    }
+    
+    
+    
 }

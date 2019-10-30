@@ -1106,7 +1106,7 @@
                                 </items>
                             </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ncj-Pv-Dv9">
-                                <rect key="frame" x="20" y="136" width="123" height="37"/>
+                                <rect key="frame" x="83" y="144" width="123" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="Vap-Cv-DqD"/>
                                     <constraint firstAttribute="width" constant="123" id="cQ2-54-TBg"/>
@@ -1117,7 +1117,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1lT-qe-5FN">
-                                <rect key="frame" x="271" y="136" width="123" height="37"/>
+                                <rect key="frame" x="209" y="144" width="123" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="123" id="PlO-Tp-Scv"/>
                                 </constraints>
@@ -1126,17 +1126,8 @@
                                     <action selector="monthlyTargetButton:" destination="ckB-6x-nRe" eventType="touchUpInside" id="qFL-mu-uBN"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ftX-LD-WS4">
-                                <rect key="frame" x="20" y="817" width="374" height="45"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="O94-Nf-bK0"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tVA-mo-hch">
-                                <rect key="frame" x="83" y="192" width="249" height="588"/>
+                                <rect key="frame" x="83" y="255" width="249" height="319"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="targetDetailCell" rowHeight="64" id="6om-gd-23t" customClass="TargetsDetailsRptCell_TVC" customModule="MyStudyTime" customModuleProvider="target">
@@ -1172,23 +1163,32 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ftX-LD-WS4">
+                                <rect key="frame" x="83" y="610" width="249" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="O94-Nf-bK0"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="Ncj-Pv-Dv9" firstAttribute="leading" secondItem="3Ge-7f-o1D" secondAttribute="leadingMargin" id="2hP-6Q-2LQ"/>
-                            <constraint firstItem="ftX-LD-WS4" firstAttribute="bottom" secondItem="otk-cF-Pa9" secondAttribute="bottom" id="8QQ-L7-ivS"/>
+                            <constraint firstItem="Ncj-Pv-Dv9" firstAttribute="leading" secondItem="3Ge-7f-o1D" secondAttribute="leadingMargin" constant="63" id="2hP-6Q-2LQ"/>
+                            <constraint firstItem="ftX-LD-WS4" firstAttribute="bottom" secondItem="otk-cF-Pa9" secondAttribute="bottom" constant="-207" id="8QQ-L7-ivS"/>
                             <constraint firstItem="n1V-N6-0Mi" firstAttribute="top" secondItem="otk-cF-Pa9" secondAttribute="top" id="8Y0-pQ-tAc"/>
-                            <constraint firstItem="1lT-qe-5FN" firstAttribute="trailing" secondItem="tVA-mo-hch" secondAttribute="trailing" constant="62" id="Cvi-Pq-lq3"/>
+                            <constraint firstItem="1lT-qe-5FN" firstAttribute="trailing" secondItem="tVA-mo-hch" secondAttribute="trailing" id="Cvi-Pq-lq3"/>
                             <constraint firstItem="n1V-N6-0Mi" firstAttribute="leading" secondItem="otk-cF-Pa9" secondAttribute="leading" id="Gy2-qa-QCL"/>
-                            <constraint firstItem="tVA-mo-hch" firstAttribute="leading" secondItem="ftX-LD-WS4" secondAttribute="leading" constant="63" id="JSo-7c-n9S"/>
+                            <constraint firstItem="tVA-mo-hch" firstAttribute="leading" secondItem="ftX-LD-WS4" secondAttribute="leading" id="JSo-7c-n9S"/>
                             <constraint firstItem="Ncj-Pv-Dv9" firstAttribute="baseline" secondItem="1lT-qe-5FN" secondAttribute="firstBaseline" id="R3q-Wm-TXe"/>
-                            <constraint firstItem="tVA-mo-hch" firstAttribute="top" secondItem="Ncj-Pv-Dv9" secondAttribute="bottom" constant="19" id="bSh-jZ-Vab"/>
-                            <constraint firstItem="tVA-mo-hch" firstAttribute="trailing" secondItem="ftX-LD-WS4" secondAttribute="trailing" constant="-62" id="bVk-2b-3o4"/>
+                            <constraint firstItem="tVA-mo-hch" firstAttribute="top" secondItem="Ncj-Pv-Dv9" secondAttribute="bottom" constant="74" id="bSh-jZ-Vab"/>
+                            <constraint firstItem="tVA-mo-hch" firstAttribute="trailing" secondItem="ftX-LD-WS4" secondAttribute="trailing" id="bVk-2b-3o4"/>
                             <constraint firstItem="n1V-N6-0Mi" firstAttribute="centerX" secondItem="tVA-mo-hch" secondAttribute="centerX" constant="-0.5" id="nO7-xv-5nH"/>
-                            <constraint firstItem="1lT-qe-5FN" firstAttribute="trailing" secondItem="3Ge-7f-o1D" secondAttribute="trailingMargin" id="rq9-AC-tKw"/>
-                            <constraint firstItem="ftX-LD-WS4" firstAttribute="top" secondItem="tVA-mo-hch" secondAttribute="bottom" constant="37" id="uco-Eq-gG6"/>
-                            <constraint firstItem="Ncj-Pv-Dv9" firstAttribute="leading" secondItem="tVA-mo-hch" secondAttribute="leading" constant="-63" id="uh1-Zb-YNi"/>
-                            <constraint firstItem="Ncj-Pv-Dv9" firstAttribute="top" secondItem="n1V-N6-0Mi" secondAttribute="bottom" constant="48" id="uiG-gx-oJp"/>
+                            <constraint firstItem="1lT-qe-5FN" firstAttribute="trailing" secondItem="3Ge-7f-o1D" secondAttribute="trailingMargin" constant="-62" id="rq9-AC-tKw"/>
+                            <constraint firstItem="ftX-LD-WS4" firstAttribute="top" secondItem="tVA-mo-hch" secondAttribute="bottom" constant="36" id="uco-Eq-gG6"/>
+                            <constraint firstItem="Ncj-Pv-Dv9" firstAttribute="leading" secondItem="tVA-mo-hch" secondAttribute="leading" id="uh1-Zb-YNi"/>
+                            <constraint firstItem="Ncj-Pv-Dv9" firstAttribute="top" secondItem="n1V-N6-0Mi" secondAttribute="bottom" constant="56" id="uiG-gx-oJp"/>
                             <constraint firstItem="Ncj-Pv-Dv9" firstAttribute="top" secondItem="1lT-qe-5FN" secondAttribute="top" id="vdz-Rh-0Kj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="otk-cF-Pa9"/>
