@@ -193,6 +193,20 @@ class ReportnMenu_VC: UIViewController {
         self.present(targetsDetailRpt,animated: true,completion: nil)
     }
     
+    //Call Charts Menu
+    @IBAction func chartsReport(_ sender: UIButton) {
+        
+        //Main StoryBoard
+        let mainStoryBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        //Call Charts Report
+        let chartRpt = mainStoryBoard.instantiateViewController(identifier: "ChartsReport_VC") as! ChartsReport_VC
+            chartRpt.modalPresentationStyle = .fullScreen
+        
+        self.present(chartRpt,animated: true,completion: nil)
+    }
+    
+    
     
     
 

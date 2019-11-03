@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -28,6 +28,8 @@
 		03F1A56B235FB34900DEB312 /* delStudyRecCell_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F1A56A235FB34900DEB312 /* delStudyRecCell_VC.swift */; };
 		03F1A56D2368DAE000DEB312 /* TargetDetailsRpt_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F1A56C2368DAE000DEB312 /* TargetDetailsRpt_VC.swift */; };
 		03F1A56F2368E52300DEB312 /* TargetsDetailsRptCell_TVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F1A56E2368E52300DEB312 /* TargetsDetailsRptCell_TVC.swift */; };
+		03F1A572236A561100DEB312 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = 03F1A571236A561100DEB312 /* Charts */; };
+		03F1A574236A5BCD00DEB312 /* ChartsReport_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F1A573236A5BCD00DEB312 /* ChartsReport_VC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +56,7 @@
 		03F1A56A235FB34900DEB312 /* delStudyRecCell_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = delStudyRecCell_VC.swift; sourceTree = "<group>"; };
 		03F1A56C2368DAE000DEB312 /* TargetDetailsRpt_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetDetailsRpt_VC.swift; sourceTree = "<group>"; };
 		03F1A56E2368E52300DEB312 /* TargetsDetailsRptCell_TVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetsDetailsRptCell_TVC.swift; sourceTree = "<group>"; };
+		03F1A573236A5BCD00DEB312 /* ChartsReport_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsReport_VC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03F1A572236A561100DEB312 /* Charts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +95,7 @@
 				0378063E2337C43400B18953 /* AppDelegate.swift */,
 				037806402337C43400B18953 /* SceneDelegate.swift */,
 				037806442337C43400B18953 /* Main.storyboard */,
+				03F1A573236A5BCD00DEB312 /* ChartsReport_VC.swift */,
 				03F1A56C2368DAE000DEB312 /* TargetDetailsRpt_VC.swift */,
 				03F1A56A235FB34900DEB312 /* delStudyRecCell_VC.swift */,
 				03ED96F3235F8AF5009C7273 /* Maintenance_VC.swift */,
@@ -128,6 +133,9 @@
 			dependencies = (
 			);
 			name = MyStudyTime;
+			packageProductDependencies = (
+				03F1A571236A561100DEB312 /* Charts */,
+			);
 			productName = MyStudyTime;
 			productReference = 0378063B2337C43400B18953 /* MyStudyTime.app */;
 			productType = "com.apple.product-type.application";
@@ -156,6 +164,9 @@
 				Base,
 			);
 			mainGroup = 037806322337C43400B18953;
+			packageReferences = (
+				03F1A570236A561100DEB312 /* XCRemoteSwiftPackageReference "Charts" */,
+			);
 			productRefGroup = 0378063C2337C43400B18953 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -192,6 +203,7 @@
 				0358B26B23551FEB00CE9AFD /* TargetsReport_VC.swift in Sources */,
 				03076EE6234926260059D1A1 /* ReportnMenu_VC.swift in Sources */,
 				03F1A56F2368E52300DEB312 /* TargetsDetailsRptCell_TVC.swift in Sources */,
+				03F1A574236A5BCD00DEB312 /* ChartsReport_VC.swift in Sources */,
 				03ED96F4235F8AF5009C7273 /* Maintenance_VC.swift in Sources */,
 				039257CC2357AAF6009D51F5 /* SubjectReport_VC.swift in Sources */,
 				037806492337C43400B18953 /* MyStudyTime.xcdatamodeld in Sources */,
@@ -396,6 +408,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		03F1A570236A561100DEB312 /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts/";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.4.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		03F1A571236A561100DEB312 /* Charts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03F1A570236A561100DEB312 /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = Charts;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		037806472337C43400B18953 /* MyStudyTime.xcdatamodeld */ = {

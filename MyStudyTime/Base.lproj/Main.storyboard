@@ -1001,6 +1001,9 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vpb-Ht-pKG">
                                 <rect key="frame" x="164" y="745" width="86" height="88.666666666666629"/>
+                                <connections>
+                                    <action selector="chartsReport:" destination="igh-jg-qXh" eventType="touchUpInside" id="PqO-rh-Bbc"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Graph Reports" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwl-JP-2uI">
                                 <rect key="frame" x="123" y="837" width="169" height="25"/>
@@ -1084,6 +1087,100 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="idb-9Y-Kul" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="860.86956521739137" y="787.5"/>
+        </scene>
+        <!--Charts ReportVC-->
+        <scene sceneID="ApN-Wf-HbI">
+            <objects>
+                <viewController storyboardIdentifier="ChartsReport_VC" id="YKU-Fo-k6v" customClass="ChartsReport_VC" customModule="MyStudyTime" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="D8U-HG-5bg">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Ci-ZG-SN9">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <items>
+                                    <navigationItem title="Title" id="hOe-7s-Glb">
+                                        <barButtonItem key="leftBarButtonItem" title="Item" id="wYs-yY-zFy">
+                                            <connections>
+                                                <action selector="backToRptMenu:" destination="YKU-Fo-k6v" id="yMf-Md-CCo"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zCI-H2-kjw">
+                                <rect key="frame" x="34" y="196" width="194" height="130"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="130" id="4Hb-II-7xe"/>
+                                </constraints>
+                            </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U61-WT-FCe">
+                                <rect key="frame" x="34" y="141" width="194" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date From" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iGo-kN-a1o">
+                                <rect key="frame" x="236" y="141" width="144" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="callDatePicker:" destination="YKU-Fo-k6v" eventType="editingDidBegin" id="2CU-Qn-1sk"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rDW-2a-Tqf">
+                                <rect key="frame" x="243" y="288" width="137" height="38"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="38" id="uJa-Pw-SRm"/>
+                                </constraints>
+                                <state key="normal" title="Chart"/>
+                                <connections>
+                                    <action selector="chartActionButton:" destination="YKU-Fo-k6v" eventType="touchUpInside" id="6d5-ZU-dBL"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pkq-kV-Idt" customClass="BarChartView" customModule="Charts">
+                                <rect key="frame" x="34" y="383" width="346" height="363"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="zCI-H2-kjw" firstAttribute="top" secondItem="U61-WT-FCe" secondAttribute="bottom" constant="21" id="2tW-yB-MFJ"/>
+                            <constraint firstItem="pkq-kV-Idt" firstAttribute="top" secondItem="zCI-H2-kjw" secondAttribute="bottom" constant="57" id="5kJ-Fh-n6N"/>
+                            <constraint firstItem="0Ci-ZG-SN9" firstAttribute="centerX" secondItem="pkq-kV-Idt" secondAttribute="centerX" id="9GH-I1-KV0"/>
+                            <constraint firstItem="U61-WT-FCe" firstAttribute="leading" secondItem="IhF-we-EAP" secondAttribute="leading" constant="34" id="MCY-nk-yGF"/>
+                            <constraint firstItem="iGo-kN-a1o" firstAttribute="leading" secondItem="U61-WT-FCe" secondAttribute="trailing" constant="8" id="NR1-Mg-3A7"/>
+                            <constraint firstItem="0Ci-ZG-SN9" firstAttribute="top" secondItem="IhF-we-EAP" secondAttribute="top" id="PHD-R7-neZ"/>
+                            <constraint firstItem="0Ci-ZG-SN9" firstAttribute="leading" secondItem="IhF-we-EAP" secondAttribute="leading" id="Pes-gL-Uve"/>
+                            <constraint firstItem="0Ci-ZG-SN9" firstAttribute="centerX" secondItem="D8U-HG-5bg" secondAttribute="centerX" id="Slj-6J-9jn"/>
+                            <constraint firstItem="rDW-2a-Tqf" firstAttribute="bottom" secondItem="zCI-H2-kjw" secondAttribute="bottom" id="UW2-UG-B7R"/>
+                            <constraint firstItem="U61-WT-FCe" firstAttribute="top" secondItem="0Ci-ZG-SN9" secondAttribute="bottom" constant="53" id="UbZ-UQ-HVR"/>
+                            <constraint firstItem="rDW-2a-Tqf" firstAttribute="leading" secondItem="zCI-H2-kjw" secondAttribute="trailing" constant="15" id="WL4-RN-t6d"/>
+                            <constraint firstItem="iGo-kN-a1o" firstAttribute="trailing" secondItem="pkq-kV-Idt" secondAttribute="trailing" id="WTh-p9-ct6"/>
+                            <constraint firstItem="IhF-we-EAP" firstAttribute="trailing" secondItem="zCI-H2-kjw" secondAttribute="trailing" constant="186" id="Zni-Te-icj"/>
+                            <constraint firstItem="U61-WT-FCe" firstAttribute="bottom" secondItem="iGo-kN-a1o" secondAttribute="bottom" id="iwe-VL-hAd"/>
+                            <constraint firstItem="U61-WT-FCe" firstAttribute="trailing" secondItem="zCI-H2-kjw" secondAttribute="trailing" id="jWa-Rn-clw"/>
+                            <constraint firstItem="U61-WT-FCe" firstAttribute="leading" secondItem="zCI-H2-kjw" secondAttribute="leading" id="ljW-xd-bMV"/>
+                            <constraint firstItem="zCI-H2-kjw" firstAttribute="leading" secondItem="pkq-kV-Idt" secondAttribute="leading" id="pos-YA-M1k"/>
+                            <constraint firstItem="U61-WT-FCe" firstAttribute="top" secondItem="iGo-kN-a1o" secondAttribute="top" id="q8H-kx-8sL"/>
+                            <constraint firstItem="rDW-2a-Tqf" firstAttribute="trailing" secondItem="iGo-kN-a1o" secondAttribute="trailing" id="tE7-wo-2WD"/>
+                            <constraint firstItem="IhF-we-EAP" firstAttribute="bottom" secondItem="pkq-kV-Idt" secondAttribute="bottom" constant="116" id="z2F-ZJ-Wus"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="IhF-we-EAP"/>
+                    </view>
+                    <connections>
+                        <outlet property="barChartOutletBarChartView" destination="pkq-kV-Idt" id="LPZ-NZ-WMe"/>
+                        <outlet property="chartOutletButton" destination="rDW-2a-Tqf" id="tSK-xR-NmA"/>
+                        <outlet property="navbarItemOutletNavbarItem" destination="wYs-yY-zFy" id="aY9-Z3-nde"/>
+                        <outlet property="navbarOutletNavBar" destination="0Ci-ZG-SN9" id="0Os-g4-5pB"/>
+                        <outlet property="pickerOutletLabel" destination="U61-WT-FCe" id="xWV-CI-o5e"/>
+                        <outlet property="pickerViewOutletPickerview" destination="zCI-H2-kjw" id="Icv-E2-8hY"/>
+                        <outlet property="studyDateFromOutletText" destination="iGo-kN-a1o" id="sm6-u2-nXa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R5x-No-aHb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2334.7826086956525" y="138.61607142857142"/>
         </scene>
         <!--Target Details RptVC-->
         <scene sceneID="Aju-he-afv">
