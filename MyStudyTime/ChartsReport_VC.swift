@@ -20,22 +20,64 @@ class ChartsReport_VC: UIViewController {
     @IBOutlet weak var studyDateFromOutletText: UITextField!
     @IBOutlet weak var pickerViewOutletPickerview: UIPickerView!
     @IBOutlet weak var barChartOutletBarChartView: BarChartView!
-    @IBOutlet weak var chartOutletButton: UIButton!
+    @IBOutlet weak var chartOutletButton: UIButton! //Monthly Chart Button
+    @IBOutlet weak var wklyChartOutletButton: UIButton! //Weekly Chart Button
     
 
     
     var subPickerArray = ["English", "Literature","History","Biology","Chemistry","Maths","Physics","Geography"]
     
     //Targets Subject Data
-    var subjectEnglish = Int32()
-    var subjectLiterature = Int32()
-    var subjectHistory = Int32()
-    var subjectBiology = Int32()
-    var subjectChemistry = Int32()
-    var subjectGeography = Int32()
-    var subjectMaths = Int32()
-    var subjectPhysics = Int32()
+    var calcWeekly = Int32(7)
+    var calcMthly = Int32(28)
     
+    //English
+    var subjectEnglish = Int32()
+    var subjectEnglishWklyTargets = Int32()
+    var subjectEnglishMthlyTargets = Int32()
+    
+    //Literature
+    var subjectLiterature = Int32()
+    var subjectLiteratureWklyTargets = Int32()
+    var subjectLiteratureMthlyTargets = Int32()
+    
+    //History
+    var subjectHistory = Int32()
+    var subjectHistoryWklyTargets = Int32()
+    var subjectHistoryMthlyTargets = Int32()
+    
+    //Biology
+    var subjectBiology = Int32()
+    var subjectBiologyWklyTargets = Int32()
+    var subjectBiologyMthlyTargets = Int32()
+    
+    //Chemistry
+    var subjectChemistry = Int32()
+    var subjectChemistryWklyTargets = Int32()
+    var subjectChemistryMthlyTargets = Int32()
+    
+    //Geography
+    var subjectGeography = Int32()
+    var subjectGeographyWklyTargets = Int32()
+    var subjectGeographyMthlyTargets = Int32()
+    
+    //Maths
+    var subjectMaths = Int32()
+    var subjectMathsWklyTargets = Int32()
+    var subjectMathsMthlyTargets = Int32()
+    
+    //Physics
+    var subjectPhysics = Int32()
+    var subjectPhysicsWklyTargets = Int32()
+    var subjectPhysicsMthlyTargets = Int32()
+    
+    //Study Data Array
+    var studySubArray: [String] = [] // ********* MAY NOT BE REQUIRED *************
+    var studyTotalTime: [Int32] = []
+    
+    //Sum of all the Study times in Array
+    var addTotalArray = Int32()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,11 +125,19 @@ class ChartsReport_VC: UIViewController {
         pickerViewOutletPickerview.layer.borderColor = UIColor.gray.cgColor
         pickerViewOutletPickerview.layer.borderWidth = 1
         
-        //Format button
+        //Format button - Monthly
         chartOutletButton.setTitleColor(.white, for: .normal)
+        chartOutletButton.setTitle("Monthly Chart", for: .normal)
         chartOutletButton.backgroundColor = UIColor.brown
         chartOutletButton.layer.borderColor = UIColor.gray.cgColor
         chartOutletButton.layer.borderWidth = 1
+        
+        //Format Button - Weekly
+        wklyChartOutletButton.setTitleColor(.white, for: .normal)
+        wklyChartOutletButton.setTitle("Weekly Chart", for: .normal)
+        wklyChartOutletButton.backgroundColor = UIColor.brown
+        wklyChartOutletButton.layer.borderColor = UIColor.gray.cgColor
+        wklyChartOutletButton.layer.borderWidth = 1
         
         barChartOutletBarChartView.layer.borderColor = UIColor.gray.cgColor
         barChartOutletBarChartView.layer.borderWidth = 1
@@ -97,7 +147,8 @@ class ChartsReport_VC: UIViewController {
     
     //Button Action
     @IBAction func chartActionButton(_ sender: UIButton) {
-        getTargetsData()
+        //getTargetsData()
+        getStudyData(inSubject: pickerOutletLabel.text!, inPeriod: 28)
     }
     
     
@@ -135,6 +186,112 @@ class ChartsReport_VC: UIViewController {
         
     }
     
+    //Get Study Data with Predicate for Subject & Study Date
+    func getStudyData(inSubject: String, inPeriod: Int) {
+        
+        //Format Calender
+        var cal = Calendar.current
+            cal.timeZone = NSTimeZone.local
+        
+        //Format Date
+        let dFormatter = DateFormatter()
+            dFormatter.dateStyle = .medium
+            dFormatter.timeStyle = .none
+        
+        
+        //Set Context
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        //Convert Date String Fromat
+        let convStdyDate = dFormatter.date(from: studyDateFromOutletText.text!)
+        
+        //Computer Weekly and Monthly Date
+        var periodChoice = 0
+        
+        if inPeriod == 7 {
+            periodChoice = 7
+        } else if inPeriod == 28 {
+            periodChoice = 28
+        }
+        
+        //To check for nil value in from the conversion
+        guard convStdyDate != nil else {
+            print("Nil value found in convStdyDate!!!")
+            return
+        }
+        
+        //Week from input date
+        let studyDateTo = cal.date(byAdding: .day, value: periodChoice, to: convStdyDate!)
+        print(studyDateTo!) //This is a test for the date format
+        
+        //Date Precidate
+        let studyDateFromPredicate = NSPredicate(format: "studyDate >= %@", convStdyDate! as NSDate)
+        let studyDateToPredicate = NSPredicate(format: "studyDate < %@", studyDateTo! as NSDate)
+        
+        //Subject Predictae
+        let subjectPredicate = NSPredicate(format: "subjectSelection == %@", inSubject)
+        
+        //Set Study Entity
+        let studyEntity = NSFetchRequest<NSFetchRequestResult>(entityName: "Study")
+        
+        //Compound Predicate
+        let studyCompundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [studyDateFromPredicate,studyDateToPredicate,subjectPredicate])
+        
+        studyEntity.predicate = studyCompundPredicate
+        
+        
+        do {
+            
+            let results = try context.fetch(studyEntity)
+            if results.count > 0 {
+                for result in results as! [NSManagedObject] {
+                    
+                    //Get Subject
+                    guard let resSubject = result.value(forKey: "subjectSelection") as? String else {
+                        print("Unable to get subject")
+                        return
+                    }
+                    
+                    studySubArray.append(resSubject)
+                    
+                    //Get Total Study Time
+                    guard let resTotalStudyTime = result.value(forKey: "studyTimeTotal") as? Int32 else {
+                        print("Unable to get total study time")
+                        return
+                    }
+                    
+                    studyTotalTime.append(resTotalStudyTime)
+                    
+                }
+                
+                //Test output
+                addTotalArray = studyTotalTime.reduce(0, +)
+                print(addTotalArray)
+                
+            }
+            
+            
+            
+        } catch {
+            print("Unable to retreive results")
+        }
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     //Get Study target - and calcualte Weekly and Month amounts
     func getTargetsData() {
@@ -166,6 +323,9 @@ class ChartsReport_VC: UIViewController {
                     
                     //Assign the result value to Variable subjectEnglish
                     subjectEnglish = resEnglish
+                    //Weekly & Monthly Target Calculations
+                    subjectEnglishWklyTargets = subjectEnglish * calcWeekly
+                    subjectEnglishMthlyTargets = subjectEnglish * calcMthly
                     
                     //Get Literature
                     guard let resLiterature = result.value(forKey: "subLiterature") as? Int32 else {
@@ -175,6 +335,8 @@ class ChartsReport_VC: UIViewController {
                     
                     //Assign the result value to varialbe subjectLiterature
                     subjectLiterature = resLiterature
+                    subjectLiteratureWklyTargets = subjectLiterature * calcWeekly
+                    subjectLiteratureMthlyTargets = subjectLiterature * calcMthly
                     
                     //Get History
                     guard let resHistory = result.value(forKey: "subHistory") as? Int32 else {
@@ -184,6 +346,8 @@ class ChartsReport_VC: UIViewController {
                     
                     //Assign the result to variable subjectHistory
                     subjectHistory = resHistory
+                    subjectHistoryWklyTargets = subjectHistory * calcWeekly
+                    subjectHistoryMthlyTargets = subjectHistory * calcMthly
                     
                     //Get Biology
                     guard let resBiology = result.value(forKey: "subBiology") as? Int32 else {
@@ -193,6 +357,8 @@ class ChartsReport_VC: UIViewController {
                     
                     //Assign Biology to variable
                     subjectBiology = resBiology
+                    subjectBiologyWklyTargets = subjectBiology * calcWeekly
+                    subjectBiologyMthlyTargets = subjectBiology * calcMthly
                     
                     //Get Chemistry
                     guard let resChemistry = result.value(forKey: "subChemistry") as? Int32 else {
@@ -202,6 +368,8 @@ class ChartsReport_VC: UIViewController {
                     
                     //Assign result to variable Chmistry
                     subjectChemistry = resChemistry
+                    subjectChemistryWklyTargets = subjectChemistry * calcWeekly
+                    subjectChemistryMthlyTargets = subjectChemistry * calcMthly
                     
                     //Get Maths
                     guard let resMaths = result.value(forKey: "subMaths") as? Int32 else {
@@ -211,6 +379,8 @@ class ChartsReport_VC: UIViewController {
                     
                     //Assign result to Maths variable
                     subjectMaths = resMaths
+                    subjectMathsWklyTargets = subjectMaths * calcWeekly
+                    subjectMathsMthlyTargets = subjectMaths * calcMthly
                     
                     //Get Physics
                     guard let resPhysics = result.value(forKey: "subPhysics") as? Int32 else {
@@ -218,6 +388,8 @@ class ChartsReport_VC: UIViewController {
                         return
                     }
                     subjectPhysics = resPhysics
+                    subjectPhysicsWklyTargets = subjectPhysics * calcWeekly
+                    subjectPhysicsMthlyTargets = subjectPhysics * calcMthly
                     
                     
                     //Get Geography
@@ -228,13 +400,20 @@ class ChartsReport_VC: UIViewController {
                     
                     //Assign result to variable Geopgraphy
                     subjectGeography = resGeography
+                    subjectGeographyWklyTargets = subjectGeography * calcWeekly
+                    subjectGeographyMthlyTargets = subjectGeography * calcMthly
                     
                 }
                 
-                print(subjectEnglish)
-                print(subjectPhysics)
-                print(subjectChemistry)
-                print(subjectBiology)
+            
+                print(subjectEnglishWklyTargets)
+                print(subjectEnglishMthlyTargets)
+                print(subjectPhysicsWklyTargets)
+                print(subjectPhysicsMthlyTargets)
+                print(subjectChemistryWklyTargets)
+                print(subjectChemistryMthlyTargets)
+                print(subjectBiologyWklyTargets)
+                print(subjectBiologyMthlyTargets)
             }
             
         } catch {

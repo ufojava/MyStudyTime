@@ -1121,7 +1121,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date From" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iGo-kN-a1o">
-                                <rect key="frame" x="236" y="141" width="144" height="34"/>
+                                <rect key="frame" x="243" y="141" width="137" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
@@ -1133,7 +1133,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="uJa-Pw-SRm"/>
                                 </constraints>
-                                <state key="normal" title="Chart"/>
+                                <state key="normal" title="Mthly Chart"/>
                                 <connections>
                                     <action selector="chartActionButton:" destination="YKU-Fo-k6v" eventType="touchUpInside" id="6d5-ZU-dBL"/>
                                 </connections>
@@ -1142,14 +1142,25 @@
                                 <rect key="frame" x="34" y="383" width="346" height="363"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EBx-HA-6fC">
+                                <rect key="frame" x="243" y="196" width="137" height="38"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="38" id="uIW-IB-dPV"/>
+                                </constraints>
+                                <state key="normal" title="Wkly Chart"/>
+                                <connections>
+                                    <action selector="chartActionButton:" destination="YKU-Fo-k6v" eventType="touchUpInside" id="S9U-YF-Lit"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="zCI-H2-kjw" firstAttribute="top" secondItem="U61-WT-FCe" secondAttribute="bottom" constant="21" id="2tW-yB-MFJ"/>
                             <constraint firstItem="pkq-kV-Idt" firstAttribute="top" secondItem="zCI-H2-kjw" secondAttribute="bottom" constant="57" id="5kJ-Fh-n6N"/>
+                            <constraint firstItem="EBx-HA-6fC" firstAttribute="trailing" secondItem="rDW-2a-Tqf" secondAttribute="trailing" id="83n-q4-e95"/>
                             <constraint firstItem="0Ci-ZG-SN9" firstAttribute="centerX" secondItem="pkq-kV-Idt" secondAttribute="centerX" id="9GH-I1-KV0"/>
                             <constraint firstItem="U61-WT-FCe" firstAttribute="leading" secondItem="IhF-we-EAP" secondAttribute="leading" constant="34" id="MCY-nk-yGF"/>
-                            <constraint firstItem="iGo-kN-a1o" firstAttribute="leading" secondItem="U61-WT-FCe" secondAttribute="trailing" constant="8" id="NR1-Mg-3A7"/>
+                            <constraint firstItem="iGo-kN-a1o" firstAttribute="leading" secondItem="U61-WT-FCe" secondAttribute="trailing" constant="15" id="NR1-Mg-3A7"/>
                             <constraint firstItem="0Ci-ZG-SN9" firstAttribute="top" secondItem="IhF-we-EAP" secondAttribute="top" id="PHD-R7-neZ"/>
                             <constraint firstItem="0Ci-ZG-SN9" firstAttribute="leading" secondItem="IhF-we-EAP" secondAttribute="leading" id="Pes-gL-Uve"/>
                             <constraint firstItem="0Ci-ZG-SN9" firstAttribute="centerX" secondItem="D8U-HG-5bg" secondAttribute="centerX" id="Slj-6J-9jn"/>
@@ -1157,7 +1168,9 @@
                             <constraint firstItem="U61-WT-FCe" firstAttribute="top" secondItem="0Ci-ZG-SN9" secondAttribute="bottom" constant="53" id="UbZ-UQ-HVR"/>
                             <constraint firstItem="rDW-2a-Tqf" firstAttribute="leading" secondItem="zCI-H2-kjw" secondAttribute="trailing" constant="15" id="WL4-RN-t6d"/>
                             <constraint firstItem="iGo-kN-a1o" firstAttribute="trailing" secondItem="pkq-kV-Idt" secondAttribute="trailing" id="WTh-p9-ct6"/>
+                            <constraint firstItem="rDW-2a-Tqf" firstAttribute="top" secondItem="EBx-HA-6fC" secondAttribute="bottom" constant="54" id="X79-A3-N9M"/>
                             <constraint firstItem="IhF-we-EAP" firstAttribute="trailing" secondItem="zCI-H2-kjw" secondAttribute="trailing" constant="186" id="Zni-Te-icj"/>
+                            <constraint firstItem="EBx-HA-6fC" firstAttribute="leading" secondItem="rDW-2a-Tqf" secondAttribute="leading" id="a4m-q4-h7d"/>
                             <constraint firstItem="U61-WT-FCe" firstAttribute="bottom" secondItem="iGo-kN-a1o" secondAttribute="bottom" id="iwe-VL-hAd"/>
                             <constraint firstItem="U61-WT-FCe" firstAttribute="trailing" secondItem="zCI-H2-kjw" secondAttribute="trailing" id="jWa-Rn-clw"/>
                             <constraint firstItem="U61-WT-FCe" firstAttribute="leading" secondItem="zCI-H2-kjw" secondAttribute="leading" id="ljW-xd-bMV"/>
@@ -1176,6 +1189,7 @@
                         <outlet property="pickerOutletLabel" destination="U61-WT-FCe" id="xWV-CI-o5e"/>
                         <outlet property="pickerViewOutletPickerview" destination="zCI-H2-kjw" id="Icv-E2-8hY"/>
                         <outlet property="studyDateFromOutletText" destination="iGo-kN-a1o" id="sm6-u2-nXa"/>
+                        <outlet property="wklyChartOutletButton" destination="EBx-HA-6fC" id="8oO-iF-U4H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R5x-No-aHb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
