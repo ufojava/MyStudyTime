@@ -85,6 +85,7 @@ class ChartsReport_VC: UIViewController {
         //Custom Function starts here
         formatVC() //Format ViewController
         connectDatasorceDelegate() //Connection for Pickerview
+        getTargetsData() //Get Targets
     }
     
     //Format ViewController
@@ -147,8 +148,9 @@ class ChartsReport_VC: UIViewController {
     
     //Button Action
     @IBAction func chartActionButton(_ sender: UIButton) {
-        //getTargetsData()
+
         getStudyData(inSubject: pickerOutletLabel.text!, inPeriod: 28)
+        wweeklyChart()
     }
     
     
@@ -484,6 +486,28 @@ class ChartsReport_VC: UIViewController {
    @objc func cancelDatePicker() {
     self.view.endEditing(true)
         
+    }
+    
+    //Function to create the bar chart
+    func wweeklyChart() {
+        
+        //Data Entry
+        let chartTargets = BarChartDataEntry(x: 1.0, y: Double(subjectBiologyWklyTargets))
+    
+        let chartStdyTime = BarChartDataEntry(x: 2.0, y: Double(addTotalArray))
+        
+        //Chart DataSet
+        let targetsDataSet = BarChartDataSet(entries: [chartTargets], label: "Targets")
+        let studyDataSet = BarChartDataSet(entries: [chartStdyTime], label: "Study Time")
+        
+ 
+        targetsDataSet.colors = ChartColorTemplates.pastel()
+        studyDataSet.colors = ChartColorTemplates.liberty()
+        
+        //Chart Data
+        let data = BarChartData(dataSets: [targetsDataSet,studyDataSet])
+        
+        barChartOutletBarChartView.data = data
     }
     
 
