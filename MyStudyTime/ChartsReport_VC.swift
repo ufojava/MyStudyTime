@@ -146,11 +146,19 @@ class ChartsReport_VC: UIViewController {
         
     }
     
+    //Reset Chart Data
+    func resetChartData() {
+        studyTotalTime.removeAll()
+        addTotalArray = Int32()
+    }
+    
     //Button Action
     @IBAction func chartActionButton(_ sender: UIButton) {
 
         getStudyData(inSubject: pickerOutletLabel.text!, inPeriod: 28)
-        wweeklyChart()
+        
+        weeklyChart()
+        resetChartData()
     }
     
     
@@ -488,27 +496,78 @@ class ChartsReport_VC: UIViewController {
         
     }
     
-    //Function to create the bar chart
-    func wweeklyChart() {
-        
-        //Data Entry
-        let chartTargets = BarChartDataEntry(x: 1.0, y: Double(subjectBiologyWklyTargets))
+
     
+    
+    
+       //Function to create the bar chart
+       func weeklyChart() {
+        
+        var chartTarget = BarChartDataEntry(x: 1.0, y: Double(0.0))
         let chartStdyTime = BarChartDataEntry(x: 2.0, y: Double(addTotalArray))
         
-        //Chart DataSet
-        let targetsDataSet = BarChartDataSet(entries: [chartTargets], label: "Targets")
-        let studyDataSet = BarChartDataSet(entries: [chartStdyTime], label: "Study Time")
         
- 
-        targetsDataSet.colors = ChartColorTemplates.pastel()
-        studyDataSet.colors = ChartColorTemplates.liberty()
+        //Switch Statements
+        switch(pickerOutletLabel.text) {
+            
+        case subPickerArray[0]:
+            chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectEnglishWklyTargets))
+            break
         
-        //Chart Data
-        let data = BarChartData(dataSets: [targetsDataSet,studyDataSet])
+        case subPickerArray[1]:
+            chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectLiteratureWklyTargets))
+            break
+            
+        case subPickerArray[2]:
+            chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectHistoryWklyTargets))
+            break
+            
+        case subPickerArray[3]:
+            chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectBiologyWklyTargets))
+            break
+            
+        case subPickerArray[4]:
+            chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectChemistryWklyTargets))
+            break
         
-        barChartOutletBarChartView.data = data
-    }
+        case subPickerArray[5]:
+            chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectMathsWklyTargets))
+            break
+            
+        case subPickerArray[6]:
+            chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectPhysicsWklyTargets))
+            break
+            
+        case subPickerArray[7]:
+            chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectGeographyWklyTargets))
+            break
+        default:
+            print("Did not select Subject")
+            
+            
+            
+        }
+        
+       
+           
+           
+           //Chart DataSet
+           let targetsDataSet = BarChartDataSet(entries: [chartTarget], label: "Targets")
+           let studyDataSet = BarChartDataSet(entries: [chartStdyTime], label: "Study Time")
+           
+    
+           targetsDataSet.colors = ChartColorTemplates.pastel()
+           studyDataSet.colors = ChartColorTemplates.liberty()
+           
+           //Chart Data
+           let data = BarChartData(dataSets: [targetsDataSet,studyDataSet])
+           
+           barChartOutletBarChartView.data = data
+       }
+       
+    
+    
+    
     
 
 
