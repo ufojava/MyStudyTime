@@ -423,14 +423,7 @@ class ChartsReport_VC: UIViewController {
                 }
                 
             
-                print(subjectEnglishWklyTargets)
-                print(subjectEnglishMthlyTargets)
-                print(subjectPhysicsWklyTargets)
-                print(subjectPhysicsMthlyTargets)
-                print(subjectChemistryWklyTargets)
-                print(subjectChemistryMthlyTargets)
-                print(subjectBiologyWklyTargets)
-                print(subjectBiologyMthlyTargets)
+             
             }
             
         } catch {
