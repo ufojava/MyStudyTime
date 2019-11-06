@@ -155,11 +155,18 @@ class ChartsReport_VC: UIViewController {
     //Button Action
     @IBAction func chartActionButton(_ sender: UIButton) {
 
-        getStudyData(inSubject: pickerOutletLabel.text!, inPeriod: 28)
+        getStudyData(inSubject: pickerOutletLabel.text!, inPeriod: 7)
         
         weeklyChart()
         resetChartData()
     }
+    
+    @IBAction func monthlyChartActionButton(_ sender: UIButton) {
+        
+        getStudyData(inSubject: pickerOutletLabel.text!, inPeriod: 28)
+        
+    }
+    
     
     
     
