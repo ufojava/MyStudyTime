@@ -22,6 +22,7 @@ class ChartsReport_VC: UIViewController {
     @IBOutlet weak var barChartOutletBarChartView: BarChartView!
     @IBOutlet weak var chartOutletButton: UIButton! //Monthly Chart Button
     @IBOutlet weak var wklyChartOutletButton: UIButton! //Weekly Chart Button
+    @IBOutlet weak var infoChartOutletLabel: UILabel!
     
 
     
@@ -142,6 +143,11 @@ class ChartsReport_VC: UIViewController {
         
         barChartOutletBarChartView.layer.borderColor = UIColor.gray.cgColor
         barChartOutletBarChartView.layer.borderWidth = 1
+        
+        //Format Info Lable
+        infoChartOutletLabel.font = infoChartOutletLabel.font.withSize(14)
+        infoChartOutletLabel.textAlignment = .center
+        infoChartOutletLabel.textColor = UIColor.brown
     
         
     }
@@ -164,7 +170,8 @@ class ChartsReport_VC: UIViewController {
     @IBAction func monthlyChartActionButton(_ sender: UIButton) {
         
         getStudyData(inSubject: pickerOutletLabel.text!, inPeriod: 28)
-        
+        MonthlyChart()
+        resetChartData()
     }
     
     
@@ -558,7 +565,6 @@ class ChartsReport_VC: UIViewController {
     
     
     
-    //********** STOPPED HERE ************
     //Function to create the bar Monthly chart
           func MonthlyChart() {
            
@@ -570,38 +576,46 @@ class ChartsReport_VC: UIViewController {
            switch(pickerOutletLabel.text) {
                
            case subPickerArray[0]:
-               chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectEnglishWklyTargets))
+               chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectEnglishMthlyTargets))
                break
            
            case subPickerArray[1]:
-               chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectLiteratureWklyTargets))
+               chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectLiteratureMthlyTargets))
                break
                
            case subPickerArray[2]:
-               chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectHistoryWklyTargets))
+               chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectHistoryMthlyTargets))
                break
                
            case subPickerArray[3]:
-               chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectBiologyWklyTargets))
+               chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectBiologyMthlyTargets))
                break
                
            case subPickerArray[4]:
-               chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectChemistryWklyTargets))
+               chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectChemistryMthlyTargets))
                break
            
            case subPickerArray[5]:
-               chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectMathsWklyTargets))
+               chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectMathsMthlyTargets))
                break
                
            case subPickerArray[6]:
-               chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectPhysicsWklyTargets))
+               chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectPhysicsMthlyTargets))
                break
                
            case subPickerArray[7]:
-               chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectGeographyWklyTargets))
+               chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectGeographyMthlyTargets))
                break
            default:
-               print("Did not select Subject")
+               
+            chartTarget = BarChartDataEntry(x: 1.0, y: Double(0.0))
+            
+            infoChartOutletLabel.text = "No Chart Data Found"
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                
+                self.infoChartOutletLabel.text = " "
+            }
                
                
                

@@ -1153,18 +1153,28 @@
                                     <action selector="chartActionButton:" destination="YKU-Fo-k6v" eventType="touchUpInside" id="S9U-YF-Lit"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dRe-gA-P4q">
+                                <rect key="frame" x="34" y="817" width="346" height="45"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="dRe-gA-P4q" firstAttribute="bottom" secondItem="IhF-we-EAP" secondAttribute="bottom" id="0Ms-rE-6zv"/>
                             <constraint firstItem="zCI-H2-kjw" firstAttribute="top" secondItem="U61-WT-FCe" secondAttribute="bottom" constant="21" id="2tW-yB-MFJ"/>
+                            <constraint firstItem="dRe-gA-P4q" firstAttribute="trailing" secondItem="pkq-kV-Idt" secondAttribute="trailing" id="436-Hc-2hQ"/>
                             <constraint firstItem="pkq-kV-Idt" firstAttribute="top" secondItem="zCI-H2-kjw" secondAttribute="bottom" constant="57" id="5kJ-Fh-n6N"/>
                             <constraint firstItem="EBx-HA-6fC" firstAttribute="trailing" secondItem="rDW-2a-Tqf" secondAttribute="trailing" id="83n-q4-e95"/>
+                            <constraint firstItem="dRe-gA-P4q" firstAttribute="leading" secondItem="pkq-kV-Idt" secondAttribute="leading" id="94r-17-Rqh"/>
                             <constraint firstItem="0Ci-ZG-SN9" firstAttribute="centerX" secondItem="pkq-kV-Idt" secondAttribute="centerX" id="9GH-I1-KV0"/>
                             <constraint firstItem="U61-WT-FCe" firstAttribute="leading" secondItem="IhF-we-EAP" secondAttribute="leading" constant="34" id="MCY-nk-yGF"/>
                             <constraint firstItem="iGo-kN-a1o" firstAttribute="leading" secondItem="U61-WT-FCe" secondAttribute="trailing" constant="15" id="NR1-Mg-3A7"/>
                             <constraint firstItem="0Ci-ZG-SN9" firstAttribute="top" secondItem="IhF-we-EAP" secondAttribute="top" id="PHD-R7-neZ"/>
                             <constraint firstItem="0Ci-ZG-SN9" firstAttribute="leading" secondItem="IhF-we-EAP" secondAttribute="leading" id="Pes-gL-Uve"/>
                             <constraint firstItem="0Ci-ZG-SN9" firstAttribute="centerX" secondItem="D8U-HG-5bg" secondAttribute="centerX" id="Slj-6J-9jn"/>
+                            <constraint firstItem="dRe-gA-P4q" firstAttribute="top" secondItem="pkq-kV-Idt" secondAttribute="bottom" constant="71" id="UO0-xy-GTN"/>
                             <constraint firstItem="rDW-2a-Tqf" firstAttribute="bottom" secondItem="zCI-H2-kjw" secondAttribute="bottom" id="UW2-UG-B7R"/>
                             <constraint firstItem="U61-WT-FCe" firstAttribute="top" secondItem="0Ci-ZG-SN9" secondAttribute="bottom" constant="53" id="UbZ-UQ-HVR"/>
                             <constraint firstItem="rDW-2a-Tqf" firstAttribute="leading" secondItem="zCI-H2-kjw" secondAttribute="trailing" constant="15" id="WL4-RN-t6d"/>
@@ -1185,6 +1195,7 @@
                     <connections>
                         <outlet property="barChartOutletBarChartView" destination="pkq-kV-Idt" id="LPZ-NZ-WMe"/>
                         <outlet property="chartOutletButton" destination="rDW-2a-Tqf" id="tSK-xR-NmA"/>
+                        <outlet property="infoChartOutletLabel" destination="dRe-gA-P4q" id="iM6-bj-KAb"/>
                         <outlet property="navbarItemOutletNavbarItem" destination="wYs-yY-zFy" id="aY9-Z3-nde"/>
                         <outlet property="navbarOutletNavBar" destination="0Ci-ZG-SN9" id="0Os-g4-5pB"/>
                         <outlet property="pickerOutletLabel" destination="U61-WT-FCe" id="xWV-CI-o5e"/>
