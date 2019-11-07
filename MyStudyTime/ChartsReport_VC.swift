@@ -488,7 +488,7 @@ class ChartsReport_VC: UIViewController {
     
     
     
-       //Function to create Weelky the bar chart
+       //Function to create the bar Weekly chart
        func weeklyChart() {
         
         var chartTarget = BarChartDataEntry(x: 1.0, y: Double(0.0))
@@ -536,54 +536,7 @@ class ChartsReport_VC: UIViewController {
             
         }
         
-       /// ****REQUIRES EDITING *******
-        //Function to create the Monthly bar chart
-              func MonthlyChart() {
-               
-               var chartTarget = BarChartDataEntry(x: 1.0, y: Double(0.0))
-               let chartStdyTime = BarChartDataEntry(x: 2.0, y: Double(addTotalArray))
-               
-               
-               //Switch Statements
-               switch(pickerOutletLabel.text) {
-                   
-               case subPickerArray[0]:
-                   chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectEnglishWklyTargets))
-                   break
-               
-               case subPickerArray[1]:
-                   chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectLiteratureWklyTargets))
-                   break
-                   
-               case subPickerArray[2]:
-                   chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectHistoryWklyTargets))
-                   break
-                   
-               case subPickerArray[3]:
-                   chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectBiologyWklyTargets))
-                   break
-                   
-               case subPickerArray[4]:
-                   chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectChemistryWklyTargets))
-                   break
-               
-               case subPickerArray[5]:
-                   chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectMathsWklyTargets))
-                   break
-                   
-               case subPickerArray[6]:
-                   chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectPhysicsWklyTargets))
-                   break
-                   
-               case subPickerArray[7]:
-                   chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectGeographyWklyTargets))
-                   break
-               default:
-                   print("Did not select Subject")
-                   
-                   
-                   
-               }
+        
         
        
            
@@ -604,6 +557,74 @@ class ChartsReport_VC: UIViewController {
        
     
     
+    
+    //********** STOPPED HERE ************
+    //Function to create the bar Monthly chart
+          func MonthlyChart() {
+           
+           var chartTarget = BarChartDataEntry(x: 1.0, y: Double(0.0))
+           let chartStdyTime = BarChartDataEntry(x: 2.0, y: Double(addTotalArray))
+           
+           
+           //Switch Statements
+           switch(pickerOutletLabel.text) {
+               
+           case subPickerArray[0]:
+               chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectEnglishWklyTargets))
+               break
+           
+           case subPickerArray[1]:
+               chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectLiteratureWklyTargets))
+               break
+               
+           case subPickerArray[2]:
+               chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectHistoryWklyTargets))
+               break
+               
+           case subPickerArray[3]:
+               chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectBiologyWklyTargets))
+               break
+               
+           case subPickerArray[4]:
+               chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectChemistryWklyTargets))
+               break
+           
+           case subPickerArray[5]:
+               chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectMathsWklyTargets))
+               break
+               
+           case subPickerArray[6]:
+               chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectPhysicsWklyTargets))
+               break
+               
+           case subPickerArray[7]:
+               chartTarget = BarChartDataEntry(x: 1.0, y: Double(subjectGeographyWklyTargets))
+               break
+           default:
+               print("Did not select Subject")
+               
+               
+               
+           }
+           
+           
+           
+          
+              
+              
+              //Chart DataSet
+              let targetsDataSet = BarChartDataSet(entries: [chartTarget], label: "Targets")
+              let studyDataSet = BarChartDataSet(entries: [chartStdyTime], label: "Study Time")
+              
+       
+              targetsDataSet.colors = ChartColorTemplates.pastel()
+              studyDataSet.colors = ChartColorTemplates.liberty()
+              
+              //Chart Data
+              let data = BarChartData(dataSets: [targetsDataSet,studyDataSet])
+              
+              barChartOutletBarChartView.data = data
+          }
     
     
 
